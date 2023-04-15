@@ -1,10 +1,7 @@
-import Hero from '@/features/home/Hero';
-import LatestPRojects from '@/features/home/LatestProjects';
-import LendableProjects from '@/features/home/LendableProjects';
 import { Button } from '@/ui/Button';
 import Image from 'next/image';
 
-const CollectionCard = ({ image }: { image: string }) => (
+export const CollectionCard = ({ image }: { image: string }) => (
   <div className="block h-full w-full max-w-[319px] rounded-[19px] bg-grey-200 p-4 font-rob">
     <Image src={image} alt="project" width={293} height={156} className="mb-[21px] rounded-[16px]" />
 
@@ -21,17 +18,7 @@ const CollectionCard = ({ image }: { image: string }) => (
       Buy Now
     </button> */}
     <Button href="/collections/1" variant="filled" color="primary" fullwidth>
-      Buy Now
+      view more
     </Button>
   </div>
 );
-
-export default function Home() {
-  return (
-    <>
-      <Hero />
-      <LatestPRojects />
-      <LendableProjects />
-    </>
-  );
-}
