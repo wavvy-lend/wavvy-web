@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="h-full w-full bg-grey-400 bg-body bg-cover bg-no-repeat">
         <nav className="flex h-full w-full items-center justify-between px-4 py-[22px] lg:px-[100px]">
           <Link href="/" className="font-ava text-lg/[18px] text-white md:text-[25px]/[25px]">
-            OTHERAIRE
+            wavvy
           </Link>
           <div className="hidden w-full items-center justify-end gap-8 md:flex lg:flex">
             <ul className="flex items-center justify-end gap-4">
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </button>
           </div>
         </nav>
-        <hr className="my-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />
+        <hr className="mb-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />
 
         <main className="h-full w-full pb-[100px] lg:px-[93px]">{children}</main>
       </body>
