@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <ArrowLongLeftIcon className="h-4 w-4" /> Back to Homepage
         </Button>
       </div>
-      <div className="flex w-full items-start gap-[67px]">
+      <div className="flex w-full items-start gap-[47px]">
         <aside className="z-40 h-full w-[258px]">
           <ul className="flex h-full w-full flex-col items-start gap-2.5 p-5">
             <li>

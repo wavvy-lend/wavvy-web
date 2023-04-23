@@ -1,15 +1,11 @@
-import { CollectionCard } from '@/features/home/components/CollectionCard';
-import NoContent from './no-content';
+import LoanCard from '@/features/dashboard/components/LoanCard';
 
-export default function Dashboard() {
+const Card = () => {
   return (
-    <section className="h-full w-full">
-      <NoContent />
-      {/* <div className="grid w-full grid-cols-1 gap-2.5 lg:grid-cols-3">
-        <CollectionCard image="/assets/project-buy.png" />
-        <CollectionCard image="/assets/project-buy.png" />
-        <CollectionCard image="/assets/project-buy.png" />
-      </div> */}
-    </section>
+    <div>
+      <LoanCard name={'Nft'} amount={20} dueDate={'30'} />
+    </div>
   );
-}
+};
+
+export default Card;

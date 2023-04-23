@@ -1,3 +1,5 @@
+import { Button } from '@/ui/Button';
+
 export default function Loan() {
   return (
     <section className="flex w-full items-start gap-5">
@@ -26,8 +28,8 @@ export default function Loan() {
         </div>
       </div>
 
-      <div className="flex h-[606px] w-[317px] items-start rounded-t-[8px] bg-prime-200 bg-opacity-[0.19] px-4 py-[26px]">
-        <div className="flex h-[175px] w-[285px] flex-col items-center justify-center gap-[23px] rounded-lg bg-[#C8304D] bg-opacity-[0.20] px-4 py-[22px] text-center">
+      <div className="flex h-full max-h-[606px] w-[317px] flex-col items-start gap-7 overflow-y-auto overflow-x-hidden rounded-t-[8px] bg-prime-200 bg-opacity-[0.19] px-4 py-[26px]">
+        <div className="flex h-[175px] w-full flex-col items-center justify-center gap-[23px] rounded-lg bg-[#C8304D] bg-opacity-[0.20] px-4 py-[22px] text-center">
           <div className="flex flex-col font-rob text-white">
             <span className="text-[14px]/[22px] font-medium">Project value</span>
             <span className="text-[20px]/[31px] font-bold">0.19011 ETH</span>
@@ -37,6 +39,24 @@ export default function Loan() {
             <span className="text-[20px]/[31px] font-bold">0.19011 ETH</span>
           </div>
         </div>
+
+        <Button variant="filled" color="alt" fullwidth>
+          Pay back now
+        </Button>
+
+        <div className="px2.5 flex w-full items-center gap-5 border-b border-prime-100 border-opacity-[0.193] py-5">
+          <h2 className="font-rob text-[16px]/[16px] font-medium text-white">Loan timeline</h2>
+        </div>
+
+        <ol className="relative border-l border-gray-200">
+          <li className="ga=2.5 mb-10 ml-4">
+            <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
+            <h1 className="text-[14px]/[14px] font-bold text-white">Initial payment</h1>
+            <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+              February 2022
+            </time>
+          </li>
+        </ol>
       </div>
     </section>
   );
