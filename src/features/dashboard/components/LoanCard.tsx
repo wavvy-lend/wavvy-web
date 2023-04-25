@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Images from '@/util/images';
+import Link from 'next/link';
 
 interface ILoanCard {
   name: string;
@@ -41,7 +42,9 @@ const LoanCard = ({ name, amount, dueDate }: ILoanCard) => {
           type="button"
           className="inline-flex w-5/12 items-center justify-center rounded-full border-none bg-black px-3 py-2 text-sm outline-none ring-1 ring-prime-100/5 hover:ring-prime-200 md:px-4 md:py-3"
         >
+          <Link href="/dashboard/loan/1">
           Repay NFT
+          </Link>
         </button>
       </div>
     </div>
