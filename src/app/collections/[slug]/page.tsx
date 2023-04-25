@@ -7,7 +7,7 @@ import { ArrowLongLeftIcon } from '@heroicons/react/24/outline';
 export default function Collection() {
   return (
     <>
-      <div className="mb-[60px] flex w-full justify-start">
+      <div className="mb-[50px] flex w-full justify-start">
         <Button href="/" variant="plain">
           <ArrowLongLeftIcon className="h-4 w-4" /> Back
         </Button>
