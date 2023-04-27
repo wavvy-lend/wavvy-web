@@ -1,6 +1,20 @@
+'use client';
+import OpenDapp from '@/app/components/modal/loanModal';
 import { Button } from '@/ui/Button';
+import { useState } from 'react';
+import Modal from '@/app/components/modal';
 
 export default function Loan() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <section className="flex w-full items-start gap-5">
       <div className="flex h-full w-full max-w-[614px] flex-col gap-[50px]">
@@ -40,9 +54,12 @@ export default function Loan() {
           </div>
         </div>
 
-        <Button variant="filled" color="alt" fullwidth>
+        <Button variant="filled" color="alt" fullwidth onClick={openModal}>
           Pay back now
         </Button>
+        <Modal isOpen={isOpen} closeModal={closeModal} title="Buy With Qredos" >
+          <OpenDapp/>
+        </Modal>
 
         <div className="px2.5 flex w-full items-center gap-5 border-b border-prime-100 border-opacity-[0.193] py-5">
           <h2 className="font-rob text-[16px]/[16px] font-medium text-white">Loan timeline</h2>
