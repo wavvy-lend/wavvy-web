@@ -57,7 +57,9 @@ export default function Loan() {
         <Button variant="filled" color="alt" fullwidth onClick={openModal}>
           Pay back now
         </Button>
-        <Modal isOpen={isOpen} closeModal={closeModal} title="Buy With Qredos" children={<OpenDapp />} />
+        <Modal isOpen={isOpen} closeModal={closeModal} title="Buy With Qredos" >
+          <OpenDapp/>
+        </Modal>
 
         <div className="px2.5 flex w-full items-center gap-5 border-b border-prime-100 border-opacity-[0.193] py-5">
           <h2 className="font-rob text-[16px]/[16px] font-medium text-white">Loan timeline</h2>
