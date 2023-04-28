@@ -1,8 +1,17 @@
+import { ReactNode } from 'react';
+
 export interface ImageProps {
-  backgroundDashboard?: string;
-  Cups?: string;
-  RectangleLines?: string;
-  PoolCardImg?: string;
-  poolIcon?: string;
   nftLoan?: string;
+}
+
+export interface IParentModal {
+  title: string;
+  isOpen: boolean;
+  closeModal: () => void;
+  children: ReactNode;
+}
+
+export interface IDetailedList {
+  info: string;
+  price: string;
 }
