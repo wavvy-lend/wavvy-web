@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { IParentModal } from '@/interface/util_interface';
 import { Fragment } from 'react';
 
-export default function Modal<T extends IParentModal>({ title, isOpen, closeModal, children }: T) {
+export default function Modal({ title, isOpen, closeModal, children }: IParentModal) {
 
 
   return (
@@ -33,7 +33,7 @@ export default function Modal<T extends IParentModal>({ title, isOpen, closeModa
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="bg-grey-300 max-h-[622px] w-full max-w-[911px] transform overflow-hidden rounded-[20px] px-[45px] py-[36px] align-middle shadow-xl transition-all">
+                <Dialog.Panel className="bg-[#1E1E1E] max-h-[622px] w-full max-w-[911px] transform overflow-hidden rounded-[20px] px-[45px] py-[36px] align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between">
                     <h1 className="font-HKGrotesk mt-3 text-center text-[30px] font-bold leading-[30px] text-white lg:mt-5">
                       {title}

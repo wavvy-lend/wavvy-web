@@ -1,8 +1,9 @@
 'use client';
-import OpenDapp from '@/app/components/modal/loanModal';
+import OpenDapp from '@/app/components/modal/borrowLoanModal';
 import { Button } from '@/ui/Button';
 import { useState } from 'react';
 import Modal from '@/app/components/modal';
+import RepayLoan from '@/app/components/modal/repayLoanModal';
 
 export default function Loan() {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,8 +58,11 @@ export default function Loan() {
         <Button variant="filled" color="alt" fullwidth onClick={openModal}>
           Pay back now
         </Button>
-        <Modal isOpen={isOpen} closeModal={closeModal} title="Buy With Qredos" >
-          <OpenDapp/>
+        {/* <Modal isOpen={isOpen} closeModal={closeModal} title="Buy With Qredos">
+          <OpenDapp />
+        </Modal> */}
+        <Modal isOpen={isOpen} closeModal={closeModal} title="Repay part or all your loan">
+          <RepayLoan />
         </Modal>
 
         <div className="px2.5 flex w-full items-center gap-5 border-b border-prime-100 border-opacity-[0.193] py-5">

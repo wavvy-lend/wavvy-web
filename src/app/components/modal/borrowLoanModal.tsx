@@ -40,7 +40,7 @@ export default function OpenDapp() {
             <div className="h-[286px] w-[286px] rounded-[9px]">
               <img src={images.nftLoan} alt="" className="h-full w-full" />
             </div>
-            <div className="bg-fuchsia-1000 mt-[21px] flex h-[175px] w-[286px] items-center rounded-lg"></div>
+            {/* <div className="bg-fuchsia-1000 mt-[21px] flex h-[175px] w-[286px] items-center rounded-lg"></div> */}
           </div>
         </div>
     </>
