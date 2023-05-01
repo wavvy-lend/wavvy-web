@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="hidden w-full items-center justify-end gap-8 md:flex lg:flex">
             <ul className="flex items-center justify-end gap-4">
               <li>
-                <Link href="" className="font-rob text-base/4 font-medium text-white">
+                <Link href="/dashboard" className="font-rob text-base/4 font-medium text-white">
                   Dashboard
                 </Link>
               </li>
