@@ -9,7 +9,7 @@ const PoolDetails = ({ name, value }: { name: string; value: string }) => {
 
 export const PoolItem = () => {
   return (
-    <div className="flex w-full items-center justify-between rounded-md border-b border-grey-100 p-4 hover:bg-grey-200">
+    <div className="flex w-full items-center justify-between rounded-t-md border-b border-grey-100 p-4 hover:bg-grey-200">
       <span className="font-rube text-[18px]/[24px] text-white">
         <span className="text-[14px]">1</span> wavvy lend{' '}
       </span>
