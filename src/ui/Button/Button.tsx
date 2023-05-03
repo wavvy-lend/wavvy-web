@@ -3,7 +3,7 @@ import { ButtonOrLink, ButtonOrLinkProps } from './ButtonOrLink';
 export interface ButtonProps extends ButtonOrLinkProps {
   variant: 'filled' | 'plain';
   color?: 'primary' | 'secondary' | 'alt' | 'plain' | 'transparent';
-  fullwidth?: Boolean;
+  fullwidth?: boolean;
 }
 
 export function Button({ variant = 'plain', color = 'transparent', fullwidth = false, ...props }: ButtonProps) {
