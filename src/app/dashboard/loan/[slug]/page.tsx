@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Modal from '@/app/components/modal';
 import RepayLoan from '@/app/components/modal/repayLoanModal';
 
-export default function Loan() {
+const Loan = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -66,19 +66,29 @@ export default function Loan() {
         </Modal>
 
         <div className="px2.5 flex w-full items-center gap-5 border-b border-prime-100 border-opacity-[0.193] py-5">
-          <h2 className="font-rob text-[16px]/[16px] font-medium text-white">Loan timeline</h2>
+          <h2 className="font-rob text-[16px]/[16px] font-medium text-white">Loan Schedule</h2>
         </div>
 
-        <ol className="relative border-l border-gray-200">
-          <li className="ga=2.5 mb-10 ml-4">
-            <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
-            <h1 className="text-[14px]/[14px] font-bold text-white">Initial payment</h1>
-            <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-              February 2022
-            </time>
-          </li>
+        <ol className="relative border-l-2 border-white border-opacity-[0.48]">
+          <LoanScheduleItem label="Initial payment" duration="24th Jan 2022" />
+          <LoanScheduleItem label="1st tranche payment" duration="Due 20th Jun 2022" />
+          <LoanScheduleItem label="2nd tranche payment" duration="Due 20th Jul 2022" />
+          <LoanScheduleItem label="3rd tranche payment" duration="3rd tranche payment" />
+          <LoanScheduleItem label="Project Release" duration="Due 20th Oct 2022" />
         </ol>
       </div>
     </section>
   );
-}
+};
+
+export default Loan;
+
+const LoanScheduleItem = ({ label, duration }: { label: string; duration: string }) => {
+  return (
+    <li className="mb-10 ml-4 flex flex-col items-start gap-2.5">
+      <div className="absolute -left-2 h-[14px] w-[14px] rounded-full border border-alt-500 bg-alt-500 " />
+      <h1 className="text-[14px]/[14px] font-bold text-white">{label}</h1>
+      <time className="mb-1 text-[12px]/[12px] font-normal text-grey-100">{duration}</time>
+    </li>
+  );
+};
