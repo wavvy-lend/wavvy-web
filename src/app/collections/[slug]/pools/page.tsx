@@ -8,7 +8,7 @@ const StatsCard = ({ name, value }: { name: string; value: string }) => (
   </div>
 );
 
-export default function Pools() {
+const Pools = () => {
   return (
     <>
       <PoolsStats />
@@ -27,4 +27,6 @@ export default function Pools() {
       </section>
     </>
   );
-}
+};
+
+export default Pools;
