@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Dialog, Transition } from '@headlessui/react';
+// import { Dialog, Transition } from '@headlessui/react';
 import images from '@/util/images';
 import { FC, Fragment, useState } from 'react';
 import { IDetailedList } from '@/interface/util_interface';
@@ -22,28 +22,27 @@ export default function RepayLoan() {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="flex justify-center items-center gap-8">
+    <div className="flex items-center justify-center gap-8">
       <div className="flex w-full  flex-col gap-y-[27px] text-white ">
         <div className="flex w-full flex-col border-b-2 border-prime-200 border-opacity-50 pb-8">
           <p className="w-fit">Amount to pay </p>
-          <div className='relative'>
-
-          <div className="relative mt-3 inline-block h-[3.6rem] w-full">
-            <input
-              className="h-full w-full rounded-lg border border-[#666666] bg-transparent pl-3 pr-[20px] outline-0 placeholder:pl-3 placeholder:text-[#666666]"
-              value={value}
-              disabled
-              placeholder="Choose amount to pay"
+          <div className="relative">
+            <div className="relative mt-3 inline-block h-[3.6rem] w-full">
+              <input
+                className="h-full w-full rounded-lg border border-[#666666] bg-transparent pl-3 pr-[20px] outline-0 placeholder:pl-3 placeholder:text-[#666666]"
+                value={value}
+                disabled
+                placeholder="Choose amount to pay"
               />
-            <span
-              className="absolute bottom-0 right-3 top-[50%] w-[20px] translate-y-[-50%] cursor-pointer text-center"
-              onClick={handleOpen}
+              <span
+                className="absolute bottom-0 right-3 top-[50%] w-[20px] translate-y-[-50%] cursor-pointer text-center"
+                onClick={handleOpen}
               >
-              🔍
-            </span>
+                🔍
+              </span>
+            </div>
+            {isOpen && <LoanPaymentDropdown setAmount={amount => setValue(amount)} setIsOpen={setIsOpen} />}
           </div>
-          {isOpen && <LoanPaymentDropdown setAmount={amount => setValue(amount)} setIsOpen={setIsOpen} />}
-              </div>
           <button className="border-[ #C0C0C0] mt-[19px] flex w-full flex-row items-start justify-center gap-[10px] rounded-lg border bg-white px-[155px] py-[15px]">
             <span className="text-lg font-semibold text-[#333333]">Confirm transaction</span>
           </button>
@@ -98,7 +97,7 @@ export default function RepayLoan() {
         </div> */}
       </div>
 
-      <div className='flex flex-col justify-between gap-4'>
+      <div className="flex flex-col justify-between gap-4">
         <div className="h-[286px] w-[286px] rounded-[9px]">
           <img src={images.nftLoan} alt="" className="h-full w-full" />
         </div>

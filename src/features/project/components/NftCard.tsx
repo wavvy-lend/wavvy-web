@@ -23,7 +23,7 @@ export const NftCard = ({ image }: { image: string }) => (
       </div>
     </div>
     <div className="mb-2 mt-4 w-full px-2">
-      <Button variant="filled" color="plain">
+      <Button href="/collections/1/pools" variant="filled" color="plain">
         Buy Now
       </Button>
     </div>

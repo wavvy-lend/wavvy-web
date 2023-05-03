@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import './globals.css';
+import { ArrowUturnRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { Button } from '@/ui/Button';
+import { NavBarLink } from './NavBarLink';
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,15 +19,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Link>
           <div className="hidden w-full items-center justify-end gap-8 md:flex lg:flex">
             <ul className="flex items-center justify-end gap-4">
-              <li>
-                <Link href="/dashboard" className="font-rob text-base/4 font-medium text-white">
+              <NavBarLink href="/dashboard" label="Dashboard" />
+              {/* <li>
+                <Link href="/dashboard" className="pb-1 font-rob text-base/4 font-medium text-white hover:border-b">
                   Dashboard
                 </Link>
-              </li>
+              </li> */}
             </ul>
             <button className="flex flex-row items-center gap-[10px] rounded-lg bg-alt-100 px-[29px] py-[15px] font-rob text-[14px]/[19px] text-white">
               Connect wallet
             </button>
+            <Button variant="filled" color="alt">
+              <ArrowUturnRightIcon className="h-5 w-5 stroke-alt-500" /> 0x5TD6...4567{' '}
+              <ChevronDownIcon className="h-[14px] w-[14px] stroke-grey-100" />
+            </Button>
           </div>
         </nav>
         <hr className="mb-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />

@@ -18,7 +18,7 @@ export default {
         sm: '480px',
         md: '768px',
         lg: '976px',
-        xl: '1440px',
+        xl: '1440px'
       },
       colors: {
         prime: {
@@ -29,7 +29,9 @@ export default {
           100: '#C8304D',
           200: '#DE374B',
           300: '#00A478',
-          400: '#00945F'
+          400: '#00945F',
+          500: '#F78430',
+          600: '#FF1616'
         },
         grey: {
           100: '#DFDFDF',
@@ -47,5 +49,5 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')]
 } satisfies Config;

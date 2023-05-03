@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface ImageProps {
-  nftLoan?: string;
+  nftLoan: string;
 }
 
 export interface IParentModal {
