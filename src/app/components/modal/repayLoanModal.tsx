@@ -26,7 +26,7 @@ export default function RepayLoan() {
       <div className="flex w-full  flex-col gap-y-[27px] text-white ">
         <div className="flex w-full flex-col border-b-2 border-prime-200 border-opacity-50 pb-8">
           <p className="w-fit">Amount to pay </p>
-          <div className="relative">
+          <div className="relative" onClick={handleOpen}>
             <div className="relative mt-3 inline-block h-[3.6rem] w-full">
               <input
                 className="h-full w-full rounded-lg border border-[#666666] bg-transparent pl-3 pr-[20px] outline-0 placeholder:pl-3 placeholder:text-[#666666]"
@@ -34,11 +34,30 @@ export default function RepayLoan() {
                 disabled
                 placeholder="Choose amount to pay"
               />
-              <span
-                className="absolute bottom-0 right-3 top-[50%] w-[20px] translate-y-[-50%] cursor-pointer text-center"
-                onClick={handleOpen}
-              >
-                🔍
+              <span className="absolute bottom-0 right-3 top-[50%] w-[20px] translate-y-[-50%] cursor-pointer text-center">
+                {isOpen ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="h-6 w-6"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                  </svg>
+                )}
               </span>
             </div>
             {isOpen && <LoanPaymentDropdown setAmount={amount => setValue(amount)} setIsOpen={setIsOpen} />}
