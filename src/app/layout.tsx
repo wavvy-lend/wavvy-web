@@ -3,6 +3,7 @@ import './globals.css';
 import { ArrowUturnRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/ui/Button';
 import { NavBarLink } from './NavBarLink';
+import { Providers } from '@/redux/provider';
 
 export const metadata = {
   title: 'Create Next App',
@@ -37,7 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </nav>
         <hr className="mb-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />
 
-        <main className="h-full w-full pb-[100px] lg:px-[93px]">{children}</main>
+        <main className="h-full w-full pb-[100px] lg:px-[93px]">
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );
