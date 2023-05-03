@@ -18,7 +18,7 @@ export default function OpenDapp() {
     <>
       <div className="flex w-full flex-col gap-x-[27px] md:flex-row">
         <div className="w-full flex-col">
-          <div className="border-fuchsia-1000 h-[314px] w-[501px] border-l-[3px]">
+          <div className="border-fuchsia-1000 h-[314px] border-l-[3px]">
             <div className="flex items-center justify-between px-4 py-5">
               <span className="text-sm font-medium leading-[22px] text-white">Marketplace</span>
               <span className="text-sm font-bold leading-[22px] text-white underline">Opensea</span>
@@ -30,6 +30,27 @@ export default function OpenDapp() {
             <DetailedList info="Monthly Payments" price="0.04753 ETH" />
             <DetailedList info="Total Purchase Amount" price="0.19011 ETH" />
           </div>
+
+          <form>
+            {/* <div className="rb mb-8 flex w-full flex-col gap-4 rounded border bg-blue-300 px-4 py-3 text-center shadow-md transition duration-500 ease-in-out hover:bg-red-600 sm:bg-blue-600 md:hover:bg-red-400 lg:bg-blue-900">
+              <input type="radio" name="color-choice" value="purple" id="rb-purple" autoComplete="off" />
+              <div className="border-r border-transparent">Purple</div>
+              <span aria-checked="false"></span>
+            </div> */}
+            <div className="mt-[19px] flex flex-1 items-start gap-[19px] text-[14px] text-white">
+              <p className="h-[24px] w-[2rem] sm:w-[2rem]">
+                <input
+                  type="checkbox"
+                  id="test1"
+                  className="inline-flex h-full w-full  rounded transition duration-150 ease-in-out checked:bg-none checked:text-[#5E0585] checked:border-transparent focus:border-transparent focus:ring-2 focus:ring-[#5E0585] focus:ring-opacity-50"
+                />
+              </p>
+              <p>
+                I agree to the above, and understand any missed payments will result in forfeiture of the NFT and all
+                paid amounts
+              </p>
+            </div>
+          </form>
 
           <button className="border-[ #C0C0C0] mt-[19px] flex flex-row items-start justify-center gap-[10px] rounded-lg border bg-white px-[155px] py-[15px]">
             <span className="text-lg font-semibold text-[#333333]">Start loan plan</span>
