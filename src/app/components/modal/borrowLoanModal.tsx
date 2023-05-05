@@ -37,7 +37,7 @@ export default function OpenDapp() {
               <div className="border-r border-transparent">Purple</div>
               <span aria-checked="false"></span>
             </div> */}
-            <div className="mt-[19px] flex flex-1 items-start gap-[19px] text-[14px] text-white">
+            <div className="mt-[19px] flex flex-1 items-start gap-[0.5rem] text-[14px] text-white">
               <p className="h-[24px] w-[2rem] sm:w-[2rem]">
                 <input
                   type="checkbox"
