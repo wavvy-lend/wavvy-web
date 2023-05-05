@@ -3,6 +3,7 @@ import LatestPRojects from '@/features/home/LatestProjects';
 import LendableProjects from '@/features/home/LendableProjects';
 import { Button } from '@/ui/Button';
 import Image from 'next/image';
+import SearchBox from './components/search-box';
 
 const CollectionCard = ({ image }: { image: string }) => (
   <div className="block h-full w-full max-w-[319px] rounded-[19px] bg-grey-200 p-4 font-rob">
@@ -30,6 +31,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <SearchBox/>
       <LatestPRojects />
       <LendableProjects />
     </>
