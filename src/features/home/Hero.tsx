@@ -2,10 +2,10 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section className="flex h-full w-full items-start gap-5">
+    <section className="h-full w-full md:max-h-[328px] md:h-[328px] items-start gap-5 md:flex">
       <Banner />
       {/* TODO */}
-      <div className="block h-full w-full rounded-[19px] bg-grey-300 px-[10px] py-[30px] lg:max-w-[400px]">
+      <div className="h-full w-full rounded-[19px] bg-grey-300 px-[20px] py-[30px] md:max-w-[350px]">
         <div className="flex w-full items-center justify-between">
           <h1 className=" text-[20px]/[20px] font-bold text-grey-100">Recent purchases</h1>
           <button className="flex items-center gap-2.5 rounded-[8px] bg-grey-200 p-2.5 text-[12px]/[12px] text-[#777777]">
@@ -14,33 +14,34 @@ export default function Hero() {
           </button>
         </div>
 
-        <div className="my-3 grid w-full max-w-[380px] grid-cols-2 grid-rows-2 gap-5 overflow-x-auto overflow-y-hidden">
-          {/* <div className="mt-3 grid grid-cols-2 grid-rows-2 gap-5"> */}
-          <PurchaseItem />
-          <PurchaseItem />
-          <PurchaseItem />
-          <PurchaseItem />
-          {/* </div> */}
-        </div>
+          <div className="my-3 grid  w-full grid-cols-1 grid-rows-2 gap-5 md:gap-2 overflow-x-auto overflow-y-auto">
+            {/* <div className="mt-3 grid grid-cols-2 grid-rows-2 gap-5"> */}
+            <PurchaseItem />
+            <PurchaseItem />
+            <PurchaseItem />
+            {/* </div> */}
+          </div>
       </div>
     </section>
   );
 }
 
 const Banner = () => (
-  <div className="flex h-full max-h-[328px] w-full max-w-[833px] rounded-[19px] bg-prime-100">
-    <div className="flex w-full flex-col gap-7 py-[52px] pl-[38px] lg:max-w-[351px]">
-      <h1 className="font-rob text-[45px]/[45px] font-bold text-white">Get that NFT project now</h1>
+  <div className="grid h-full w-full grid-cols-3 content-center overflow-hidden  rounded-[19px] bg-prime-100 bg-banner-frame bg-[length:55%_100%] bg-right-top bg-no-repeat md:bg-[length:50%_100%] lg:bg-[length:35%_100%]">
+    <div className="col-start-1 col-end-3 flex w-full flex-col justify-center gap-7 py-[52px] pl-[38px] md:max-w-[400px]">
+      <h1 className="font-rob text-[30px]/[45px] font-bold text-white lg:text-[45px]/[45px]">
+        Get that NFT project now
+      </h1>
       <p className="text[14px]/[22px] font-rob font-light text-white">
         Sign up for an optimized payment plan that allows you to start using the NFTs you purchase with a small deposit,
         and pay off later.
       </p>
     </div>
-    <div className="relative h-[328px] w-[430px] rounded-[19px] bg-opacity-5 bg-banner-frame bg-cover bg-no-repeat">
+    <div className="relative h-[330px] w-[250px] rounded-[19px] bg-opacity-5  lg:justify-self-end ">
       <Image
         src="/assets/vectors/3d_vector-1.png"
         alt="buy"
-        width={385}
+        width={355}
         height={300}
         className="h-full w-full"
         priority
@@ -51,7 +52,7 @@ const Banner = () => (
 
 const PurchaseItem = () => {
   return (
-    <div className="flex h-full min-h-[70px] w-[370px] items-center gap-4 rounded-[16px] bg-[#111B283B] bg-opacity-[0.23] p-2.5">
+    <div className="flex h-full min-h-[70px] items-center gap-4 rounded-[16px] bg-[#111B283B] bg-opacity-[0.23] p-2.5">
       <Image src={'/assets/nfts/nft-2.png'} alt="" width={50} height={50} priority className="rounded-full" />
       <div className="flex w-full flex-col items-center gap-3 text-white">
         <div className="flex w-full flex-row items-end justify-between gap-3 text-[14px]/[14px]">
