@@ -7,7 +7,7 @@ export default function LatestPRojects() {
         <h2 className="font-rob text-[45px]/[45px] font-bold text-white">Latest projects</h2>
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
+      <div className="grid w-full grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
         <CollectionCard image="/assets/project-buy.png" />
         <CollectionCard image="/assets/project-buy.png" />
         <CollectionCard image="/assets/project-buy.png" />
