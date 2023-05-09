@@ -7,7 +7,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_WAVVY_API_KEY}/:path*`
+        destination: `${process.env.NEXT_PUBLIC_WAVVY_BASE_URL}/:path*`
       }
     ];
   }
