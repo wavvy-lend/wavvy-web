@@ -1,17 +1,23 @@
+import { CreatePool } from '@/features/Pool/CreatePool';
 import { PoolItem } from '@/features/Pool/PoolItem';
 import { PoolsStats } from '@/features/Pool/PoolStats';
-
-const StatsCard = ({ name, value }: { name: string; value: string }) => (
-  <div className="flex flex-col items-center gap-2">
-    <span className="font-rube text-[24px]/[34px] font-bold text-white">{value}</span>
-    <span className="text-[13px]/[23px] text-white">{name}</span>
-  </div>
-);
+import PoolStatsCard from '@/features/Pool/PoolStatsCard';
+import { PoolStatsLoader } from '@/features/Pool/loader';
+import ClientOnly from '@/util/ClientOnly';
+import { fetcher } from '@/util/util';
+import { Suspense } from 'react';
 
 const Pools = () => {
+  // const { data: totalVolume } = useSWR('/pools/totalVolume', fetcher);
+  // const { data: liquidityBorrowed } = useSWR('/pools/totalLiquidityBorrowed', fetcher);
+  // const { data: liquidityAvailable } = useSWR('/pools/totalLiquidityAvailable', fetcher);
+
   return (
     <>
-      <PoolsStats />
+      <section className="flex w-full items-center justify-between gap-4 rounded-lg bg-prime-200 bg-opacity-[0.19] px-8 py-5">
+        <PoolsStats />
+        <CreatePool />
+      </section>
 
       <section className="h-full w-full">
         <div className="flex w-full items-center justify-between px-2 py-10">
