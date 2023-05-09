@@ -10,5 +10,3 @@ export const WavvyApi = axios.create({
 });
 
 export const fetcher = (url: string) => WavvyApi.get(url).then(res => res.data);
-
-// const { data: transactions } = useSWR('http://localhost:3000/api/transactions', fetcher);
