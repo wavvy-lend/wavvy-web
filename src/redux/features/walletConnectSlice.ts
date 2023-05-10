@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { BrowserProvider, JsonRpcSigner, ethers } from 'ethers';
 import { useCallback, useState } from 'react';
 import { connectWallet } from '../services/asyncThunkAction';
+import { RootState } from '../store';
 
 declare global {
   interface Window {
@@ -21,6 +22,7 @@ export interface IState {
   isLoading: boolean;
   isError: boolean;
   message: string;
+  isSuccess:boolean;
   userWallet: IWalletProvoder | undefined;
 }
 export interface IWalletProvoder {
@@ -34,6 +36,7 @@ export interface IWalletProvoder {
 const initialState = {
   isError: false,
   isLoading: false,
+  isSuccess:false,
   message: '',
   userWallet: {
     address: null,
@@ -48,7 +51,6 @@ export const connectWalletSlice = createSlice({
   name: 'connectWallet',
   initialState,
   reducers: {
-    connect: () => {},
     reset: () => initialState
   },
   extraReducers: builder => {
@@ -67,6 +69,8 @@ export const connectWalletSlice = createSlice({
       });
   }
 });
+
+export const connect = (state: RootState) => state.connectWallet;
 
 export default connectWalletSlice.reducer;
 

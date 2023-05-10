@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section className="h-full w-full md:max-h-[328px] md:h-[328px] items-start gap-5 md:flex">
+    <section className=" w-full  gap-5 md:grid md:grid-cols-[minmax(55%,60%)_minmax(30.5%,38.5%)]">
       <Banner />
       {/* TODO */}
-      <div className="h-full w-full rounded-[19px] bg-grey-300 px-[20px] py-[30px] md:max-w-[350px]">
-        <div className="flex w-full items-center justify-between">
+      <div className=" w-full rounded-[19px] bg-grey-300 px-[20px] py-[30px]">
+        <div className="flex h-[3] w-full items-center justify-between">
           <h1 className=" text-[20px]/[20px] font-bold text-grey-100">Recent purchases</h1>
           <button className="flex items-center gap-2.5 rounded-[8px] bg-grey-200 p-2.5 text-[12px]/[12px] text-[#777777]">
             <span>last 24 hours</span>

@@ -5,7 +5,7 @@ import { collectionsApi } from './services/CollectionsAPI';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 const rootReducer = combineReducers({
-  connectWalletReducer,
+  connectWallet: connectWalletReducer,
   [collectionsApi.reducerPath]: collectionsApi.reducer
 });
 
