@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export interface ICollections {
   name: string;
-  description: string;
+  description?: string;
   image: string;
   creator: string;
   floor_price: string;
@@ -21,7 +21,7 @@ export const CollectionCard = ({ name, creator, description, status, floor_price
 
     <div>
       <div>
-        <span className="text-[12px]/[12px] font-normal text-white">{description}</span>
+        {/* <span className="text-[12px]/[12px] font-normal text-white">{description}</span> */}
         <span className="text-[14px]/[14px] font-bold text-white">{status}</span>
       </div>
       <div className="flex w-full justify-end gap-4 py-[28px]">

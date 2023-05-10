@@ -12,6 +12,7 @@ export default function LatestPRojects() {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{`Error: ${error}`}</div>;
+  
 
 
   return (
@@ -21,8 +22,9 @@ export default function LatestPRojects() {
       </div>
 
       <div className="grid w-full grid-cols-2 justify-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
-        {collections?.data.map(collection => (
+        {collections?.map(collection => (
           <CollectionCard
+          key={collection.id}
             image={collection.avatar}
             name={collection.name}
             creator={collection.owner}

@@ -1,7 +1,12 @@
+import { AUTH_JSON_HEADERS, UN_AUTH_JSON_HEADERS } from '@/util/headers';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { headers } from 'next/dist/client/components/headers';
 
 export enum NETWORKS {
-  ETHEREUM = 'ethereum'
+  ETHEREUM = 'ethereum',
+  MATIC = 'matic',
+  POLYGONMUMBAI = 'polygonMumbai',
+  BSCTESTNET = 'bscTestnet'
 }
 
 export enum STATUS {
@@ -11,7 +16,7 @@ export interface Collections {
   id: 1;
   unique_id: string;
   address: string;
-  network: string;
+  network: NETWORKS;
   name: string;
   description: string;
   avatar: string;
@@ -29,26 +34,25 @@ export interface CollectionResponse {
   data: Collections[];
 }
 
-export interface CollectionsPayload {
-  address: string;
-  network: NETWORKS;
-}
-
 export const collectionsApi = createApi({
   reducerPath: 'collectionsApi',
   refetchOnFocus: true,
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://wavvy-server.onrender.com',
-    headers: {
-      "Access-Control-Allow-Origin": 'http://localhost:3000',
-      'Content-Type': 'application/json',
-      'CLIENT-NETWORK': 'ethereum'
-    }
+    prepareHeaders: (headers, { getState }) => {
+      const clientNetwork: NETWORKS | null = localStorage.getItem('clientNetwork') as NETWORKS;
+      if (clientNetwork) {
+        AUTH_JSON_HEADERS(clientNetwork, headers);
+      }
+      return headers;
+    },
+    headers: UN_AUTH_JSON_HEADERS
   }),
   tagTypes: ['Collections'],
   endpoints: builder => ({
-    getCollections: builder.query<CollectionResponse, void>({
-      query:()=> '/collections/active',
+    getCollections: builder.query<Collections[], void>({
+      query: () => '/collections/active',
+      transformResponse: (response: { data: Collections[] }) => response.data,
       providesTags: (result, error, arg) => ['Collections']
     })
   })
