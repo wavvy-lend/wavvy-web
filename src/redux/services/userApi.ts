@@ -1,25 +1,57 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type User = {
-  id: number;
+export enum NETWORKS {
+  ETHEREUM = 'ethereum'
+}
+
+export enum STATUS {
+  ACTIVE = 'active'
+}
+export interface Collections {
+  id: 1;
+  unique_id: string;
+  address: string;
+  network: string;
   name: string;
-  email: number;
-};
+  description: string;
+  avatar: string;
+  owner: string;
+  no_of_items: string;
+  total_volume: string;
+  floor_price: string;
+  website: string;
+  status: string;
+  created_at?: string;
+  updated_at?: string;
+}
 
-export const userApi = createApi({
-  reducerPath: "userApi",
+export interface CollectionResponse {
+  data: Collections[];
+}
+
+export interface CollectionsPayload {
+  address: string;
+  network: NETWORKS;
+}
+
+export const collectionsApi = createApi({
+  reducerPath: 'collectionsApi',
   refetchOnFocus: true,
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://jsonplaceholder.typicode.com/",
+    baseUrl: 'https://wavvy-server.onrender.com',
+    headers: {
+      "Access-Control-Allow-Origin": 'http://localhost:3000',
+      'Content-Type': 'application/json',
+      'CLIENT-NETWORK': 'ethereum'
+    }
   }),
-  endpoints: (builder) => ({
-    getUsers: builder.query<User[], null>({
-      query: () => "users",
-    }),
-    getUserById: builder.query<User, { id: string }>({
-      query: ({ id }) => `users/${id}`,
-    }),
-  }),
+  tagTypes: ['Collections'],
+  endpoints: builder => ({
+    getCollections: builder.query<CollectionResponse, void>({
+      query:()=> '/collections/active',
+      providesTags: (result, error, arg) => ['Collections']
+    })
+  })
 });
 
-export const { useGetUsersQuery, useGetUserByIdQuery } = userApi;
+export const { useGetCollectionsQuery } = collectionsApi;
