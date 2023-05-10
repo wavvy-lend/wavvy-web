@@ -1,6 +1,15 @@
+'use client';
+
+import { useGetCollectionsQuery } from '@/redux/services/CollectionsAPI';
 import { CollectionCard } from './components/CollectionCard';
+import { Suspense } from 'react';
 
 export default function LendableProjects() {
+  const { data: collections, error, isLoading } = useGetCollectionsQuery();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{`Error: ${error}`}</div>;
+
   return (
     <section>
       <div className="my-[30px] mb-8 mt-[108px] flex w-full items-center justify-between px-2">
@@ -8,10 +17,19 @@ export default function LendableProjects() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-        <CollectionCard image="/assets/project-sell.png" />
-        <CollectionCard image="/assets/project-sell.png" />
-        <CollectionCard image="/assets/project-sell.png" />
-        <CollectionCard image="/assets/project-sell.png" />
+      <Suspense fallback={<div>Loading...</div>}>
+        {collections?.map(collection => (
+          <CollectionCard
+          key={collection.id}
+          image={collection.avatar}
+          name={collection.name}
+          creator={collection.owner}
+          floor_price={collection.floor_price}
+          description={collection.description}
+          status={collection.status}
+          />
+          ))}
+          </Suspense>
       </div>
     </section>
   );
