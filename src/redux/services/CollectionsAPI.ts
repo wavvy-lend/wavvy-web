@@ -13,7 +13,7 @@ export enum STATUS {
   ACTIVE = 'active'
 }
 export interface Collections {
-  id: 1;
+  id: string;
   unique_id: string;
   address: string;
   network: NETWORKS;

@@ -1,14 +1,10 @@
 'use client';
 
-import { useGetCollectionsQuery } from '@/redux/services/userApi';
+import { useGetCollectionsQuery } from '@/redux/services/CollectionsAPI';
 import { CollectionCard } from './components/CollectionCard';
 
 export default function LendableProjects() {
-  const {
-    data: collections,
-    error,
-    isLoading
-  } = useGetCollectionsQuery();
+  const { data: collections, error, isLoading } = useGetCollectionsQuery();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{`Error: ${error}`}</div>;
@@ -20,9 +16,9 @@ export default function LendableProjects() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-      {collections?.map(collection => (
+        {collections?.map(collection => (
           <CollectionCard
-          key={collection.id}
+            key={collection.id}
             image={collection.avatar}
             name={collection.name}
             creator={collection.owner}

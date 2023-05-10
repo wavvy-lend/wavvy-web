@@ -1,19 +1,13 @@
 'use client';
 
-import { useGetCollectionsQuery } from '@/redux/services/userApi';
+import { useGetCollectionsQuery } from '@/redux/services/CollectionsAPI';
 import { CollectionCard } from './components/CollectionCard';
 
 export default function LatestPRojects() {
-  const {
-    data: collections,
-    error,
-    isLoading
-  } = useGetCollectionsQuery();
+  const { data: collections, error, isLoading } = useGetCollectionsQuery();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{`Error: ${error}`}</div>;
-  
-
 
   return (
     <section className="h-full w-full">
@@ -24,7 +18,7 @@ export default function LatestPRojects() {
       <div className="grid w-full grid-cols-2 justify-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
         {collections?.map(collection => (
           <CollectionCard
-          key={collection.id}
+            key={collection.id}
             image={collection.avatar}
             name={collection.name}
             creator={collection.owner}
