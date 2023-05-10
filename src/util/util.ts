@@ -14,13 +14,13 @@ export const WavvyApi = axios.create({
 // fetch data from server
 export const fetcher = (url: string) => WavvyApi.get(url).then(res => res.data);
 
-export const getCookieItem = (key: string) => {
-  'use server';
-  return cookies().get(key);
-};
+// export const getCookieItem = (key: string) => {
+//   'use server';
+//   return cookies().get(key);
+// };
 
-export const setCookieItem = (key: string, value: string) => {
-  'use server';
+// export const setCookieItem = (key: string, value: string) => {
+//   'use server';
 
-  return Cookies.set(key, value);
-};
+//   return Cookies.set(key, value);
+// };

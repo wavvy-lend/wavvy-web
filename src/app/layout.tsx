@@ -4,6 +4,8 @@ import { ArrowUturnRightIcon, ChevronDownIcon } from '@heroicons/react/24/outlin
 import { Button } from '@/ui/Button';
 import { NavBarLink } from './NavBarLink';
 import { Providers } from '@/redux/provider';
+import { useAppDispatch } from '@/redux/hooks';
+import { useSelector } from 'react-redux';
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,8 +13,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // const {
+  //   userWallet,
+  //   isLoading, isError, isSuccess, message} = useSelector((state) => state.connectWallet);
   return (
     <html lang="en">
+        <Providers>
       <body className="h-full w-full bg-grey-400 bg-body bg-cover bg-no-repeat">
         <nav className="flex h-full w-full items-center justify-between px-4 py-[22px] lg:px-[100px]">
           <Link href="/" className="font-ava text-lg/[18px] text-white md:text-[25px]/[25px]">
@@ -39,9 +45,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <hr className="mb-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />
 
         <main className="h-full w-full pb-[100px] lg:px-[93px]">
-          <Providers>{children}</Providers>
+        {children}
         </main>
       </body>
+      </Providers>
     </html>
   );
 }
