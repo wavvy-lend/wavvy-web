@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import counterReducer from './features/testSlice';
+import connectWalletReducer from './features/walletConnectSlice';
 import { collectionsApi } from './services/CollectionsAPI';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 const rootReducer = combineReducers({
-  counterReducer,
+  connectWallet: connectWalletReducer,
   [collectionsApi.reducerPath]: collectionsApi.reducer
 });
 

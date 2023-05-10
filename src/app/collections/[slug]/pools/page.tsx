@@ -15,7 +15,9 @@ const Pools = () => {
   return (
     <>
       <section className="flex w-full items-center justify-between gap-4 rounded-lg bg-prime-200 bg-opacity-[0.19] px-8 py-5">
-        <PoolsStats />
+        <Suspense fallback={<PoolStatsLoader />}>
+          <PoolsStats />
+        </Suspense>
         <CreatePool />
       </section>
 

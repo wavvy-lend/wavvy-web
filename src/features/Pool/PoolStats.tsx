@@ -6,24 +6,20 @@ import PoolStatsCard from './PoolStatsCard';
 import { fetcher } from '@/util/util';
 
 export const PoolsStats = () => {
-  const { data: totalVolume } = useSWR('/pools/totalVolume', fetcher);
-  const { data: liquidityBorrowed } = useSWR('/pools/totalLiquidityBorrowed', fetcher);
-  const { data: liquidityAvailable } = useSWR('/pools/totalLiquidityAvailable', fetcher);
+  const { data: totalVolume } = useSWR('/pools/totalVolume', fetcher, { suspense: true });
+  const { data: liquidityBorrowed } = useSWR('/pools/totalLiquidityBorrowed', fetcher, { suspense: true });
+  const { data: liquidityAvailable } = useSWR('/pools/totalLiquidityAvailable', fetcher, { suspense: true });
   const { data: collections } = useSWR('/collections/active', fetcher);
 
   console.log(collections);
 
   return (
     <>
-      <Suspense fallback={<PoolStatsLoader />}>
-        <PoolStatsCard name="Total volume" value={totalVolume} />
-      </Suspense>
-      <Suspense fallback={<PoolStatsLoader />}>
-        <PoolStatsCard name="Liquidity available" value={liquidityAvailable} />
-      </Suspense>
-      <Suspense fallback={<PoolStatsLoader />}>
-        <PoolStatsCard name="Liquidity borrowed" value={liquidityBorrowed} />
-      </Suspense>
+      <PoolStatsCard name="Total volume" value={totalVolume} />
+
+      <PoolStatsCard name="Liquidity available" value={liquidityAvailable} />
+
+      <PoolStatsCard name="Liquidity borrowed" value={liquidityBorrowed} />
     </>
   );
 };
