@@ -2,11 +2,11 @@
 
 import { useGetCollectionsQuery } from '@/redux/services/CollectionsAPI';
 import { CollectionCard } from './components/CollectionCard';
+import { Suspense } from 'react';
 
 export default function LatestPRojects() {
   const { data: collections, error, isLoading } = useGetCollectionsQuery();
 
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{`Error: ${error}`}</div>;
 
   return (
@@ -16,17 +16,19 @@ export default function LatestPRojects() {
       </div>
 
       <div className="grid w-full grid-cols-2 justify-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
+        <Suspense fallback={<div>Loading...</div>}>
         {collections?.map(collection => (
           <CollectionCard
-            key={collection.id}
-            image={collection.avatar}
-            name={collection.name}
-            creator={collection.owner}
-            floor_price={collection.floor_price}
-            description={collection.description}
-            status={collection.status}
+          key={collection.id}
+          image={collection.avatar}
+          name={collection.name}
+          creator={collection.owner}
+          floor_price={collection.floor_price}
+          description={collection.description}
+          status={collection.status}
           />
-        ))}
+          ))}
+          </Suspense>
       </div>
     </section>
   );
