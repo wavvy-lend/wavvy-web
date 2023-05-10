@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import counterReducer from './features/testSlice';
-import { collectionsApi } from './services/userApi';
+import { collectionsApi } from './services/CollectionsAPI';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 const rootReducer = combineReducers({
   counterReducer,
-  [collectionsApi.reducerPath]: collectionsApi.reducer,
+  [collectionsApi.reducerPath]: collectionsApi.reducer
 });
 
 export const store = configureStore({
