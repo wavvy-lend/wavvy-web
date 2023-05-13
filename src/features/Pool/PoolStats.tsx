@@ -9,10 +9,6 @@ export const PoolsStats = () => {
   const { data: totalVolume } = useSWR('/pools/totalVolume', fetcher, { suspense: true });
   const { data: liquidityBorrowed } = useSWR('/pools/totalLiquidityBorrowed', fetcher, { suspense: true });
   const { data: liquidityAvailable } = useSWR('/pools/totalLiquidityAvailable', fetcher, { suspense: true });
-  const { data: collections } = useSWR('/collections/active', fetcher);
-
-  console.log(collections);
-
   return (
     <>
       <PoolStatsCard name="Total volume" value={totalVolume} />
