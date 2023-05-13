@@ -73,7 +73,7 @@ export default function ContractProvider({ children }: ContractProps) {
     } catch (error) {
       console.log(error);
     }
-  }, [setAccount]);
+  }, [account]);
 
   const disconnect = async () => {
     try {
@@ -118,7 +118,7 @@ export default function ContractProvider({ children }: ContractProps) {
     } catch (error) {
       console.log(error);
     }
-  }, [account, setAccount]);
+  }, [account]);
 
   useEffect(() => {
     confirmWalletConnection();
