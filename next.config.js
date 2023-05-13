@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true
   },
   images: {
-    domains: ['i.seadn.io'],
+    domains: ['i.seadn.io','nft-cdn.alchemy.com'],
   },
 }
 

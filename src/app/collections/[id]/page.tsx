@@ -1,12 +1,16 @@
+'use client';
 import ProjectDetail from '@/features/project/ProjectDetail';
 import { NftCard } from '@/features/project/components/NftCard';
+import { ICollection } from '@/interface/util_interface';
+import { useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
 
 import { ArrowLongLeftIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Suspense } from 'react';
 
-export default function Collection() {
+export default function Collection({params: { id }}: { params: {id:string} }) {
+  const { data: [collection] = [], error, isLoading } = useGetCollectionQuery(id);
+
   return (
     <>
       <div className="mb-[50px] flex w-full justify-start">
@@ -15,19 +19,29 @@ export default function Collection() {
         </Button>
       </div>
 
-      <ProjectDetail />
+      {collection && (
+        <Suspense fallback={<div>Loading...</div>}>
+        <ProjectDetail
+          {...collection}
+          />
+          </Suspense>
+      )}
 
       <section>
         <div className="my-[30px] mb-8 flex w-full items-center justify-between px-2">
           <h2 className="font-rob text-[45px]/[45px] font-bold text-white">Items</h2>
         </div>
 
+        <Suspense fallback={<div>Loading...</div>}>
+
         <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-          <NftCard image="/assets/nfts/nft-2.png" />
-          <NftCard image="/assets/nfts/nft-2.png" />
-          <NftCard image="/assets/nfts/nft-2.png" />
-          <NftCard image="/assets/nfts/nft-2.png" />
+          {
+            collection?.collections?.map(item =>(
+              <NftCard {...item} itemsNumber={collection.no_of_items} floorPrice={collection.floor_price} network={collection.network}  />
+              ))
+            }
         </div>
+        </Suspense>
       </section>
     </>
   );

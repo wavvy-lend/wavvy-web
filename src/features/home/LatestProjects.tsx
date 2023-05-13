@@ -19,7 +19,8 @@ export default function LatestPRojects() {
         <Suspense fallback={<div>Loading...</div>}>
         {collections?.map(collection => (
           <CollectionCard
-          key={collection.id}
+          collectionId={collection.id}
+          uniqueId={collection.unique_id}
           image={collection.avatar}
           name={collection.name}
           creator={collection.owner}
