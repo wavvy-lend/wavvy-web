@@ -1,12 +1,9 @@
 'use client';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '@/redux/hooks';
 
 import { ArrowUturnRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/ui/Button';
 import { shortenAddress } from '@/util/util';
-import { useEffect } from 'react';
-import { IAccountContext, useAccountContext } from '@/context/AccountContex';
+
 import { useContractContext } from '@/context/contract-context';
 // import { connectWallet } from '@/redux/services/account.servie';
 
@@ -14,12 +11,11 @@ export default function ConnectWalletButton() {
   const { account, connectWallet } = useContractContext();
 
   const { address, isAuthenticated } = account;
-  // const {
-  //   connectWallet,
-  //   disconnect,
-  //   checkIfWalletIsConnected,
-  //   state: { isAuthenticated, address }
-  // } = useAccountContext() as IAccountContext;
+
+  // TODO handle disconnect
+  // TODO register user
+  // TODO add network logo to button
+  //  create dropdown
 
   return (
     <>
