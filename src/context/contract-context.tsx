@@ -59,7 +59,7 @@ export default function ContractProvider({ children }: ContractProps) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [setAccount]);
 
   const confirmWalletConnection = useCallback(async () => {
     try {
@@ -77,6 +77,7 @@ export default function ContractProvider({ children }: ContractProps) {
         console.log(chainId);
         const chainNetwork = CHAIN_INFO[13881].network;
         setAccount({
+          ...account,
           address: accounts[0],
           chainNetwork,
           isAuthenticated: true
@@ -86,7 +87,7 @@ export default function ContractProvider({ children }: ContractProps) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [account, setAccount]);
 
   useEffect(() => {
     confirmWalletConnection();
@@ -114,7 +115,7 @@ export default function ContractProvider({ children }: ContractProps) {
     return { account, connectWallet };
   }, [account, connectWallet]);
 
-  return <ContractContext.Provider value={contextValue}>{children}</ContractContext.Provider>;
+  return <ContractContext.Provider value={{ account, connectWallet }}>{children}</ContractContext.Provider>;
 }
 
 export const useContractContext = () => useContext(ContractContext);

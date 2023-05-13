@@ -52,7 +52,7 @@ export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
       <PoolDetails name="Loans" value="2" />
       <PoolDetails name="Avg APY" value={`${pool.apr}%`} />
       <PoolDetails name="Volume" value={`$ ${pool.volume}`} />
-      <ModalContainer label="Create Pool" open={open} close={closeModal}>
+      <ModalContainer label="Buy with Wavvy" open={open} close={closeModal}>
         <BorrowModal />
       </ModalContainer>
     </div>

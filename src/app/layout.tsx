@@ -28,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <ul className="flex items-center justify-end gap-4">
                   <NavBarLink href="/dashboard" label="Dashboard" />
                 </ul>
+
                 <ConnectWalletButton />
               </div>
             </nav>
