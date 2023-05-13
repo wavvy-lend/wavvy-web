@@ -73,7 +73,7 @@ export default function ContractProvider({ children }: ContractProps) {
     } catch (error) {
       console.log(error);
     }
-  }, [account]);
+  }, [createUser, data, error, isLoading]);
 
   const disconnect = async () => {
     try {
@@ -108,7 +108,6 @@ export default function ContractProvider({ children }: ContractProps) {
         console.log(chainId);
         const chainNetwork = CHAIN_INFO[13881].network;
         setAccount({
-          ...account,
           address: accounts[0],
           chainNetwork,
           isAuthenticated: true
@@ -118,11 +117,11 @@ export default function ContractProvider({ children }: ContractProps) {
     } catch (error) {
       console.log(error);
     }
-  }, [account]);
+  }, []);
 
   useEffect(() => {
     confirmWalletConnection();
-  }, []);
+  }, [account, confirmWalletConnection]);
 
   useEffect(() => {
     if (typeof window.ethereum === 'undefined') return;
@@ -135,12 +134,12 @@ export default function ContractProvider({ children }: ContractProps) {
       setAccount({ ...account, chainNetwork: CHAIN_INFO[Number(network)].network });
     });
 
+    window.ethereum.on('disconnect', disconnect);
+
     return () => {
       window.ethereum.removeAllListeners();
     };
   }, [account]);
-
-  console.log(account);
 
   // const contextValue = useMemo(() => {
   //   return { account, connectWallet };
