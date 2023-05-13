@@ -28,6 +28,7 @@ export const connectWallet = createAsyncThunk('wavvy', async (_, thunkAPI) => {
 
 const connect = async (): Promise<IWalletProvoder | undefined> => {
   // if (state.isAuthenticated) return;
+  if (localStorage.getItem('isAuthenticated') === 'connected') return;
 
   const { ethereum } = window;
 

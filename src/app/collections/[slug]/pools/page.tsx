@@ -1,10 +1,9 @@
 import { CreatePool } from '@/features/Pool/CreatePool';
 import { PoolItem } from '@/features/Pool/PoolItem';
+import PoolItems from '@/features/Pool/PoolItems';
 import { PoolsStats } from '@/features/Pool/PoolStats';
-import PoolStatsCard from '@/features/Pool/PoolStatsCard';
 import { PoolStatsLoader } from '@/features/Pool/loader';
-import ClientOnly from '@/util/ClientOnly';
-import { fetcher } from '@/util/util';
+
 import { Suspense } from 'react';
 
 const Pools = () => {
@@ -25,13 +24,15 @@ const Pools = () => {
         <div className="flex w-full items-center justify-between px-2 py-10">
           <h2 className="font-rob text-[45px]/[45px] font-bold text-white">Pools</h2>
         </div>
-
+        {/* 
         <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
           <PoolItem />
           <PoolItem />
           <PoolItem />
           <PoolItem />
-        </div>
+        </div> */}
+
+        <PoolItems />
       </section>
     </>
   );

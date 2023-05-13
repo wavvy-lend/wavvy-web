@@ -5,11 +5,11 @@ import { useCallback, useState } from 'react';
 import { connectWallet } from '../services/asyncThunkAction';
 import { RootState } from '../store';
 
-declare global {
-  interface Window {
-    ethereum?: any;
-  }
+// declare global {
+interface Window {
+  ethereum?: any;
 }
+// }
 
 export enum NETWORKS {
   ETHEREUM = 'ethereum',
@@ -22,7 +22,7 @@ export interface IState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  isSuccess:boolean;
+  isSuccess: boolean;
   userWallet: IWalletProvoder | undefined;
 }
 export interface IWalletProvoder {
@@ -36,7 +36,7 @@ export interface IWalletProvoder {
 const initialState = {
   isError: false,
   isLoading: false,
-  isSuccess:false,
+  isSuccess: false,
   message: '',
   userWallet: {
     address: null,

@@ -2,7 +2,7 @@
   "extends": ["next/core-web-vitals", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["off", { "printWidth": 120 }],
+    "prettier/prettier": ["on", { "printWidth": 120 }],
     "no-console": "off"
   }
 }
