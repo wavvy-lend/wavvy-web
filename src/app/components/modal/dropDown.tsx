@@ -25,13 +25,17 @@ const LoanPaymentDropdown = ({ setAmount, setIsOpen }: ILoanPaymentDropdown) => 
   return (
     <div className="absolute bottom-0 left-[50%] top-[4rem] z-50 flex h-fit w-full translate-x-[-50%]  flex-col rounded-lg bg-white pb-3 pl-3 pt-3 text-[#666]">
       <p
-        className="cursor-pointer border-b w-full border-b-[#666] p-3 hover:bg-prime-200 hover:bg-opacity-80 hover:text-white hover:rounded-md"
+        className="w-full cursor-pointer border-b border-b-[#666] p-3 hover:rounded-md hover:bg-prime-200 hover:bg-opacity-80 hover:text-white"
         onClick={handlePartPaymentClick}
         ref={partPaymentRef}
       >
         Part Payment: 365$
       </p>
-      <p className="cursor-pointer p-3 w-full  hover:bg-prime-200 hover:bg-opacity-80 hover:text-white hover:rounded-md" onClick={handleFullPaymentClick} ref={fullPaymentRef}>
+      <p
+        className="w-full cursor-pointer p-3  hover:rounded-md hover:bg-prime-200 hover:bg-opacity-80 hover:text-white"
+        onClick={handleFullPaymentClick}
+        ref={fullPaymentRef}
+      >
         Full Payment: 500$
       </p>
     </div>

@@ -17,19 +17,19 @@ export default function LendableProjects() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-      <Suspense fallback={<div>Loading...</div>}>
-        {collections?.map(collection => (
-          <CollectionCard
-          key={collection.id}
-          image={collection.avatar}
-          name={collection.name}
-          creator={collection.owner}
-          floor_price={collection.floor_price}
-          description={collection.description}
-          status={collection.status}
-          />
+        <Suspense fallback={<div>Loading...</div>}>
+          {collections?.map(collection => (
+            <CollectionCard
+              key={collection.id}
+              image={collection.avatar}
+              name={collection.name}
+              creator={collection.owner}
+              floor_price={collection.floor_price}
+              description={collection.description}
+              status={collection.status}
+            />
           ))}
-          </Suspense>
+        </Suspense>
       </div>
     </section>
   );

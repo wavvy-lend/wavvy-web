@@ -44,16 +44,19 @@ export const userAPi = createApi({
       header(chainNetwork, headers);
     }
   }),
+  tagTypes: ['Pools'],
   endpoints: builder => ({
     createUser: builder.mutation<IUser, any>({
       query: ({ address }) => ({
         url: `/user/${address}`,
         method: 'POST'
       })
+    }),
+    getPools: builder.query<IPool[], any>({
+      query: data => `/user/${data}`,
+      transformResponse: (response: { data: IPool[] }) => response.data,
+      providesTags: ['Pools']
     })
-    //   getPokemonByName: builder.query<Pokemon, string>({
-    //     query: (name) => `pokemon/${name}`,
-    //   }),
   })
 });
 

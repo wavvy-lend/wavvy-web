@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <SearchBox/>
+      <SearchBox />
       <LatestPRojects />
       <LendableProjects />
     </>

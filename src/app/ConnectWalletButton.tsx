@@ -12,12 +12,14 @@ import { Button } from '@/ui/Button';
 import { shortenAddress } from '@/util/util';
 
 import { useContractContext } from '@/context/contract-context';
+import Image from 'next/image';
+import { CHAIN_INFO } from '@/util/chain';
 // import { connectWallet } from '@/redux/services/account.servie';
 
 export default function ConnectWalletButton() {
   const { account, connectWallet, disconnect } = useContractContext();
 
-  const { address, isAuthenticated } = account;
+  const { address, isAuthenticated, chainId } = account;
 
   // TODO handle disconnect
   // TODO register user
@@ -39,7 +41,8 @@ export default function ConnectWalletButton() {
             {({ open }) => (
               <>
                 <Popover.Button className="flex items-center justify-center gap-2.5 rounded-lg bg-alt-300 px-[29px] py-[15px] font-rob text-[14px]/[14px] font-bold text-white outline-none">
-                  <ArrowUturnRightIcon className="h-5 w-5 stroke-alt-500" />
+                  {/* <ArrowUturnRightIcon className="h-5 w-5 stroke-alt-500" /> */}
+                  <Image src={CHAIN_INFO[chainId].icon} alt="icon" width={20} height={20} priority />
                   {shortenAddress(address)}
                   <ChevronDownIcon className="h-[14px] w-[14px] stroke-grey-100" />
                 </Popover.Button>

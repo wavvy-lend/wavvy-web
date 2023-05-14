@@ -11,7 +11,7 @@ const ErrorView = ({ error, reset }: ErrorViewProps) => {
     <section
       aria-label="Error screen"
       role="alert"
-      className="container grid min-h-screen max-w-5xl items-center justify-center gap-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:pb-24 lg:pt-16"
+      className="flex h-full w-full items-center justify-center gap-6 py-[100px]"
     >
       <div className="flex h-full w-full flex-col items-center justify-center space-y-4">
         <ExclamationTriangleIcon className="h-28 w-28 text-red-500 dark:text-red-500" aria-hidden="true" />

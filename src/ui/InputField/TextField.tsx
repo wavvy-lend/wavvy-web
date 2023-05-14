@@ -10,7 +10,7 @@ export const TextField = forwardRef<HTMLInputElement, InputProps>(function TextF
       <span className="text-[14px]/[22px] font-medium text-white">{label}</span>
 
       <input
-        className="w-full rounded-lg border border-[#666666] bg-grey-200 bg-opacity-[0.69] px-[25px] py-[19px] font-ava text-[20px]/[20px] font-medium text-grey-100 outline-none placeholder:text-[#666666] focus:border-prime-200"
+        className="w-full rounded-lg border border-[#666666] bg-grey-200 bg-opacity-[0.69] px-[25px] py-[19px] font-rob text-[20px]/[20px] font-medium text-grey-100 outline-none placeholder:text-[#666666] focus:border-prime-200"
         ref={ref}
         type={type}
         {...props}
