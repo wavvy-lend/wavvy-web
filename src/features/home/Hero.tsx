@@ -14,13 +14,13 @@ export default function Hero() {
           </button>
         </div>
 
-          <div className="my-3 grid  w-full grid-cols-1 grid-rows-2 gap-5 md:gap-2 overflow-x-auto overflow-y-auto">
-            {/* <div className="mt-3 grid grid-cols-2 grid-rows-2 gap-5"> */}
-            <PurchaseItem />
-            <PurchaseItem />
-            <PurchaseItem />
-            {/* </div> */}
-          </div>
+        <div className="my-3 grid  w-full grid-cols-1 grid-rows-2 gap-5 overflow-x-auto overflow-y-auto md:gap-2">
+          {/* <div className="mt-3 grid grid-cols-2 grid-rows-2 gap-5"> */}
+          <PurchaseItem />
+          <PurchaseItem />
+          <PurchaseItem />
+          {/* </div> */}
+        </div>
       </div>
     </section>
   );

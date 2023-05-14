@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { ChangeEvent, useState } from 'react';
 
 const SearchBox = () => {
@@ -7,7 +7,7 @@ const SearchBox = () => {
   return (
     <div className="relative mt-3 inline-block h-[3.6rem] w-full">
       <input
-        className="h-full w-full rounded-lg border border-[#666666] text-white bg-transparent pl-3 pr-[20px] outline-0 placeholder:pl-3 placeholder:text-[#666666]"
+        className="h-full w-full rounded-lg border border-[#666666] bg-transparent pl-3 pr-[20px] text-white outline-0 placeholder:pl-3 placeholder:text-[#666666]"
         value={value}
         placeholder="Search project"
         onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}

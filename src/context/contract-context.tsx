@@ -1,7 +1,7 @@
 'use client';
 
 import { useCreateUserMutation } from '@/redux/services/userApi';
-import { CHAIN_INFO, SupportedNetWork } from '@/util/chain';
+import { CHAIN_INFO, SupportedChainId, SupportedNetWork } from '@/util/chain';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -13,6 +13,7 @@ declare global {
 
 export interface IAccount {
   address: string;
+  chainId: SupportedChainId;
   chainNetwork: string;
   isAuthenticated: boolean;
 }
@@ -24,6 +25,7 @@ export interface ContractState {
 const initialState: ContractState = {
   account: {
     address: '',
+    chainId: SupportedChainId.POLYGONTESTNET,
     chainNetwork: SupportedNetWork.POLYGONTESTNET,
     isAuthenticated: false
   }
@@ -49,11 +51,11 @@ export default function ContractProvider({ children }: ContractProps) {
 
       const accounts: any = (await ethereum.request({ method: 'eth_requestAccounts' })) as string[];
       const chainId = await ethereum.request({ method: 'eth_chainId' });
-      // console.log(chainId);
-      const chainNetwork = CHAIN_INFO[13881].network;
+      const chainNetwork = CHAIN_INFO[Number(chainId)].network;
 
       setAccount({
         address: accounts[0],
+        chainId: Number(chainId),
         chainNetwork,
         isAuthenticated: true
       });
@@ -65,63 +67,51 @@ export default function ContractProvider({ children }: ContractProps) {
       if (!isLoading) return;
 
       if (data) {
-        toast.error('User Successfully registered');
+        toast.success('User Successfully registered');
         return;
       }
 
       localStorage.setItem('chain_network', chainNetwork);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.code === 4001) {
+        toast.error('Please connect your wallet');
+        return;
+      }
     }
   }, [createUser, data, error, isLoading]);
 
   const disconnect = async () => {
-    try {
-      const { ethereum } = window;
+    setAccount(initialState.account);
 
-      if (!ethereum) {
-        toast.error('No ethereum wallet found, Please install metamask');
-        return;
-      }
-
-      const accounts: any = (await ethereum.request({ method: 'eth_accounts' })) as string[];
-      if (accounts?.length > 0) {
-        setAccount(initialState.account);
-      }
-      localStorage.removeItem('chain_network');
-    } catch {}
+    localStorage.removeItem('chain_network');
   };
 
-  const confirmWalletConnection = useCallback(async () => {
+  const _updateWalletConnection = useCallback(async () => {
     try {
       const { ethereum } = window;
+      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
 
-      if (!ethereum) {
-        toast.error('No ethereum wallet found, Please install metamask');
+      if (accounts.length === 0) {
+        disconnect();
         return;
       }
 
-      const accounts: any = (await ethereum.request({ method: 'eth_requestAccounts' })) as string[];
+      const chainId = await ethereum.request({ method: 'eth_chainId' });
+      const chainNetwork = CHAIN_INFO[Number(chainId)].network;
 
-      if (accounts?.length > 0) {
-        const chainId = await ethereum.request({ method: 'eth_chainId' });
-        console.log(chainId);
-        const chainNetwork = CHAIN_INFO[13881].network;
-        setAccount({
-          address: accounts[0],
-          chainNetwork,
-          isAuthenticated: true
-        });
-        localStorage.setItem('chain_network', chainNetwork);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+      setAccount({
+        address: accounts[0],
+        chainNetwork,
+        chainId: Number(chainId),
+        isAuthenticated: true
+      });
+      localStorage.setItem('chain_network', chainNetwork);
+    } catch (error) {}
   }, []);
 
   useEffect(() => {
-    confirmWalletConnection();
-  }, [account, confirmWalletConnection]);
+    _updateWalletConnection();
+  }, [_updateWalletConnection]);
 
   useEffect(() => {
     if (typeof window.ethereum === 'undefined') return;
@@ -131,7 +121,7 @@ export default function ContractProvider({ children }: ContractProps) {
     });
 
     window.ethereum.on('networkChanged', (network: string) => {
-      setAccount({ ...account, chainNetwork: CHAIN_INFO[Number(network)].network });
+      setAccount({ ...account, chainId: Number(network), chainNetwork: CHAIN_INFO[Number(network)].network });
     });
 
     window.ethereum.on('disconnect', disconnect);
@@ -141,11 +131,37 @@ export default function ContractProvider({ children }: ContractProps) {
     };
   }, [account]);
 
-  // const contextValue = useMemo(() => {
-  //   return { account, connectWallet };
-  // }, [account, connectWallet]);
-
   return <ContractContext.Provider value={{ account, connectWallet, disconnect }}>{children}</ContractContext.Provider>;
 }
 
 export const useContractContext = () => useContext(ContractContext);
+
+// const confirmWalletConnection = useCallback(async () => {
+//   try {
+//     const { ethereum } = window;
+
+//     if (!ethereum) {
+//       toast.error('No ethereum wallet found, Please install metamask');
+//       return;
+//     }
+
+//     const accounts: any = (await ethereum.request({ method: 'eth_requestAccounts' })) as string[];
+//     const chainId = await ethereum.request({ method: 'eth_chainId' });
+
+//     if (accounts?.length > 0) {
+//       const chainNetwork = CHAIN_INFO[Number(chainId)].network;
+
+//       console.log(chainNetwork);
+
+//       setAccount({
+//         address: accounts[0],
+//         chainNetwork,
+//         chainId,
+//         isAuthenticated: true
+//       });
+//       localStorage.setItem('chain_network', chainNetwork);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }, []);

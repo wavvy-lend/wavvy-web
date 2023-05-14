@@ -1,22 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type CounterState = {
   value: number;
 };
 
 const initialState = {
-  value: 0,
+  value: 0
 } as CounterState;
 
 export const counter = createSlice({
-  name: "counter",
+  name: 'counter',
   initialState,
   reducers: {
-    reset: () => initialState,
+    reset: () => initialState
   }
 });
 
 export const {
-// Todo: add action functions
+  // Todo: add action functions
 } = counter.actions;
 export default counter.reducer;

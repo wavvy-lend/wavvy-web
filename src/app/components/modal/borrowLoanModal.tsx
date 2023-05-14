@@ -42,7 +42,7 @@ export default function OpenDapp() {
                 <input
                   type="checkbox"
                   id="test1"
-                  className="inline-flex h-full w-full  rounded transition duration-150 ease-in-out checked:bg-none checked:text-[#5E0585] checked:border-transparent focus:border-transparent focus:ring-2 focus:ring-[#5E0585] focus:ring-opacity-50"
+                  className="inline-flex h-full w-full  rounded transition duration-150 ease-in-out checked:border-transparent checked:bg-none checked:text-[#5E0585] focus:border-transparent focus:ring-2 focus:ring-[#5E0585] focus:ring-opacity-50"
                 />
               </p>
               <p>
