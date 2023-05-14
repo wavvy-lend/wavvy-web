@@ -1,3 +1,4 @@
+import { ICollectionItems } from '@/interface/util_interface';
 import { AUTH_JSON_HEADERS, UN_AUTH_JSON_HEADERS } from '@/util/headers';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { headers } from 'next/dist/client/components/headers';
@@ -26,13 +27,11 @@ export interface Collections {
   floor_price: string;
   website: string;
   status: string;
+  collections: ICollectionItems[]
   created_at?: string;
   updated_at?: string;
 }
 
-export interface CollectionResponse {
-  data: Collections[];
-}
 
 export const collectionsApi = createApi({
   reducerPath: 'collectionsApi',
@@ -54,8 +53,13 @@ export const collectionsApi = createApi({
       query: () => '/collections/active',
       transformResponse: (response: { data: Collections[] }) => response.data,
       providesTags: (result, error, arg) => ['Collections']
+    }),
+    getCollection:builder.query<Collections[], string>({
+      query: (id) =>`/collections/${id}`,
+      transformResponse: (response: { data: Collections[] }) : Collections[] => response.data,
+      providesTags: (result, error, arg) => ['Collections']
     })
   })
 });
 
-export const { useGetCollectionsQuery } = collectionsApi;
+export const { useGetCollectionsQuery, useGetCollectionQuery } = collectionsApi;
