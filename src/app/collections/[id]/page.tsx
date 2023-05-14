@@ -37,7 +37,7 @@ export default function Collection({params: { id }}: { params: {id:string} }) {
         <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
           {
             collection?.collections?.map(item =>(
-              <NftCard {...item} itemsNumber={collection.no_of_items} floorPrice={collection.floor_price} network={collection.network}  />
+              <NftCard key={item.tokenId} {...item} itemsNumber={collection.no_of_items} floorPrice={collection.floor_price} network={collection.network}  />
               ))
             }
         </div>
