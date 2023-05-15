@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* <Navigation /> */}
             <hr className="mb-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />
 
-            <main className="h-full w-full pb-[100px] lg:px-[93px]">{children}</main>
+            <main className="h-full w-full pb-[100px] lg:px-[72px]">{children}</main>
             <Toaster position="bottom-center" reverseOrder={false} />
           </ContractProvider>
         </body>
