@@ -52,7 +52,7 @@ export const userAPi = createApi({
         method: 'POST'
       })
     }),
-    getPools: builder.query<IPool[], any>({
+    getUserPools: builder.query<IPool[], any>({
       query: data => `/user/${data}`,
       transformResponse: (response: { data: IPool[] }) => response.data,
       providesTags: ['Pools']
@@ -60,4 +60,4 @@ export const userAPi = createApi({
   })
 });
 
-export const { useCreateUserMutation } = userAPi;
+export const { useCreateUserMutation, useGetUserPoolsQuery } = userAPi;

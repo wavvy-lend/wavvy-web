@@ -23,10 +23,10 @@ export default function ProjectDetail({
     <section key={collectionId} className="flex h-full w-full flex-col items-start gap-4 rounded-[19px] bg-grey-200">
       <Image
         src="/assets/projects/project-1.png"
-        alt=""
+        alt="cover-photo"
         width={1233}
         height={60}
-        className="rounded-t-[19px]"
+        className="h-[200px] w-full rounded-t-[19px]"
         priority
       />
 

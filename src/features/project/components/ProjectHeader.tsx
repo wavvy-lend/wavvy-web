@@ -3,14 +3,14 @@ import { GlobeAltIcon, HeartIcon, LinkIcon, PresentationChartBarIcon } from '@he
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const ProjectHeader = ({ collectionImage}: { collectionImage: string }) => (
+export const ProjectHeader = ({ collectionImage }: { collectionImage: string }) => (
   <div className="flex w-full items-start justify-between px-[27px]">
     <Image
       src={`${collectionImage}`}
       alt=""
       width={130}
       height={130}
-      className="-mt-[130px] rounded-[10px] border-[4px] border-grey-300 object-cover"
+      className="-mt-[100px] h-[130px] w-[130px] rounded-[10px] border-[4px] border-grey-300 object-cover"
       priority
     />
 
@@ -34,7 +34,7 @@ export const ProjectHeader = ({ collectionImage}: { collectionImage: string }) =
   </div>
 );
 
-export const ProjectTitle = ({ name, creator,website }: { name: string; creator: string, website:string }) => (
+export const ProjectTitle = ({ name, creator, website }: { name: string; creator: string; website: string }) => (
   <div className="flex w-full items-center justify-between py-[40px] text-white">
     <hgroup className=" flex flex-col items-start gap-5 font-rob font-bold">
       <h1 className=" text-[30px]/[30px]">{`${name} -- NFT Project`}</h1>
@@ -42,7 +42,8 @@ export const ProjectTitle = ({ name, creator,website }: { name: string; creator:
     </hgroup>
 
     <ButtonOrLink
-      href={`${website}`} target='blank'
+      href={`${website}`}
+      target="blank"
       className="flex items-center gap-2.5 rounded-lg bg-prime-200 bg-opacity-[0.44] px-4 py-2 font-rob text-[16px]/[25px] font-medium text-white"
     >
       Visit site <LinkIcon className="h-5 w-5" />
@@ -50,7 +51,7 @@ export const ProjectTitle = ({ name, creator,website }: { name: string; creator:
   </div>
 );
 
-export const ProjectDescription = ({ description } :{description:string}) => (
+export const ProjectDescription = ({ description }: { description: string }) => (
   <div className="font-rob text-[14px]/[22px] font-medium text-white">
     <p>{description}</p>
 
