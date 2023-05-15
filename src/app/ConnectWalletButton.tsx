@@ -66,11 +66,11 @@ export default function ConnectWalletButton() {
                       </div>
                       <div className="w-full flex-col gap-4 px-2 py-4 first-letter:flex">
                         <button
-                          className="flex w-full items-center justify-center gap-4 rounded-lg bg-alt-200 bg-opacity-20 p-2 text-[14px]/[14px] font-bold text-grey-100 hover:bg-opacity-50"
+                          className="flex w-full items-center gap-4 rounded-lg bg-alt-200 bg-opacity-20 p-2 text-[14px]/[14px] font-bold text-grey-100 hover:bg-opacity-50"
                           onClick={disconnect}
                         >
-                          <span>Logout</span>
                           <ArrowRightOnRectangleIcon className="h-5 w-5" />
+                          <span>Logout</span>
                         </button>
                       </div>
                     </Popover.Panel>

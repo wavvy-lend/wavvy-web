@@ -64,7 +64,7 @@ body {
 
 .banner_frame_1,
 .banner_frame_2 {
-  @apply absolute w-full;
+  @apply absolute left-0 right-0 top-0 w-full;
 }
 
 .banner_frame_1 {
