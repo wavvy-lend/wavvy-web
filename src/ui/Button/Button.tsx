@@ -2,7 +2,7 @@ import { ButtonOrLink, ButtonOrLinkProps } from './ButtonOrLink';
 
 export interface ButtonProps extends ButtonOrLinkProps {
   variant: 'filled' | 'plain';
-  color?: 'primary' | 'secondary' | 'alt' | 'plain' | 'transparent';
+  color?: 'primary' | 'secondary' | 'alt' | 'plain' | 'alt-0' | 'transparent';
   fullwidth?: boolean;
 }
 
@@ -26,7 +26,7 @@ export function Button({ variant = 'plain', color = 'transparent', fullwidth = f
   return (
     <ButtonOrLink
       {...props}
-      className={`flex items-center justify-center gap-2.5 px-[29px] py-[15px] font-rob text-[14px]/[14px] font-bold ${buttonType} ${buttonStyles} ${
+      className={`flex items-center justify-center gap-2.5 px-[29px] py-[15px] font-rob text-[14px]/[14px] font-bold duration-300 ease-in ${buttonType} ${buttonStyles} ${
         fullwidth ? 'w-full' : ''
       }`}
     />

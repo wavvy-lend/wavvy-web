@@ -60,6 +60,8 @@ export default function ContractProvider({ children }: ContractProps) {
         isAuthenticated: true
       });
 
+      localStorage.setItem('chain_network', chainNetwork);
+
       if (error) return console.log(error);
 
       await createUser({ address: accounts[0] });
@@ -70,8 +72,6 @@ export default function ContractProvider({ children }: ContractProps) {
         toast.success('User Successfully registered');
         return;
       }
-
-      localStorage.setItem('chain_network', chainNetwork);
     } catch (error: any) {
       if (error.code === 4001) {
         toast.error('Please connect your wallet');

@@ -16,6 +16,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function Se
           className="block w-full rounded-2xl border border-grey-200 bg-grey-200 bg-opacity-[0.69] py-[14px] pl-3 font-rob text-[18px]/[18px] text-grey-100 placeholder:text-[#666666] focus:border-grey-200 focus:outline-none focus:ring-grey-200"
           ref={ref}
           type={type}
+          autoComplete="off"
           {...props}
         />
         <div className="pointer-events-none absolute inset-y-[14px] right-[22px] pl-[20px]">

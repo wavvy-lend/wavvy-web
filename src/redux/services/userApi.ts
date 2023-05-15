@@ -27,11 +27,7 @@ export interface IUserState {
 }
 
 const header = (chainNetwork: SupportedNetWork, headers: Headers) => {
-  return {
-    ...headers,
-    // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-    'CLIENT-NETWORK': chainNetwork ? chainNetwork : SupportedNetWork.POLYGONTESTNET
-  };
+  return headers.set('CLIENT-NETWORK', `${chainNetwork ? chainNetwork : SupportedNetWork.POLYGONTESTNET}`);
 };
 
 // Define a service using a base URL and expected endpoints
@@ -53,7 +49,7 @@ export const userAPi = createApi({
       })
     }),
     getUserPools: builder.query<IPool[], any>({
-      query: data => `/user/${data}`,
+      query: data => `/pools/user/${data}`,
       transformResponse: (response: { data: IPool[] }) => response.data,
       providesTags: ['Pools']
     })

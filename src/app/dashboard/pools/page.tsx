@@ -1,5 +1,6 @@
 'use client';
 
+import AuthUser from '@/components/auth-user';
 import NoContent from '@/components/no-content';
 import { useContractContext } from '@/context/contract-context';
 import { CreatePool } from '@/features/Pool/CreatePool';
@@ -10,6 +11,7 @@ import { PoolStatsLoader } from '@/features/Pool/loader';
 import { useGetUserPoolsQuery } from '@/redux/services/userApi';
 import { Button } from '@/ui/Button';
 import { ButtonOrLink } from '@/ui/Button/ButtonOrLink';
+import Image from 'next/image';
 
 import { Suspense } from 'react';
 
@@ -19,27 +21,11 @@ const Pools = () => {
     connectWallet
   } = useContractContext();
 
-  const { data: pools, error, isLoading } = useGetUserPoolsQuery(address);
+  const user = isAuthenticated && address;
 
-  if (!isAuthenticated) {
-    return (
-      <section className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-[24px]/[24px] font-bold text-white">Connect your wallet to View your pools.</h1>
-        <p className="text-[16px]/[24px] font-medium text-white">
-          If you don&#39;t have a{' '}
-          <ButtonOrLink href="" className="text-alt-100">
-            wallet
-          </ButtonOrLink>{' '}
-          yet, you can select a provider and create one now.
-        </p>
-        <div className="flex w-full max-w-[200px] items-center justify-center py-5">
-          <Button variant="filled" color="plain" fullwidth={true} onClick={connectWallet}>
-            Connect Wallet
-          </Button>
-        </div>
-      </section>
-    );
-  }
+  const { data: pools, error, isLoading } = useGetUserPoolsQuery(user);
+
+  if (!isAuthenticated) return <AuthUser label="Connect your wallet to View your pools." onClick={connectWallet} />;
 
   return (
     <>
@@ -55,17 +41,15 @@ const Pools = () => {
           <h2 className="font-rob text-[45px]/[45px] font-bold text-white">Pools</h2>
         </div>
         <Suspense fallback={<PoolStatsLoader />}>
-          <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
-            {pools && pools.length > 1 ? (
-              <NoContent label="Yo do not have any pool yet. kindly create on using the create pool butto above" />
-            ) : (
-              <>
-                {pools?.map(pool => (
-                  <PoolItem key={pool.unique_id} pool={pool} />
-                ))}
-              </>
-            )}
-          </div>
+          {pools && pools.length < 1 ? (
+            <NoContent label="Yo do not have any pool yet. To create a pool make use of the button above" />
+          ) : (
+            <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
+              {pools?.map(pool => (
+                <PoolItem key={pool.unique_id} pool={pool} />
+              ))}
+            </div>
+          )}
         </Suspense>
       </section>
     </>
