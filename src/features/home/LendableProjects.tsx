@@ -1,14 +1,17 @@
 'use client';
 
-import { useGetCollectionsQuery } from '@/redux/services/CollectionsAPI';
-import { CollectionCard } from './components/CollectionCard';
+import { useGetLimitPoolsQuery } from '@/redux/services/poolApi';
 import { Suspense } from 'react';
+import PoolCard from './components/PoolCard';
+import { FectchLimitPoolSkelonton } from '@/components/skelonton';
+import { toast } from 'react-hot-toast';
 
 export default function LendableProjects() {
-  const { data: collections, error, isLoading } = useGetCollectionsQuery();
+  const { data: pools, error, isLoading, isFetching } = useGetLimitPoolsQuery(4);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{`Error: ${error}`}</div>;
+  // if (isLoading) return <FectchLimitPoolSkelonton />;
+
+  if (error) return toast.error('Error while loading data, Prefecting');
 
   return (
     <section>
@@ -17,22 +20,11 @@ export default function LendableProjects() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-        <Suspense fallback={<div>Loading...</div>}>
-          {collections?.map(collection => (
-            <CollectionCard
-              key={collection.id}
-              collectionId={collection.id}
-              uniqueId={collection.unique_id}
-              image={collection.avatar}
-              name={collection.name}
-              creator={collection.owner}
-              floor_price={collection.floor_price}
-              description={collection.description}
-              status={collection.status}
-            />
-          ))}
-        </Suspense>
+        {pools?.map(pool => (
+          <PoolCard key={pool.unique_id} {...pool} />
+        ))}
       </div>
+      {isFetching ? <FectchLimitPoolSkelonton /> : null}
     </section>
   );
 }

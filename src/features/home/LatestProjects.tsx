@@ -3,9 +3,10 @@
 import { useGetCollectionsQuery } from '@/redux/services/CollectionsAPI';
 import { CollectionCard } from './components/CollectionCard';
 import { Suspense } from 'react';
+import { CollectionLoader } from '@/components/skelonton';
 
 export default function LatestPRojects() {
-  const { data: collections, error, isLoading } = useGetCollectionsQuery();
+  const { data: collections, error, isLoading, isFetching } = useGetCollectionsQuery();
 
   if (error) return <div>{`Error: ${error}`}</div>;
 
@@ -32,6 +33,7 @@ export default function LatestPRojects() {
           ))}
         </Suspense>
       </div>
+      {isFetching ? <CollectionLoader /> : null}
     </section>
   );
 }

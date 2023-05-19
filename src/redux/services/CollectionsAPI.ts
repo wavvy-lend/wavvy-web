@@ -27,11 +27,10 @@ export interface Collections {
   floor_price: string;
   website: string;
   status: string;
-  collections: ICollectionItems[]
+  collections: ICollectionItems[];
   created_at?: string;
   updated_at?: string;
 }
-
 
 export const collectionsApi = createApi({
   reducerPath: 'collectionsApi',
@@ -54,9 +53,9 @@ export const collectionsApi = createApi({
       transformResponse: (response: { data: Collections[] }) => response.data,
       providesTags: (result, error, arg) => ['Collections']
     }),
-    getCollection:builder.query<Collections[], string>({
-      query: (id) =>`/collections/${id}`,
-      transformResponse: (response: { data: Collections[] }) : Collections[] => response.data,
+    getCollection: builder.query<Collections[], string>({
+      query: id => `/collections/${id}`,
+      transformResponse: (response: { data: Collections[] }): Collections[] => response.data,
       providesTags: (result, error, arg) => ['Collections']
     })
   })

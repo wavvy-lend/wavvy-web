@@ -11,7 +11,7 @@ export default function Hero() {
           <Banner />
           <LenderBanner />
         </div>
-        <div className="h-full max-h-[328px] w-full max-w-[452px] rounded-[19px] bg-grey-300 px-[20px] py-[30px]">
+        <div className="h-full max-h-[328px] w-full max-w-[448px] rounded-[19px] bg-grey-300 px-[20px] py-[30px]">
           <div className="flex h-[3] w-full items-center justify-between">
             <h1 className=" text-[20px]/[20px] font-bold text-grey-100">Recent purchases</h1>
             <button className="flex items-center gap-2.5 rounded-[8px] bg-grey-200 p-2.5 text-[12px]/[12px] text-[#777777]">

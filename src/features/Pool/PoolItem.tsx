@@ -7,7 +7,7 @@ import { PoolStatsLoader } from './loader';
 const PoolDetails = ({ name, value }: { name: string; value: string | number }) => {
   return (
     <div className="flex flex-col items-start gap-2">
-      <dt className="text-[12px]/[14px] font-semibold text-alt-200">{name}</dt>
+      <dt className="text-[12px]/[14px] font-semibold text-alt-200 group-hover:text-grey-100">{name}</dt>
       <dd className="font-rube text-[14px]/[16px] font-bold text-white">{value}</dd>
     </div>
   );
