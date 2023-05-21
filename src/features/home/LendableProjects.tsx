@@ -11,8 +11,10 @@ export default function LendableProjects() {
 
   // if (isLoading) return <FectchLimitPoolSkelonton />;
 
-  if (error) return toast.error('Error while loading data, Prefecting');
-
+  if (error) {
+    toast.error('Error while loading data, Prefecting');
+    return <div />;
+  }
   return (
     <section>
       <div className="my-[30px] mb-8 mt-[108px] flex w-full items-center justify-between px-2">
@@ -24,7 +26,7 @@ export default function LendableProjects() {
           <PoolCard key={pool.unique_id} {...pool} />
         ))}
       </div>
-      {isFetching ? <FectchLimitPoolSkelonton /> : null}
+      {isLoading || isFetching ? <FectchLimitPoolSkelonton /> : null}
     </section>
   );
 }

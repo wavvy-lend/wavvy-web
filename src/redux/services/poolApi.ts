@@ -1,4 +1,5 @@
 import { SupportedNetWork } from '@/util/chain';
+import { header } from '@/util/headers';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export interface IPool {
@@ -17,10 +18,9 @@ export interface IPool {
   volume: number;
 }
 
-const header = (chainNetwork: SupportedNetWork, headers: Headers) => {
-  console.log(chainNetwork);
-  return headers.set('CLIENT-NETWORK', `${chainNetwork}`);
-};
+// const header = (chainNetwork: SupportedNetWork, headers: Headers) => {
+//   return headers.set('CLIENT-NETWORK', `${chainNetwork}`);
+// };
 
 // Define a service using a base URL and expected endpoints
 export const poolApi = createApi({
