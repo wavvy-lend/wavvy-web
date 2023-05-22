@@ -101,3 +101,32 @@ body {
     visibility: visible;
   }
 }
+
+@layer utilities {
+  input[pattern='[0-9]*']:invalid {
+    border: 2px solid red;
+    animation: shake 0.2s 2;
+  }
+
+  .input-error-message {
+    display: none;
+  }
+
+  input[pattern="[0-9]*"]:invalid + .input-error-message {
+    display: block;
+    color: red;
+  }
+
+  @keyframes shake {
+    25% {
+      translate: 6px 0;
+    }
+    50% {
+      translate: -6px 0;
+    }
+
+    75% {
+      translate: 6px 0;
+    }
+  }
+}

@@ -2,15 +2,43 @@
 import ProjectDetail from '@/features/project/ProjectDetail';
 import { NftCard } from '@/features/project/components/NftCard';
 import { ICollection } from '@/interface/util_interface';
-import { useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
+import { selectSearchItem, setInputValue } from '@/redux/features/slices/searchSlice';
+import { collectionsApi, useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
 import { SearchField } from '@/ui/InputField';
-
+import { debounce } from 'lodash';
 import { ArrowLongLeftIcon } from '@heroicons/react/24/outline';
-import { Suspense } from 'react';
+import { ChangeEvent, Suspense, useCallback, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Collection({ params: { id } }: { params: { id: string } }) {
   const { data: [collection] = [], error, isLoading } = useGetCollectionQuery(id);
+  const { inputValue } = useSelector(selectSearchItem);
+  const [trigger, { data: isItemData, isLoading: isLoadingItem, error: isItemError }, lastPromiseInfo] =
+    collectionsApi.useLazyGetCollectionItemQuery();
+  const dispatch = useDispatch();
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    debouncedChangeHandler(value);
+  };
+
+  const debouncedChangeHandler = useCallback(
+    debounce((value: string) => {
+      dispatch(setInputValue(value));
+      const isValidNumber = !isNaN(Number(value));
+      if (isValidNumber) {
+        trigger({ collectionId: id, tokenId: value });
+      }
+    }, 300),
+    []
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedChangeHandler.cancel();
+    };
+  }, [debouncedChangeHandler]);
 
   return (
     <>
@@ -19,44 +47,46 @@ export default function Collection({ params: { id } }: { params: { id: string } 
           <ArrowLongLeftIcon className="h-4 w-4" /> Back
         </Button>
       </div>
-
-      {collection && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <ProjectDetail {...collection} />
-        </Suspense>
-      )}
+      <Suspense fallback={<div>Loading...</div>}>{collection && <ProjectDetail {...collection} />}</Suspense>
 
       <section>
         <div className="my-[30px] mb-8 flex w-full flex-col items-center justify-between px-2 md:flex-row">
           <h2 className="font-rob text-[45px]/[45px] font-bold text-white">Items</h2>
           <form className="w-full md:max-w-[500px]">
-            <SearchField id="item-search" placeholder="Search by Token ID" />
+            <SearchField
+              id="item-search"
+              onChange={handleInputChange}
+              pattern="[0-9]*"
+              value={inputValue}
+              placeholder="Search by Token ID"
+            />
           </form>
         </div>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-            {collection?.collections?.map(item => (
+        <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
+          <Suspense fallback={<div>Loading...</div>}>
+            {isItemData ? (
               <NftCard
-                key={item.tokenId}
-                {...item}
+                key={isItemData.tokenId}
+                {...isItemData}
                 itemsNumber={collection.no_of_items}
                 floorPrice={collection.floor_price}
                 network={collection.network}
               />
-            ))}
-          </div>
-        </Suspense>
+            ) : (
+              collection?.collections?.map(item => (
+                <NftCard
+                  key={item.tokenId}
+                  {...item}
+                  itemsNumber={collection.no_of_items}
+                  floorPrice={collection.floor_price}
+                  network={collection.network}
+                />
+              ))
+            )}
+          </Suspense>
+        </div>
       </section>
     </>
-  );
-}
-
-function ColllectionValue({ value, item }: { item: string; value: string }) {
-  return (
-    <div className="flex flex-col items-center gap-1 font-rob text-[14px]/[22px] text-white">
-      <span className=" font-bold">{value}</span>
-      <span className=" font-medium">{item}</span>
-    </div>
   );
 }

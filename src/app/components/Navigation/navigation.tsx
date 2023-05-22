@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useAppDispatch } from '@/redux/hooks';
 import { useSelector } from 'react-redux';
 
-import { connect } from '@/redux/features/walletConnectSlice';
+import { connect } from '@/redux/features/slices/walletConnectSlice';
 import { connectWallet } from '@/redux/services/asyncThunkAction';
 import { NavBarLink } from '@/app/NavBarLink';
 import { shortenAddress } from '@/util/util';

@@ -2,7 +2,6 @@ import { ICollectionItems } from '@/interface/util_interface';
 import { SupportedNetWork } from '@/util/chain';
 import { AUTH_JSON_HEADERS, UN_AUTH_JSON_HEADERS, header } from '@/util/headers';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { headers } from 'next/dist/client/components/headers';
 
 export enum NETWORKS {
   ETHEREUM = 'ethereum',
@@ -33,6 +32,11 @@ export interface Collections {
   updated_at?: string;
 }
 
+export interface IGetCollectionItemParams {
+  collectionId: string;
+  tokenId: string;
+}
+
 export const collectionsApi = createApi({
   reducerPath: 'collectionsApi',
   refetchOnFocus: true,
@@ -44,7 +48,7 @@ export const collectionsApi = createApi({
     }
     // headers: UN_AUTH_JSON_HEADERS
   }),
-  tagTypes: ['Collections'],
+  tagTypes: ['Collections', 'items'],
   endpoints: builder => ({
     getCollections: builder.query<Collections[], void>({
       query: () => '/collections/active',
@@ -55,16 +59,13 @@ export const collectionsApi = createApi({
       query: id => `/collections/${id}`,
       transformResponse: (response: { data: Collections[] }): Collections[] => response.data,
       providesTags: (result, error, arg) => ['Collections']
+    }),
+    getCollectionItem: builder.query<ICollectionItems, IGetCollectionItemParams>({
+      query: ({ collectionId, tokenId }) => `tokens/get/${collectionId}/${encodeURIComponent(tokenId)}`,
+      transformResponse: (response: { data: ICollectionItems }): ICollectionItems => response.data,
+      providesTags: (result, error, arg) => [{ type: 'items', arg }]
     })
   })
 });
 
-export const { useGetCollectionsQuery, useGetCollectionQuery } = collectionsApi;
-
-// prepareHeaders: (headers, { getState }) => {
-//   const clientNetwork: NETWORKS | null = localStorage.getItem('clientNetwork') as NETWORKS;
-//   if (clientNetwork) {
-//     AUTH_JSON_HEADERS(clientNetwork, headers);
-//   }
-//   return headers;
-// },
+export const { useGetCollectionsQuery, useGetCollectionQuery, useGetCollectionItemQuery } = collectionsApi;
