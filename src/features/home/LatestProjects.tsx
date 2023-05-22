@@ -7,7 +7,6 @@ import { CollectionLoader } from '@/components/skelonton';
 export default function LatestPRojects() {
   const { data: collections, error, isLoading, isFetching } = useGetCollectionsQuery();
 
-  console.log(collections);
 
   if (error) return <div>{`Error: ${error}`}</div>;
 

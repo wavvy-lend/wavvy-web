@@ -1,7 +1,7 @@
 'use client';
 import ProjectDetail from '@/features/project/ProjectDetail';
 import { NftCard } from '@/features/project/components/NftCard';
-import { ICollection } from '@/interface/util_interface';
+import { ICollection, ICollectionItems } from '@/interface/util_interface';
 import { selectSearchItem, setInputValue } from '@/redux/features/slices/searchSlice';
 import { collectionsApi, useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
@@ -74,7 +74,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
                 network={collection.network}
               />
             ) : (
-              collection?.collections?.map(item => (
+              collection?.collections?.map((item: ICollectionItems) => (
                 <NftCard
                   key={item.tokenId}
                   {...item}
