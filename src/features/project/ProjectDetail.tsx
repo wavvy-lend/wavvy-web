@@ -30,7 +30,7 @@ export default function ProjectDetail({
         priority
       />
 
-      <ProjectHeader collectionImage={image} />
+      <ProjectHeader collectionImage={image ? image : '/assets/project-buy.png'} />
       <div className="w-full px-[27px]">
         <ProjectTitle name={name} creator={creator} website={website!} />
         <ProjectDescription description={description} />

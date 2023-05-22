@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ethers } from 'ethers';
-import { IWalletProvoder } from '../features/walletConnectSlice';
+import { IWalletProvoder } from '../features/slices/walletConnectSlice';
 
 // export const signup = createAsyncThunk(
 //     'neverlandUser/signup',

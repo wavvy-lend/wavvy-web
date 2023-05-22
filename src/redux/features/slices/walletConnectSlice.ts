@@ -2,8 +2,8 @@ import { MetaMaskInpageProvider } from '@metamask/providers';
 import { createSlice } from '@reduxjs/toolkit';
 import { BrowserProvider, JsonRpcSigner, ethers } from 'ethers';
 import { useCallback, useState } from 'react';
-import { connectWallet } from '../services/asyncThunkAction';
-import { RootState } from '../store';
+import { connectWallet } from '../../services/asyncThunkAction';
+import { RootState } from '../../store';
 
 // declare global {
 interface Window {
