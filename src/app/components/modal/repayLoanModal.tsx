@@ -14,7 +14,7 @@ const DetailedList: FC<IDetailedList> = ({ info, price }) => (
   </div>
 );
 
-export default function RepayLoan() {
+export default function RepayLoanModal() {
   const [value, setValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,11 +40,11 @@ export default function RepayLoan() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="h-6 w-6"
                   >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                   </svg>
                 ) : (
                   <svg
@@ -55,7 +55,7 @@ export default function RepayLoan() {
                     stroke="currentColor"
                     className="h-5 w-5"
                   >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                   </svg>
                 )}
               </span>

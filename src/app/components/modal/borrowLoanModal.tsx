@@ -13,7 +13,7 @@ const DetailedList: FC<IDetailedList> = ({ info, price }) => (
   </div>
 );
 
-export default function OpenDapp() {
+export default function BorrowLoanModal() {
   return (
     <>
       <div className="flex w-full flex-col gap-x-[27px] md:flex-row">
