@@ -1,9 +1,13 @@
 import { Toaster } from 'react-hot-toast';
-import { Providers } from '@/redux/provider';
-import ContractProvider from '@/context/contract-context';
-import Navigation from '@/components/Navigation/navigation';
+
+import Navigation from './components/Navigation/navigation';
 import './globals.css';
-import NetWorkBanner from '@/components/NetworkBanner';
+
+import { Providers } from '@/redux/provider';
+import Link from 'next/link';
+import { NavBarLink } from './NavBarLink';
+import ConnectWalletButton from './ConnectWalletButton';
+import ContractProvider from '@/context/contract-context';
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,16 +18,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <Providers>
-        <ContractProvider>
-          <body className="h-full w-full bg-grey-400 bg-body bg-cover bg-no-repeat" suppressHydrationWarning={true}>
-            <NetWorkBanner />
-            <Navigation />
+        <body className="h-full w-full bg-grey-400 bg-body bg-cover bg-no-repeat" suppressHydrationWarning={true}>
+          <ContractProvider>
+            <nav className="flex h-full w-full items-center justify-between px-4 py-[22px] lg:px-[100px]">
+              <Link href="/" className="font-ava text-lg/[18px] text-white md:text-[25px]/[25px]">
+                wavvy
+              </Link>
+              <div className="hidden w-full items-center justify-end gap-8 md:flex lg:flex">
+                <ul className="flex items-center justify-end gap-4">
+                  <NavBarLink href="/dashboard" label="Dashboard" />
+                </ul>
+
+                <ConnectWalletButton />
+              </div>
+            </nav>
+            {/* <Navigation /> */}
             <hr className="mb-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />
 
             <main className="h-full w-full pb-[100px] lg:px-[72px]">{children}</main>
             <Toaster position="bottom-center" reverseOrder={false} />
-          </body>
-        </ContractProvider>
+          </ContractProvider>
+        </body>
       </Providers>
     </html>
   );
