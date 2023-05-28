@@ -12,13 +12,10 @@ import { useGetUserPoolsQuery } from '@/redux/services/userApi';
 import { Button } from '@/ui/Button';
 import { ButtonOrLink } from '@/ui/Button/ButtonOrLink';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import { Suspense } from 'react';
-import { toast } from 'react-hot-toast';
 
 const Pools = () => {
-  const router = useRouter();
   const {
     account: { isAuthenticated, address },
     connectWallet
@@ -28,13 +25,7 @@ const Pools = () => {
 
   const { data: pools, error, isLoading } = useGetUserPoolsQuery(user);
 
-  // if (!isAuthenticated) return <AuthUser label="Connect your wallet to View your pools." onClick={connectWallet} />;
-
-  if (!isAuthenticated) {
-    router.push('/');
-
-    toast.error('Connect your wallet to View your pools');
-  }
+  if (!isAuthenticated) return <AuthUser label="Connect your wallet to View your pools." onClick={connectWallet} />;
 
   return (
     <>

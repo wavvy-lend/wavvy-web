@@ -3,10 +3,7 @@ import { Button } from '@/ui/Button';
 import Image from 'next/image';
 
 export const CollectionCard = ({ ...collection }: ICollections) => (
-  <div key={collection.collectionId} className="relative block h-full w-full rounded-[19px] bg-grey-200 p-4 font-rob">
-    <div className="absolute right-0 my-[13px] flex items-center bg-alt-300 px-[18px] py-[10px] shadow-badge">
-      <span className="font-rob text-[12px]/[18px] font-bold text-white">LOAN AVAILABLE</span>
-    </div>
+  <div key={collection.collectionId} className="block h-full w-full rounded-[19px] bg-grey-200 p-4 font-rob">
     <Image
       src={collection.image}
       alt="project"
