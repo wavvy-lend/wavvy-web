@@ -1,9 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useCreateUserMutation } from '@/redux/services/userApi';
 import { CHAIN_INFO, SupportedChainId, SupportedNetWork } from '@/util/chain';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { chain } from 'lodash';
 
 declare global {
   interface Window {
@@ -36,10 +38,13 @@ const ContractContext = createContext<any | null>(initialState);
 export interface ContractProps extends React.PropsWithChildren {}
 
 export default function ContractProvider({ children }: ContractProps) {
+  const router = useRouter();
   const [account, setAccount] = useState<IAccount>(initialState.account);
-
   const [createUser, { isLoading, error, data }] = useCreateUserMutation();
 
+  /**
+   * Connect user wallet and sign up user
+   */
   const connectWallet = useCallback(async () => {
     try {
       const { ethereum } = window;
@@ -51,6 +56,7 @@ export default function ContractProvider({ children }: ContractProps) {
 
       const accounts: any = (await ethereum.request({ method: 'eth_requestAccounts' })) as string[];
       const chainId = await ethereum.request({ method: 'eth_chainId' });
+
       const chainNetwork = CHAIN_INFO[Number(chainId)].network;
 
       setAccount({
@@ -60,6 +66,7 @@ export default function ContractProvider({ children }: ContractProps) {
         isAuthenticated: true
       });
 
+      console.log(chainNetwork);
       localStorage.setItem('chain_network', chainNetwork);
 
       if (error) return console.log(error);
@@ -80,6 +87,7 @@ export default function ContractProvider({ children }: ContractProps) {
     }
   }, [createUser, data, error, isLoading]);
 
+  // Disconnect wallet
   const disconnect = async () => {
     setAccount(initialState.account);
 
@@ -105,9 +113,13 @@ export default function ContractProvider({ children }: ContractProps) {
         chainId: Number(chainId),
         isAuthenticated: true
       });
+
+      console.log(chainNetwork);
+
       localStorage.setItem('chain_network', chainNetwork);
+      router.refresh();
     } catch (error) {}
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     _updateWalletConnection();
@@ -118,18 +130,22 @@ export default function ContractProvider({ children }: ContractProps) {
 
     window.ethereum.on('accountsChanged', (accounts: string[]) => {
       setAccount({ ...account, address: accounts[0] });
+      router.refresh();
     });
 
     window.ethereum.on('networkChanged', (network: string) => {
       setAccount({ ...account, chainId: Number(network), chainNetwork: CHAIN_INFO[Number(network)].network });
+      router.refresh();
     });
 
     window.ethereum.on('disconnect', disconnect);
+    router.refresh();
 
     return () => {
       window.ethereum.removeAllListeners();
+      router.refresh();
     };
-  }, [account]);
+  }, [account, router]);
 
   return <ContractContext.Provider value={{ account, connectWallet, disconnect }}>{children}</ContractContext.Provider>;
 }
