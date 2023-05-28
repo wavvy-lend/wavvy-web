@@ -1,7 +1,24 @@
 import { ReactNode } from 'react';
 
+
+export enum NETWORKS {
+  ETHEREUM = 'ethereum',
+  MATIC = 'matic',
+  POLYGONMUMBAI = 'polygonMumbai',
+  BSCTESTNET = 'bscTestnet'
+}
+export enum STATUS {
+  ACTIVE = 'active'
+}
+
 export interface ImageProps {
   nftLoan: string;
+}
+
+
+export interface IGetCollectionItemParams {
+  collectionId: string;
+  tokenId: string;
 }
 
 export interface IParentModal {
@@ -27,19 +44,24 @@ export interface ICollections {
   status: string;
 }
 
-export interface ICollection {
-  collectionId: string;
-  uniqueId: string;
+
+export interface Collections {
+  id: string;
+  unique_id: string;
+  address: string;
+  network: NETWORKS;
   name: string;
-  website: string;
   description: string;
-  image: string;
-  creator: string;
-  items: string;
+  avatar: string;
+  owner: string;
+  no_of_items: string;
+  total_volume: string;
   floor_price: string;
+  website: string;
   status: string;
-  collections?: ICollectionItems[];
-  volume?: string;
+  collections: ICollectionItems[];
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface ICollectionItems {

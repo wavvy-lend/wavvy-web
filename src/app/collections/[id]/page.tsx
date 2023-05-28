@@ -1,7 +1,5 @@
 'use client';
 import ProjectDetail from '@/features/project/ProjectDetail';
-import { NftCard } from '@/features/project/components/NftCard';
-import { ICollection, ICollectionItems } from '@/interface/util_interface';
 import { selectSearchItem, setInputValue } from '@/redux/features/slices/searchSlice';
 import { collectionsApi, useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
@@ -10,12 +8,17 @@ import { debounce } from 'lodash';
 import { ArrowLongLeftIcon } from '@heroicons/react/24/outline';
 import { ChangeEvent, Suspense, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import NftItemsCard from '@/app/components/nft-items-cards/nft-cards';
 
 export default function Collection({ params: { id } }: { params: { id: string } }) {
   const { data: [collection] = [], error, isLoading } = useGetCollectionQuery(id);
   const { inputValue } = useSelector(selectSearchItem);
-  const [trigger, { data: isItemData, isLoading: isLoadingItem, error: isItemError }, lastPromiseInfo] =
-    collectionsApi.useLazyGetCollectionItemQuery();
+  const {
+    data: isItemData,
+    isSuccess,
+    isFetching,
+    isError
+  } = useGetCollectionItemQuery({ collectionId: id, tokenId: inputValue }, { skip: inputValue === '' });
   const dispatch = useDispatch();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,11 +28,8 @@ export default function Collection({ params: { id } }: { params: { id: string } 
 
   const debouncedChangeHandler = useCallback(
     debounce((value: string) => {
-      dispatch(setInputValue(value));
       const isValidNumber = !isNaN(Number(value));
-      if (isValidNumber) {
-        trigger({ collectionId: id, tokenId: value });
-      }
+      if (isValidNumber) dispatch(setInputValue(value));
     }, 300),
     []
   );
@@ -65,25 +65,14 @@ export default function Collection({ params: { id } }: { params: { id: string } 
 
         <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
           <Suspense fallback={<div>Loading...</div>}>
-            {isItemData ? (
-              <NftCard
-                key={isItemData.tokenId}
-                {...isItemData}
-                itemsNumber={collection.no_of_items}
-                floorPrice={collection.floor_price}
-                network={collection.network}
-              />
-            ) : (
-              collection?.collections?.map((item: ICollectionItems) => (
-                <NftCard
-                  key={item.tokenId}
-                  {...item}
-                  itemsNumber={collection.no_of_items}
-                  floorPrice={collection.floor_price}
-                  network={collection.network}
-                />
-              ))
-            )}
+            <NftItemsCard
+              NftItems={
+                typeof Number(inputValue) === 'number' && inputValue.length > 0
+                  ? isItemData ?? []
+                  : collection?.collections
+              }
+              collection={collection}
+            />
           </Suspense>
         </div>
       </section>
