@@ -1,45 +1,12 @@
-import { ICollectionItems } from '@/interface/util_interface';
+import { Collections, ICollectionItems, IGetCollectionItemParams } from '@/interface/util_interface';
 import { SupportedNetWork } from '@/util/chain';
-import { AUTH_JSON_HEADERS, UN_AUTH_JSON_HEADERS, header } from '@/util/headers';
+import { header } from '@/util/headers';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export enum NETWORKS {
-  ETHEREUM = 'ethereum',
-  MATIC = 'matic',
-  POLYGONMUMBAI = 'polygonMumbai',
-  BSCTESTNET = 'bscTestnet'
-}
-
-export enum STATUS {
-  ACTIVE = 'active'
-}
-export interface Collections {
-  id: string;
-  unique_id: string;
-  address: string;
-  network: NETWORKS;
-  name: string;
-  description: string;
-  avatar: string;
-  owner: string;
-  no_of_items: string;
-  total_volume: string;
-  floor_price: string;
-  website: string;
-  status: string;
-  collections: ICollectionItems[];
-  created_at?: string;
-  updated_at?: string;
-}
-
-export interface IGetCollectionItemParams {
-  collectionId: string;
-  tokenId: string;
-}
 
 export const collectionsApi = createApi({
   reducerPath: 'collectionsApi',
-  refetchOnFocus: true,
+  refetchOnMountOrArgChange: true,
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_WAVVY_BASE_URL}`,
     prepareHeaders(headers, api) {
@@ -60,10 +27,10 @@ export const collectionsApi = createApi({
       transformResponse: (response: { data: Collections[] }): Collections[] => response.data,
       providesTags: (result, error, arg) => ['Collections']
     }),
-    getCollectionItem: builder.query<ICollectionItems, IGetCollectionItemParams>({
+    getCollectionItem: builder.query<ICollectionItems[], IGetCollectionItemParams>({
       query: ({ collectionId, tokenId }) => `tokens/get/${collectionId}/${encodeURIComponent(tokenId)}`,
-      transformResponse: (response: { data: ICollectionItems }): ICollectionItems => response.data,
-      providesTags: (result, error, arg) => [{ type: 'items', arg }]
+      transformResponse: (response: {data: ICollectionItems} ): ICollectionItems[] => [response.data],
+      providesTags: (result, error, arg) => [{ type: 'items', arg }],
     })
   })
 });

@@ -54,14 +54,5 @@ export const ProjectTitle = ({ name, creator, website }: { name: string; creator
 export const ProjectDescription = ({ description }: { description: string }) => (
   <div className="font-rob text-[14px]/[22px] font-medium text-white">
     <p>{description}</p>
-
-    <ul>
-      <li>⚒️Deadline to Forge physical: 14th September www.rtfkt.com</li>
-      <li>⚒️You must forge your apparel within this window to receive the physicals.</li>
-    </ul>
-    <p className="pt-4">
-      Please note: Sneaker Forging is not part of this Forging Event and are Digital Wearables for the time being.See
-      the full collection: lookbook.rtfkt.com
-    </p>
   </div>
 );
