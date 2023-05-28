@@ -34,7 +34,7 @@ export default function Hero() {
       <section className="my-[61px] flex w-full flex-col items-center justify-between md:flex-row">
         {/* Search */}
         <form className="w-full md:max-w-[411px]">
-          <SearchField id="searh" placeholder="Search" />
+          <SearchField id="search" placeholder="Search" />
         </form>
         {/* end of search */}
 
