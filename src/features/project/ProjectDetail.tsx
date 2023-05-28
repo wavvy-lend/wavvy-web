@@ -1,10 +1,6 @@
-import { ButtonOrLink } from '@/ui/Button/ButtonOrLink';
-import { GlobeAltIcon, HeartIcon, LinkIcon, PresentationChartBarIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ProjectDescription, ProjectHeader, ProjectTitle } from './components/ProjectHeader';
-import { ICollection } from '@/interface/util_interface';
-import { Collections } from '@/redux/services/CollectionsAPI';
+import { Collections } from '@/interface/util_interface';
 
 export default function ProjectDetail({
   id: collectionId,
@@ -38,20 +34,20 @@ export default function ProjectDetail({
         <hr className="mb-5 mt-10 border-grey-100" />
 
         <div className="grid w-full grid-cols-2 gap-10 px-5 py-5 lg:grid-cols-5">
-          <ColllectionValue value="30K" item=" owners" />
-          <ColllectionValue value={items} item="items" />
-          <ColllectionValue value={volume} item="Total volume" />
-          <ColllectionValue value={floor_price} item="floor price" />
+          <CollectionValue value={creator} item=" owners" />
+          <CollectionValue value={items} item="items" />
+          <CollectionValue value={volume} item="Total volume" />
+          <CollectionValue value={floor_price} item="floor price" />
         </div>
       </div>
     </section>
   );
 }
 
-function ColllectionValue({ value, item }: { item: string; value: string }) {
+function CollectionValue({ value, item }: { item: string; value: string }) {
   return (
     <div className="flex flex-col items-center gap-1 font-rob text-[14px]/[22px] text-white">
-      <span className=" font-bold">{Math.floor(Number(value))}</span>
+      <span className=" font-bold">{Math.floor(Number(value)) as unknown as string}</span>
       <span className=" font-medium">{item}</span>
     </div>
   );

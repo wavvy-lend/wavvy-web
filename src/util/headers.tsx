@@ -1,4 +1,4 @@
-import { NETWORKS } from '@/redux/services/CollectionsAPI';
+import { NETWORKS } from '@/interface/util_interface';
 import { SupportedNetWork } from './chain';
 
 export const AUTH_JSON_HEADERS = (clientNetwork: NETWORKS, headers: Headers) =>
