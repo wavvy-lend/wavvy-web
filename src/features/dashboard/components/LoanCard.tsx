@@ -3,6 +3,9 @@ import Images from '@/util/images';
 import Link from 'next/link';
 import { Button } from '@/ui/Button';
 import { ButtonOrLink } from '@/ui/Button/ButtonOrLink';
+import { useState } from 'react';
+import ModalContainer from '@/ui/Modal/Modal';
+import RepayLoanModal from '@/app/components/modal/repayLoanModal';
 
 interface ILoanCard {
   name: string;
@@ -11,6 +14,16 @@ interface ILoanCard {
 }
 
 const LoanCard = ({ name, amount, dueDate }: ILoanCard) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="flex items-center justify-between gap-4 rounded-md bg-grey-200 px-6 py-3">
       <div className="flex items-center gap-4">
@@ -38,9 +51,12 @@ const LoanCard = ({ name, amount, dueDate }: ILoanCard) => {
         <p className="text-white text-opacity-50">Next Due Date</p>
       </div>
 
-      <Button variant="filled" color="secondary">
+      <Button variant="filled" color="secondary" onClick={openModal}>
         Repay Loan
       </Button>
+      <ModalContainer open={isOpen} close={closeModal} label="Buy With Wavvy">
+          <RepayLoanModal />
+        </ModalContainer>
     </div>
   );
 };
