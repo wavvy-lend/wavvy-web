@@ -28,7 +28,6 @@ export const connectWallet = createAsyncThunk('wavvy', async (_, thunkAPI) => {
 
 const connect = async (): Promise<IWalletProvoder | undefined> => {
   // if (state.isAuthenticated) return;
-
   const { ethereum } = window;
 
   if (!ethereum) console.log('no metamask connected');
@@ -36,6 +35,9 @@ const connect = async (): Promise<IWalletProvoder | undefined> => {
   const provider = new ethers.BrowserProvider(ethereum);
 
   const accounts: string[] = await provider.send('eth_requestAccounts', []);
+
+
+  console.log({accounts});
 
   let signer;
 
