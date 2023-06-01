@@ -7,9 +7,18 @@ export const WavvyApi = axios.create({
   headers: {
     "Access-Control-Allow-Origin' ": 'http://localhost:3000',
     'Content-Type': 'application/json',
-    'CLIENT-NETWORK': 'ethereum'
+    'CLIENT-NETWORK': 'polygonMumbai'
   }
 });
+
+/**
+ * Shorten Address
+ * @param {string} address - string to shorten
+//  * @returns {string}
+ */
+export function shortenAddress(address: any) {
+  return address?.substring(0, 6) + '...' + address?.substring(address?.length - 4);
+}
 
 // fetch data from server
 export const fetcher = (url: string) => WavvyApi.get(url).then(res => res.data);

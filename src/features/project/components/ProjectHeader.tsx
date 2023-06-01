@@ -3,14 +3,14 @@ import { GlobeAltIcon, HeartIcon, LinkIcon, PresentationChartBarIcon } from '@he
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const ProjectHeader = () => (
+export const ProjectHeader = ({ collectionImage }: { collectionImage: string }) => (
   <div className="flex w-full items-start justify-between px-[27px]">
     <Image
-      src="/assets/nfts/nft-1.png"
+      src={`${collectionImage}`}
       alt=""
       width={130}
       height={130}
-      className="-mt-[130px] rounded-[10px] border-[4px] border-grey-300 object-cover"
+      className="-mt-[100px] h-[130px] w-[130px] rounded-[10px] border-[4px] border-grey-300 object-cover"
       priority
     />
 
@@ -34,37 +34,25 @@ export const ProjectHeader = () => (
   </div>
 );
 
-export const ProjectTitle = () => (
+export const ProjectTitle = ({ name, creator, website }: { name: string; creator: string; website: string }) => (
   <div className="flex w-full items-center justify-between py-[40px] text-white">
     <hgroup className=" flex flex-col items-start gap-5 font-rob font-bold">
-      <h1 className=" text-[30px]/[30px]">Sneakerheads -- NFT Project</h1>
-      <p className="text-[18px]/[18px]">By RTFKT</p>
+      <h1 className=" text-[30px]/[30px]">{`${name} -- NFT Project`}</h1>
+      <p className="text-[18px]/[18px]">{`By ${creator}`}</p>
     </hgroup>
 
     <ButtonOrLink
-      href="/"
+      href={`${website}`}
+      target="blank"
       className="flex items-center gap-2.5 rounded-lg bg-prime-200 bg-opacity-[0.44] px-4 py-2 font-rob text-[16px]/[25px] font-medium text-white"
     >
-      vist site <LinkIcon className="h-5 w-5" />
+      Visit site <LinkIcon className="h-5 w-5" />
     </ButtonOrLink>
   </div>
 );
 
-export const ProjectDescription = () => (
+export const ProjectDescription = ({ description }: { description: string }) => (
   <div className="font-rob text-[14px]/[22px] font-medium text-white">
-    <p>
-      Clone X Forging 2022 features exclusive apparel designed for Clone X holders.This collection contains pre-forged
-      NFTs that can be redeemed for physicals at no extra cost via www.rtfkt.comForging of physical starts: Wednesday,
-      7th September via www.rtfkt.com
-    </p>
-
-    <ul>
-      <li>⚒️Deadline to Forge physical: 14th September www.rtfkt.com</li>
-      <li>⚒️You must forge your apparel within this window to receive the physicals.</li>
-    </ul>
-    <p className="pt-4">
-      Please note: Sneaker Forging is not part of this Forging Event and are Digital Wearables for the time being.See
-      the full collection: lookbook.rtfkt.com
-    </p>
+    <p>{description}</p>
   </div>
 );

@@ -18,6 +18,46 @@ const CollectionCard = ({ image }: { image: string }) => (
     </button>
   </div>
 );
+const Loader = () => (
+  <div className="block h-full w-full max-w-[319px] animate-pulse rounded-[19px] bg-grey-300 p-4 font-rob">
+    <div className="mb-[21px] h-[138px] w-full rounded-[16px] bg-grey-200" />
+
+    <div className="mb-4 h-4 w-full rounded-md bg-grey-200" />
+
+    <div className="flex w-full justify-between gap-4 py-4">
+      <div className="h-4 w-full rounded-md bg-grey-200" />
+      <div className="h-4 w-[100px] rounded-md bg-grey-200" />
+    </div>
+
+    <div className="mt-4 h-10 w-full rounded-md bg-grey-200" />
+  </div>
+);
+const PoolCard = () => (
+  <div className="block h-full w-full max-w-[319px] rounded-[19px] bg-grey-200 p-4 font-rob">
+    <div className="flex w-full justify-between gap-4 py-4">
+      <h1 className="truncate pb-2 font-rob text-base/[16px] font-bold text-white">01x3564...3647</h1>
+
+      <span className="text-[14px]/[14px] font-bold text-white">
+        <span className="text-alt-500">16.5%</span> APR
+      </span>
+    </div>
+
+    <button className="flex w-full items-center justify-center gap-2.5 rounded-lg bg-prime-200 px-[29px] py-[15px] font-rob text-[14px]/[14px] font-bold text-white">
+      View Pool
+    </button>
+  </div>
+);
+
+const Fetching = () => (
+  <div className="block h-full max-w-[319px] animate-pulse space-y-4 rounded-2xl bg-grey-300 p-4">
+    <div className="flex w-full justify-between gap-4 py-4">
+      <div className="h-4 w-full rounded-md bg-grey-200" />
+      <div className="h-4 w-[100px] rounded-md bg-grey-200" />
+    </div>
+
+    <div className="h-8 w-full rounded-md bg-grey-200" />
+  </div>
+);
 
 export default function Collections() {
   return (
@@ -56,6 +96,9 @@ export default function Collections() {
         </div>
 
         <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
+          <Loader />
+          <Loader />
+          <Loader />
           <CollectionCard image="/assets/project-buy.png" />
           <CollectionCard image="/assets/project-buy.png" />
           <CollectionCard image="/assets/project-buy.png" />
@@ -71,10 +114,12 @@ export default function Collections() {
         </div>
 
         <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-          <CollectionCard image="/assets/project-sell.png" />
-          <CollectionCard image="/assets/project-sell.png" />
-          <CollectionCard image="/assets/project-sell.png" />
-          <CollectionCard image="/assets/project-sell.png" />
+          <Fetching />
+          <Fetching />
+          <PoolCard />
+          <PoolCard />
+          <PoolCard />
+          <Fetching />
         </div>
       </section>
     </>

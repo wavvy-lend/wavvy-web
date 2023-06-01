@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ethers } from 'ethers';
-import { IWalletProvoder } from '../features/walletConnectSlice';
+import { IWalletProvoder } from '../features/slices/walletConnectSlice';
 
 // export const signup = createAsyncThunk(
 //     'neverlandUser/signup',
@@ -28,6 +28,8 @@ export const connectWallet = createAsyncThunk('wavvy', async (_, thunkAPI) => {
 
 const connect = async (): Promise<IWalletProvoder | undefined> => {
   // if (state.isAuthenticated) return;
+  if (localStorage.getItem('isAuthenticated') === 'connected') return;
+
   const { ethereum } = window;
 
   if (!ethereum) console.log('no metamask connected');
