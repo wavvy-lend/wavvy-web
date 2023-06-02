@@ -28,6 +28,7 @@ export default function LatestPRojects() {
             floor_price={collection.floor_price}
             description={collection.description}
             status={collection.status}
+            banner_image_url={collection?.banner_image_url}
           />
         ))}
       </div>
