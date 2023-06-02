@@ -20,13 +20,13 @@ export interface IPoolItems extends PropsWithChildren {
   creator_id: string;
   payment_cycle: string;
   apr: number;
-  noOfLoans: number;
   duration_in_secs: number;
   duration_in_months: number;
   status: string;
   created_at: Date;
   updated_at: Date;
   volume: number;
+  noOfLoans: number;
 }
 
 export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
