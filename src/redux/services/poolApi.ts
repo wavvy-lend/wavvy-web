@@ -12,6 +12,7 @@ export interface IPool {
   apr: number;
   duration_in_secs: number;
   duration_in_months: number;
+  noOfLoans: number;
   status: string;
   created_at: Date;
   updated_at: Date;

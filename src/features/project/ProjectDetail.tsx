@@ -10,6 +10,7 @@ export default function ProjectDetail({
   website,
   description,
   status,
+  banner_image_url,
   total_volume: volume,
   no_of_items: items,
   floor_price,
@@ -18,7 +19,7 @@ export default function ProjectDetail({
   return (
     <section key={collectionId} className="flex h-full w-full flex-col items-start gap-4 rounded-[19px] bg-grey-200">
       <Image
-        src="/assets/projects/project-1.png"
+        src={banner_image_url}
         alt="cover-photo"
         width={1233}
         height={60}

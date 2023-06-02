@@ -10,9 +10,22 @@ const CardPrice = ({ item, value }: { item: string; value: string }) => (
   </div>
 );
 
-export const NftItemCard: React.FC<INFTCard> = ({ tokenId, tokenAvatar, network, floorPrice, saleStatus, itemsNumber }) => (
+export const NftItemCard: React.FC<INFTCard> = ({
+  tokenId,
+  tokenAvatar,
+  network,
+  floorPrice,
+  saleStatus,
+  itemsNumber
+}) => (
   <div className="block h-full w-full max-w-[319px] rounded-[19px] bg-prime-200 p-2 font-rob">
-    <Image src={`${tokenAvatar}`} alt="project" width={301} height={441} className="mb-[21px] rounded-[16px]" />
+    <Image
+      src={`${tokenAvatar}`}
+      alt="project"
+      width={301}
+      height={441}
+      className="mb-[21px] h-[441px] w-[301px] rounded-[16px]"
+    />
 
     <div className="-mt-[100px] flex h-[100px] w-full flex-col items-start  rounded-b-[16px] bg-grey-200 bg-opacity-[0.48] px-2 py-4 backdrop-blur-[14.5px]">
       <span className="text-[14px]/[22px] font-semibold capitalize text-white">{`#${tokenId}`}</span>

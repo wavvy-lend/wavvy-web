@@ -13,6 +13,7 @@ export interface IPool {
   creator_id: string;
   payment_cycle: string;
   apr: number;
+  noOfLoans: number;
   duration_in_secs: number;
   duration_in_months: number;
   status: string;

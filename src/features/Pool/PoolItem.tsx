@@ -26,6 +26,7 @@ export interface IPoolItems extends PropsWithChildren {
   created_at: Date;
   updated_at: Date;
   volume: number;
+  noOfLoans: number;
 }
 
 export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
@@ -48,7 +49,7 @@ export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
         </button>
       </div>
 
-      <PoolDetails name="Loans" value="2" />
+      <PoolDetails name="Loans" value={pool.noOfLoans} />
       <PoolDetails name="Avg APY" value={`${pool.apr}%`} />
       <PoolDetails name="Volume" value={`$ ${pool.volume}`} />
       <ModalContainer label="Buy with Wavvy" open={open} close={closeModal}>
