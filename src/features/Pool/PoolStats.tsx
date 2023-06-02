@@ -11,9 +11,6 @@ import {
 } from '@/redux/services/poolApi';
 
 export const PoolsStats = () => {
-  // const { data: totalVolume } = useSWR('/pools/totalVolume', fetcher, { suspense: true });
-  // const { data: liquidityBorrowed } = useSWR('/pools/totalLiquidityBorrowed', fetcher, { suspense: true });
-  // const { data: liquidityAvailable } = useSWR('/pools/totalLiquidityAvailable', fetcher, { suspense: true });
 
   const { data: totalVolume } = useGetVolumeQuery('');
   const { data: liquidityBorrowed } = useGetLiquidityBorrowedQuery('');
