@@ -3,7 +3,7 @@
 import { useContractContext } from '@/context/contract-context';
 import Image from 'next/image';
 
-export default function NetWorkBanner({ children }: { children: JSX.Element }) {
+export default function NetWorkBanner() {
   const { account } = useContractContext();
 
   const { address, isAuthenticated, isNetwork } = account;
@@ -34,5 +34,5 @@ export default function NetWorkBanner({ children }: { children: JSX.Element }) {
     );
   }
 
-  return children;
+  return <div className="hidden" />;
 }

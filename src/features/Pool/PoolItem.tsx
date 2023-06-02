@@ -1,8 +1,7 @@
-import { PropsWithChildren, Suspense, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import ModalContainer from '@/ui/Modal/Modal';
 import BorrowModal from './BorrowModal';
 import { shortenAddress } from '@/util/util';
-import { PoolStatsLoader } from './loader';
 
 const PoolDetails = ({ name, value }: { name: string; value: string | number }) => {
   return (
