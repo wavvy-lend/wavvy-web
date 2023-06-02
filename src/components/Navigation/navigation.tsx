@@ -7,7 +7,7 @@ import { useContractContext } from '@/context/contract-context';
 
 const Navigation = () => {
   const {
-    account: { isAuthenticated }
+    account: { isAuthenticated, isNetwork }
   } = useContractContext();
 
   return (
@@ -16,7 +16,7 @@ const Navigation = () => {
         wavvy
       </Link>
       <div className="hidden w-full items-center justify-end gap-8 md:flex lg:flex">
-        {isAuthenticated ? (
+        {isAuthenticated && isNetwork ? (
           <ul className="flex items-center justify-end gap-4">
             <NavBarLink href="/dashboard" label="Dashboard" />
           </ul>

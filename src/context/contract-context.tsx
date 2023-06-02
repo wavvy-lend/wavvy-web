@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useCreateUserMutation } from '@/redux/services/userApi';
 import { CHAIN_INFO, SupportedChainId, SupportedNetWork } from '@/util/chain';
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { chain } from 'lodash';
 
@@ -15,9 +15,10 @@ declare global {
 
 export interface IAccount {
   address: string;
-  chainId: SupportedChainId;
+  chainId: SupportedChainId | null;
   chainNetwork: string;
   isAuthenticated: boolean;
+  isNetwork: boolean;
 }
 
 export interface ContractState {
@@ -29,7 +30,8 @@ const initialState: ContractState = {
     address: '',
     chainId: SupportedChainId.POLYGONTESTNET,
     chainNetwork: SupportedNetWork.POLYGONTESTNET,
-    isAuthenticated: false
+    isAuthenticated: false,
+    isNetwork: false
   }
 };
 
@@ -57,17 +59,27 @@ export default function ContractProvider({ children }: ContractProps) {
       const accounts: any = (await ethereum.request({ method: 'eth_requestAccounts' })) as string[];
       const chainId = await ethereum.request({ method: 'eth_chainId' });
 
-      const chainNetwork = CHAIN_INFO[Number(chainId)].network;
+      // const chainNetwork = CHAIN_INFO[Number(chainId)].network;
+      const chainNetwork = CHAIN_INFO[Number(chainId)];
 
-      setAccount({
-        address: accounts[0],
-        chainId: Number(chainId),
-        chainNetwork,
-        isAuthenticated: true
-      });
-
-      console.log(chainNetwork);
-      localStorage.setItem('chain_network', chainNetwork);
+      if (chainNetwork !== undefined) {
+        setAccount({
+          address: accounts[0],
+          chainId: Number(chainId),
+          chainNetwork: chainNetwork.network,
+          isAuthenticated: true,
+          isNetwork: true
+        });
+        localStorage.setItem('chain_network', chainNetwork.network);
+      } else {
+        setAccount({
+          ...initialState.account,
+          address: accounts[0],
+          chainId: Number(chainId),
+          isAuthenticated: true,
+          isNetwork: false
+        });
+      }
 
       if (error) return console.log(error);
 
@@ -105,49 +117,65 @@ export default function ContractProvider({ children }: ContractProps) {
       }
 
       const chainId = await ethereum.request({ method: 'eth_chainId' });
-      const chainNetwork = CHAIN_INFO[Number(chainId)].network;
+      // const chainNetwork = CHAIN_INFO[Number(chainId)].network;
 
-      setAccount({
-        address: accounts[0],
-        chainNetwork,
-        chainId: Number(chainId),
-        isAuthenticated: true
-      });
+      const chainNetwork = CHAIN_INFO[Number(chainId)];
 
-      console.log(chainNetwork);
-
-      localStorage.setItem('chain_network', chainNetwork);
-      router.refresh();
+      if (chainNetwork !== undefined) {
+        setAccount({
+          address: accounts[0],
+          chainId: Number(chainId),
+          chainNetwork: chainNetwork.network,
+          isAuthenticated: true,
+          isNetwork: true
+        });
+        localStorage.setItem('chain_network', chainNetwork.network);
+      } else {
+        setAccount({
+          ...initialState.account,
+          address: accounts[0],
+          chainId: Number(chainId),
+          isAuthenticated: true,
+          isNetwork: false
+        });
+      }
     } catch (error) {}
-  }, [router]);
+  }, []);
 
   useEffect(() => {
     _updateWalletConnection();
-  }, [_updateWalletConnection]);
+    router.refresh();
+  }, [_updateWalletConnection, router]);
 
   useEffect(() => {
     if (typeof window.ethereum === 'undefined') return;
 
     window.ethereum.on('accountsChanged', (accounts: string[]) => {
       setAccount({ ...account, address: accounts[0] });
-      router.refresh();
     });
 
     window.ethereum.on('networkChanged', (network: string) => {
-      setAccount({ ...account, chainId: Number(network), chainNetwork: CHAIN_INFO[Number(network)].network });
-      router.refresh();
+      const chainNetwork = CHAIN_INFO[Number(network)];
+      if (chainNetwork !== undefined) {
+        setAccount({ ...account, chainId: Number(network), chainNetwork: chainNetwork.network });
+      }
+    window.location.reload();
+
     });
 
     window.ethereum.on('disconnect', disconnect);
-    router.refresh();
+
 
     return () => {
       window.ethereum.removeAllListeners();
-      router.refresh();
     };
   }, [account, router]);
 
-  return <ContractContext.Provider value={{ account, connectWallet, disconnect }}>{children}</ContractContext.Provider>;
+  const contextValue = useMemo(() => {
+    return { account, connectWallet, disconnect };
+  }, [account, connectWallet, disconnect]);
+
+  return <ContractContext.Provider value={contextValue}>{children}</ContractContext.Provider>;
 }
 
 export const useContractContext = () => useContext(ContractContext);

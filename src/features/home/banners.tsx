@@ -29,18 +29,18 @@ export const LenderBanner = () => (
       <div className="flex w-full flex-col gap-7 py-[52px] pl-[38px]">
         <h1 className="font-rob text-[45px]/[45px] font-bold text-white">Lend to the pool, earn from projects </h1>
         <p className="text[14px]/[22px] font-rob font-light text-white">
-          Contribute to a particular project of interest or to the Qredos pool and get interests on your funds.
+          Contribute to a particular project of interest or to the Wavvy pool and get interests on your funds.
         </p>
       </div>
       <div className="relative h-[328px] w-[410px] rounded-[19px] bg-opacity-5 bg-banner-frame bg-cover bg-no-repeat">
-        <Image
+        {/* <Image
           src="/assets/vectors/3d_vector-2.png"
           alt="buy"
           width={385}
           height={300}
           className="h-full w-full"
           priority
-        />
+        /> */}
       </div>
     </div>
   </div>

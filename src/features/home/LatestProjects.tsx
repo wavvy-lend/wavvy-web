@@ -7,7 +7,6 @@ import { CollectionLoader } from '@/components/skelonton';
 export default function LatestPRojects() {
   const { data: collections, error, isLoading, isFetching } = useGetCollectionsQuery();
 
-
   if (error) return <div>{`Error: ${error}`}</div>;
 
   return (
@@ -25,6 +24,7 @@ export default function LatestPRojects() {
             image={collection?.avatar ? collection.avatar : '/assets/project-buy.png'}
             name={collection.name}
             creator={collection.owner}
+            network={collection.network}
             floor_price={collection.floor_price}
             description={collection.description}
             status={collection.status}

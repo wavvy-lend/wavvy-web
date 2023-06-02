@@ -3,16 +3,20 @@
 import AuthUser from '@/components/auth-user';
 import { useContractContext } from '@/context/contract-context';
 import LoanCard from '@/features/dashboard/components/LoanCard';
+import { toast } from 'react-hot-toast';
 
 const Card = () => {
   const {
-    account: { isAuthenticated, address },
-    connectWallet
+    account: { isAuthenticated }
   } = useContractContext();
 
-  // const user = isAuthenticated && address;
+  if (!isAuthenticated) {
+    if (typeof window !== 'undefined') {
+      document.location.href = '/';
+    }
 
-  if (!isAuthenticated) return <AuthUser label="Connect your wallet to View your projects." onClick={connectWallet} />;
+    toast.error('Please connect your wallet to view your pools');
+  }
 
   return (
     <section className="grid w-full grid-cols-1 gap-4">

@@ -1,27 +1,20 @@
 'use client';
 
-import AuthUser from '@/components/auth-user';
 import NoContent from '@/components/no-content';
 import { useContractContext } from '@/context/contract-context';
 import { CreatePool } from '@/features/Pool/CreatePool';
 import { PoolItem } from '@/features/Pool/PoolItem';
-import PoolItems from '@/features/Pool/PoolItems';
 import { PoolsStats } from '@/features/Pool/PoolStats';
 import { PoolStatsLoader } from '@/features/Pool/loader';
 import { useGetUserPoolsQuery } from '@/redux/services/userApi';
-import { Button } from '@/ui/Button';
-import { ButtonOrLink } from '@/ui/Button/ButtonOrLink';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
 const Pools = () => {
   const router = useRouter();
   const {
-    account: { isAuthenticated, address },
-    connectWallet
+    account: { isAuthenticated, address }
   } = useContractContext();
 
   const user = isAuthenticated && address;
@@ -31,9 +24,10 @@ const Pools = () => {
   // if (!isAuthenticated) return <AuthUser label="Connect your wallet to View your pools." onClick={connectWallet} />;
 
   if (!isAuthenticated) {
-    router.push('/');
-
-    toast.error('Connect your wallet to View your pools');
+    if (typeof window !== 'undefined') {
+      document.location.href = '/';
+    }
+    toast.error('Please connect your wallet to view your pools');
   }
 
   return (
