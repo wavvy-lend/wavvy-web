@@ -1,6 +1,6 @@
 type IPoolStatas = {
   name: string;
-  value: number;
+  value: number | string;
 };
 
 export default function PoolStatsCard({ name, value }: IPoolStatas) {

@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 
-
 export enum NETWORKS {
   ETHEREUM = 'ethereum',
   MATIC = 'matic',
@@ -14,7 +13,6 @@ export enum STATUS {
 export interface ImageProps {
   nftLoan: string;
 }
-
 
 export interface IGetCollectionItemParams {
   collectionId: string;
@@ -42,8 +40,8 @@ export interface ICollections {
   creator: string;
   floor_price: string;
   status: string;
+  network: NETWORKS;
 }
-
 
 export interface Collections {
   id: string;
