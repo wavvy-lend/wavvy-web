@@ -3,7 +3,6 @@ import { SupportedNetWork } from '@/util/chain';
 import { header } from '@/util/headers';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
 export const collectionsApi = createApi({
   reducerPath: 'collectionsApi',
   refetchOnMountOrArgChange: true,
@@ -18,7 +17,7 @@ export const collectionsApi = createApi({
   tagTypes: ['Collections', 'items'],
   endpoints: builder => ({
     getCollections: builder.query<Collections[], void>({
-      query: () => '/collections/active',
+      query: () => '/collections/viewAll',
       transformResponse: (response: { data: Collections[] }) => response.data,
       providesTags: (result, error, arg) => ['Collections']
     }),
@@ -29,8 +28,8 @@ export const collectionsApi = createApi({
     }),
     getCollectionItem: builder.query<ICollectionItems[], IGetCollectionItemParams>({
       query: ({ collectionId, tokenId }) => `tokens/get/${collectionId}/${encodeURIComponent(tokenId)}`,
-      transformResponse: (response: {data: ICollectionItems} ): ICollectionItems[] => [response.data],
-      providesTags: (result, error, arg) => [{ type: 'items', arg }],
+      transformResponse: (response: { data: ICollectionItems }): ICollectionItems[] => [response.data],
+      providesTags: (result, error, arg) => [{ type: 'items', arg }]
     })
   })
 });

@@ -12,6 +12,7 @@ export interface IPool {
   apr: number;
   duration_in_secs: number;
   duration_in_months: number;
+  noOfLoans: number;
   status: string;
   created_at: Date;
   updated_at: Date;
@@ -42,6 +43,15 @@ export const poolApi = createApi({
       transformResponse: (response: { data: IPool[] }) => response.data,
       providesTags: (result, error, arg) => ['Pools']
     }),
+    getVolume: builder.query<number, string>({
+      query: () => '/pools/totalVolume'
+    }),
+    getLiquidityBorrowed: builder.query<number, string>({
+      query: () => '/pools/totalLiquidityBorrowed'
+    }),
+    getLiquidityAvailable: builder.query<number, string>({
+      query: () => '/pools/totalLiquidityAvailable'
+    }),
 
     getLimitPools: builder.query<IPool[], any>({
       query: () => '/pools/active/',
@@ -51,4 +61,10 @@ export const poolApi = createApi({
   })
 });
 
-export const { useGetPoolsQuery, useGetLimitPoolsQuery } = poolApi;
+export const {
+  useGetPoolsQuery,
+  useGetLimitPoolsQuery,
+  useGetVolumeQuery,
+  useGetLiquidityAvailableQuery,
+  useGetLiquidityBorrowedQuery
+} = poolApi;

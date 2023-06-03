@@ -40,6 +40,9 @@ export default {
           400: 'rgb(30, 30, 30)'
         }
       },
+      boxShadow: {
+        badge: '16px 18px 8px rgba(0, 0, 0, 0.25)'
+      },
       backgroundImage: {
         body: "url('/assets/bg-blur-circles.svg')",
         'banner-frame': "url('/assets/bg-illu.png')",
