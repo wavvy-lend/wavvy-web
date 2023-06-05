@@ -157,6 +157,7 @@ export default function ContractProvider({ children }: ContractProps) {
     window.ethereum.on('networkChanged', (network: string) => {
       const chainNetwork = CHAIN_INFO[Number(network)];
       if (chainNetwork !== undefined) {
+        console.log({chainNetwork:chainNetwork.network})
         setAccount({ ...account, chainId: Number(network), chainNetwork: chainNetwork.network });
       }
     window.location.reload();

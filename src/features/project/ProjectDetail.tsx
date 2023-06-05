@@ -13,13 +13,13 @@ export default function ProjectDetail({
   banner_image_url,
   total_volume: volume,
   no_of_items: items,
-  floor_price,
+  floorPrice,
   avatar: image
 }: Collections) {
   return (
     <section key={collectionId} className="flex h-full w-full flex-col items-start gap-4 rounded-[19px] bg-grey-200">
       <Image
-        src={banner_image_url}
+        src={banner_image_url !== 'null' ? banner_image_url : '/assets/projects/project-1.png'}
         alt="cover-photo"
         width={1233}
         height={60}
@@ -38,7 +38,7 @@ export default function ProjectDetail({
           <CollectionValue value={creator} item=" owners" />
           <CollectionValue value={items} item="items" />
           <CollectionValue value={volume} item="Total volume" />
-          <CollectionValue value={floor_price} item="floor price" />
+          <CollectionValue value={floorPrice} item="floor price" />
         </div>
       </div>
     </section>

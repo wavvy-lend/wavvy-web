@@ -37,7 +37,7 @@ export const ProjectHeader = ({ collectionImage }: { collectionImage: string }) 
 export const ProjectTitle = ({ name, creator, website }: { name: string; creator: string; website: string }) => (
   <div className="flex w-full items-center justify-between py-[40px] text-white">
     <hgroup className=" flex flex-col items-start gap-5 font-rob font-bold">
-      <h1 className=" text-[30px]/[30px] capitalize">{`${name} -- NFT Project`}</h1>
+      <h1 className=" text-[30px]/[30px] capitalize">{`${name}`}</h1>
       <p className="text-[18px]/[18px]">{`By ${creator}`}</p>
     </hgroup>
 

@@ -1,7 +1,9 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import ModalContainer from '@/ui/Modal/Modal';
-import BorrowModal from './BorrowModal';
-import { shortenAddress } from '@/util/util';
+import { BorrowModal } from './BorrowModal';
+import { fetcher, shortenAddress } from '@/util/util';
+import useSWR from 'swr';
+import { useParams } from 'next/navigation';
 
 const PoolDetails = ({ name, value }: { name: string; value: string | number }) => {
   return (
@@ -31,20 +33,34 @@ export interface IPoolItems extends PropsWithChildren {
 
 export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
   const [open, setOpen] = useState(false);
+  let [loanTerm, setLoanTerm] = useState(null);
+  const { collectionId, tokenId } = useParams();
 
-  function openModal() {
+  const { data: tokenDetails } = useSWR('tokens/get/' + collectionId + '/' + tokenId, fetcher, { suspense: true })
+  const { data: collection } = useSWR('collections/' + collectionId, fetcher, { suspense: true })
+
+  async function openModal(e: React.MouseEvent) {
+    let element = e.target as HTMLButtonElement;
+    let poolId = element.getAttribute('data-poolid');
+    await fetchPool(poolId)
     setOpen(true);
   }
+
   function closeModal() {
     setOpen(false);
   }
 
-  console.log(pool);
+  async function fetchPool(poolId: string | null) {
+    let data = await fetcher('loan/terms/' + poolId + '/' + collectionId + '/' + tokenId)
+    setLoanTerm(data.data)
+  }
+
+
   return (
     <div className="group flex w-full items-center justify-between gap-4 rounded-[10px] bg-grey-200 p-4 hover:bg-prime-200">
       <div className="flex items-center gap-2">
         <span className="text-[14px]/[16px] text-grey-100">{pool.contract_pool_id}</span>
-        <button className="font-rube text-[20px]/[24px] text-[#999999] group-hover:underline" onClick={openModal}>
+        <button data-poolid={pool.unique_id} className="font-rube text-[20px]/[24px] text-[#999999] group-hover:underline" onClick={openModal}>
           {shortenAddress(pool.creator_id)}
         </button>
       </div>
@@ -53,7 +69,8 @@ export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
       <PoolDetails name="Avg APY" value={`${pool.apr}%`} />
       <PoolDetails name="Volume" value={`$ ${pool.volume}`} />
       <ModalContainer label="Buy with Wavvy" open={open} close={closeModal}>
-        <BorrowModal />
+        {loanTerm && tokenDetails &&
+          <BorrowModal tokenDetails={tokenDetails?.data} loanTerm={loanTerm} collectionId={collection.data[0].address} />}
       </ModalContainer>
     </div>
   );

@@ -40,6 +40,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
     };
   }, [debouncedChangeHandler]);
 
+  console.log({isItemData})
   return (
     <>
       <div className="mb-[50px] flex w-full justify-start">

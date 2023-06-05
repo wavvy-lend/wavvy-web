@@ -55,7 +55,7 @@ export interface Collections {
   owner: string;
   no_of_items: string;
   total_volume: string;
-  floor_price: string;
+  floorPrice: string;
   website: string;
   status: string;
   banner_image_url: string;
@@ -65,15 +65,32 @@ export interface Collections {
 }
 
 export interface ICollectionItems {
+  collectionId: string;
   tokenId: string;
   tokenAvatar: string;
   floorPrice: string | null;
+  loanPrice: string | null;
   floorPriceCurrency: string | null;
   saleStatus: string;
   orderId: string | null;
 }
 
 export interface INFTCard extends ICollectionItems {
-  itemsNumber: string;
   network: string;
+}
+
+export interface iLoanTerm {
+  downPaymentAmount: number;
+  interestFee: number;
+  monthlyPayments: number;
+  originalPurchasePrice: number | string;
+  totalPurchaseAmount: number;
+}
+export interface iTokenDetails {
+  floorPrice: string;
+  floorPriceCurrency: string;
+  loanPrice: number;
+  saleStatus: string;
+  tokenAvatar: string;
+  tokenId: string;
 }
