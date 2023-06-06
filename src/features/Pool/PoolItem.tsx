@@ -31,9 +31,29 @@ export interface IPoolItems extends PropsWithChildren {
   noOfLoans: number;
 }
 
+export interface IPurchaseItems {
+  borrower: string;
+  collectionName: string
+  contract_loan_id: string
+  contract_pool_id: string
+  created_at: string
+  debt: number
+  id: number
+  network: string
+  nextDueDate: string
+  principal: string
+  status: string
+  tokenAvatar: string
+  tokenId: string
+  unique_id: string
+  updated_at: string
+}
+
+
 export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
   const [open, setOpen] = useState(false);
   let [loanTerm, setLoanTerm] = useState(null);
+  let [selectedPoolId, setSelectedPoolId] = useState('0');
   const { collectionId, tokenId } = useParams();
 
   const { data: tokenDetails } = useSWR('tokens/get/' + collectionId + '/' + tokenId, fetcher, { suspense: true })
@@ -42,15 +62,20 @@ export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
   async function openModal(e: React.MouseEvent) {
     let element = e.target as HTMLButtonElement;
     let poolId = element.getAttribute('data-poolid');
-    await fetchPool(poolId)
+    poolId !== null && await fetchPoolDetails(poolId)
+    await fetchLoanTerm(poolId)
     setOpen(true);
   }
 
   function closeModal() {
     setOpen(false);
   }
+  async function fetchPoolDetails(poolId: string) {
+    let data = await fetcher('pools/' + poolId)
+    setSelectedPoolId(data.data[0].contract_pool_id)
+  }
 
-  async function fetchPool(poolId: string | null) {
+  async function fetchLoanTerm(poolId: string | null) {
     let data = await fetcher('loan/terms/' + poolId + '/' + collectionId + '/' + tokenId)
     setLoanTerm(data.data)
   }
@@ -70,7 +95,11 @@ export const PoolItem = ({ pool }: { pool: IPoolItems }) => {
       <PoolDetails name="Volume" value={`$ ${pool.volume}`} />
       <ModalContainer label="Buy with Wavvy" open={open} close={closeModal}>
         {loanTerm && tokenDetails &&
-          <BorrowModal tokenDetails={tokenDetails?.data} loanTerm={loanTerm} collectionId={collection.data[0].address} />}
+          <BorrowModal
+            tokenDetails={tokenDetails?.data}
+            loanTerm={loanTerm}
+            collectionAddress={collection.data[0].address}
+            poolContractId={selectedPoolId} />}
       </ModalContainer>
     </div>
   );

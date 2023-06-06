@@ -55,10 +55,10 @@ export interface Collections {
   owner: string;
   no_of_items: string;
   total_volume: string;
-  floorPrice: string;
+  floor_price: string;
   website: string;
   status: string;
-  banner_image_url: string;
+  banner_image_url: string ;
   collections: ICollectionItems[];
   created_at?: string;
   updated_at?: string;

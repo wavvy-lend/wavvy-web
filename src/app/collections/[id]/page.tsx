@@ -40,7 +40,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
     };
   }, [debouncedChangeHandler]);
 
-  console.log({isItemData})
+  // console.log({collection})
   return (
     <>
       <div className="mb-[50px] flex w-full justify-start">
@@ -48,7 +48,9 @@ export default function Collection({ params: { id } }: { params: { id: string } 
           <ArrowLongLeftIcon className="h-4 w-4" /> Back
         </Button>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>{collection && <ProjectDetail {...collection} />}</Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        {collection && <ProjectDetail {...collection} />}
+      </Suspense>
 
       <section>
         <div className="my-[30px] mb-8 flex w-full flex-col items-center justify-between px-2 md:flex-row">

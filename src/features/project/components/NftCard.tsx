@@ -24,7 +24,7 @@ export const NftItemCard: React.FC<INFTCard> = ({
   floorPriceCurrency,
   saleStatus
 }) => {
-  console.log({ floorPrice, loanPrice })
+  // console.log({ floorPrice, loanPrice })
   return (
     <div className="relative block h-full w-full max-w-[319px] rounded-[19px] bg-prime-200 p-2 font-rob">
       <NftStatus label={saleStatus} />

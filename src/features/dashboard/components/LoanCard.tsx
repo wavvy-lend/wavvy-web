@@ -11,9 +11,11 @@ interface ILoanCard {
   name: string;
   amount: Number;
   dueDate: string | Date;
+  avatar:string;
+  tokenId:string;
 }
 
-const LoanCard = ({ name, amount, dueDate }: ILoanCard) => {
+const LoanCard = ({ name, amount, dueDate,avatar,tokenId }: ILoanCard) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -28,7 +30,7 @@ const LoanCard = ({ name, amount, dueDate }: ILoanCard) => {
     <div className="flex items-center justify-between gap-4 rounded-md bg-grey-200 px-6 py-3">
       <div className="flex items-center gap-4">
         <Image
-          src={Images.nftLoan as string}
+          src={avatar}
           alt="buy"
           width={80}
           height={80}
@@ -37,7 +39,7 @@ const LoanCard = ({ name, amount, dueDate }: ILoanCard) => {
         />
         <div>
           <ButtonOrLink href="/" className="text-white text-opacity-80 hover:underline">
-            #14
+            # {tokenId}
           </ButtonOrLink>
           <p className="text-[16px]/[24px] font-bold text-grey-100">{name}</p>
         </div>
@@ -47,7 +49,7 @@ const LoanCard = ({ name, amount, dueDate }: ILoanCard) => {
         <p className="text-white text-opacity-50">Debt</p>
       </div>
       <div>
-        <p className="text-sm font-bold text-white">{`${dueDate} Days`}</p>
+        <p className="text-sm font-bold text-white">{`${dueDate}`}</p>
         <p className="text-white text-opacity-50">Next Due Date</p>
       </div>
 

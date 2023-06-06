@@ -1,4 +1,4 @@
-'use client'
+
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -9,7 +9,7 @@ export const WavvyApi = axios.create({
   headers: {
     "Access-Control-Allow-Origin' ": 'http://localhost:3000',
     'Content-Type': 'application/json',
-    'CLIENT-NETWORK': window.localStorage.getItem('chain_network')
+    'CLIENT-NETWORK':'matic' // window.localStorage.getItem('chain_network')
   }
 });
 

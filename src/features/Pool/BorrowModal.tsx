@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ButtonOrLink } from '@/ui/Button/ButtonOrLink';
 import { TextBox } from '@/ui/InputField';
+import { getConnectedAddress, loadProvider, purchaseNFT } from '@/methods';
+import { Request } from '@/util/https';
 
 const DetailedList: FC<IDetailedList> = ({ info, price }) => (
   <div className="flex items-center justify-between px-4 pb-5">
@@ -13,11 +15,34 @@ const DetailedList: FC<IDetailedList> = ({ info, price }) => (
   </div>
 );
 
-export const BorrowModal = ({ tokenDetails, loanTerm, collectionId }:
-  { tokenDetails: iTokenDetails; loanTerm: iLoanTerm; collectionId: string }) => {
+export const BorrowModal = ({ tokenDetails, loanTerm, collectionAddress, poolContractId }:
+  { tokenDetails: iTokenDetails; loanTerm: iLoanTerm; collectionAddress: string, poolContractId: string }) => {
 
   let { downPaymentAmount, interestFee, monthlyPayments, originalPurchasePrice, totalPurchaseAmount } = loanTerm;
   let { tokenAvatar, loanPrice, floorPriceCurrency, tokenId } = tokenDetails;
+
+  function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    let provider = await loadProvider()
+    let userAddress = await getConnectedAddress()
+
+    let txn = await purchaseNFT(provider, userAddress, collectionAddress, Number(tokenId), downPaymentAmount, downPaymentAmount, Number(poolContractId))
+
+    await delay(10000);
+
+    if (txn.ok) {
+      let url = `${process.env.NEXT_PUBLIC_WAVVY_BASE_URL}purchase/opensea/buy/${collectionAddress}/${tokenId}`;
+      let result = await Request.get(url)
+
+      console.log({ result: result.data.data })
+    }
+
+  }
 
   return (
     <>
@@ -27,7 +52,7 @@ export const BorrowModal = ({ tokenDetails, loanTerm, collectionId }:
             <div className="flex items-center justify-between px-4 py-5">
               <span className="text-sm font-medium leading-[22px] text-white">Marketplace</span>
               <span className="text-sm font-bold leading-[22px] text-white underline">
-                <a href={'https://opensea.io/assets/matic/' + collectionId + '/' + tokenId}>Opensea</a>
+                <a href={'https://opensea.io/assets/matic/' + collectionAddress + '/' + tokenId}>Opensea</a>
               </span>
             </div>
             <DetailedList info="Original Purchase Price" price={originalPurchasePrice + ' ' + floorPriceCurrency} />
@@ -45,7 +70,7 @@ export const BorrowModal = ({ tokenDetails, loanTerm, collectionId }:
           />
 
           <button className="border-[ #C0C0C0] mt-[19px] flex flex-row items-start justify-center gap-[10px] rounded-lg border bg-white px-[155px] py-[15px]">
-            <span className="text-lg font-semibold text-[#333333]">Start loan plan</span>
+            <span onClick={handleSubmit} className="text-lg font-semibold text-[#333333]">Start loan plan</span>
           </button>
         </div>
 
