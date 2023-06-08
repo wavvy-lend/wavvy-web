@@ -6,10 +6,10 @@ import ModalContainer from '@/ui/Modal/Modal';
 import RepayLoanModal from '@/app/components/modal/repayLoanModal';
 import { useGetLoanTimeLineQuery } from '@/redux/services/purchaseAPI';
 
-const Loan = () => {
+const Loan = ({ params: { id } }: { params: { id: string } }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: timeline, error, isLoading, isFetching } = useGetLoanTimeLineQuery();
+  const { data: timeline, error, isLoading, isFetching } = useGetLoanTimeLineQuery(id);
 
   const openModal = () => {
     setIsOpen(true);

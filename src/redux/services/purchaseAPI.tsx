@@ -38,9 +38,9 @@ export const purchaseApi = createApi({
   tagTypes: ['purchase'],
 
   endpoints: builder => ({
-    getLoanTimeLine: builder.query<[], void>({
+    getLoanTimeLine: builder.query<[string], void>({
       query: id => `/repayment/timeline/${id}`,
-      transformResponse: (response: { data: [] }) => response.data
+      transformResponse: (response: { data: [string] }) => response.data
     })
     // getPuurchaseDetails: builder.query<, void>({
     //   query: id => `purchase/user/projects/${id}`,
