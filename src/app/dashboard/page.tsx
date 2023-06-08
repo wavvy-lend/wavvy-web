@@ -6,9 +6,10 @@ import NoContent from '@/components/no-content';
 import { IPurchaseItems } from '@/features/Pool/PoolItem';
 import { useGetUserPurchaseQuery } from '@/redux/services/userApi';
 import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const Card = () => {
-  let userId;
+  const [userId, setUserId] = useState('');
   const { data: purchases } = useGetUserPurchaseQuery(userId, { skip: userId === '' });
 
   const {
@@ -20,9 +21,14 @@ const Card = () => {
     redirect('/');
   }
 
-  if (typeof window !== undefined) {
-    userId = localStorage.getItem('user_id');
-  }
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const id = localStorage.getItem('user_id');
+      if (id) {
+        setUserId(id);
+      }
+    }
+  }, []);
 
   return (
     <section className="grid w-full grid-cols-1 gap-4">
