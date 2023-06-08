@@ -17,7 +17,7 @@ export default function PoolItems() {
           ))}
         </>
       ) : (
-        <NoContent label="No Pools ound create one" />
+        <NoContent label="No Pools available currently." />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { Banner, LenderBanner } from './banners';
 import { SearchField } from '@/ui/InputField';
+import RecentPurchase from './RecentPurchase';
 
 export default function Hero() {
   return (
@@ -11,7 +11,8 @@ export default function Hero() {
           <Banner />
           <LenderBanner />
         </div>
-        <div className="h-full max-h-[328px] w-full max-w-[448px] rounded-[19px] bg-grey-300 px-[20px] py-[30px]">
+        <RecentPurchase />
+        {/* <div className="h-full max-h-[328px] w-full max-w-[448px] rounded-[19px] bg-grey-300 px-[20px] py-[30px]">
           <div className="flex h-[3] w-full items-center justify-between">
             <h1 className=" text-[20px]/[20px] font-bold text-grey-100">Recent purchases</h1>
             <button className="flex items-center gap-2.5 rounded-[8px] bg-grey-200 p-2.5 text-[12px]/[12px] text-[#777777]">
@@ -29,7 +30,7 @@ export default function Hero() {
             <PurchaseItem />
             <PurchaseItem />
           </div>
-        </div>
+        </div> */}
       </section>
       <section className="my-[61px] flex w-full flex-col items-center justify-between md:flex-row">
         {/* Search */}

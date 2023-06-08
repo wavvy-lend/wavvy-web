@@ -38,6 +38,9 @@ const connect = async (): Promise<IWalletProvoder | undefined> => {
 
   const accounts: string[] = await provider.send('eth_requestAccounts', []);
 
+
+  console.log({accounts});
+
   let signer;
 
   if (accounts.length > 0) {

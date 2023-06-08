@@ -16,10 +16,11 @@ export default function ProjectDetail({
   floor_price,
   avatar: image
 }: Collections) {
+  // console.log({image,banner_image_url})
   return (
     <section key={collectionId} className="flex h-full w-full flex-col items-start gap-4 rounded-[19px] bg-grey-200">
       <Image
-        src={banner_image_url}
+        src={banner_image_url !== 'null' ? banner_image_url : '/assets/projects/project-1.png'}
         alt="cover-photo"
         width={1233}
         height={60}

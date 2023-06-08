@@ -1,7 +1,7 @@
 'use client';
 import ProjectDetail from '@/features/project/ProjectDetail';
 import { selectSearchItem, setInputValue } from '@/redux/features/slices/searchSlice';
-import { collectionsApi, useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
+import {  useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
 import { SearchField } from '@/ui/InputField';
 import { debounce } from 'lodash';
@@ -9,15 +9,15 @@ import { ArrowLongLeftIcon } from '@heroicons/react/24/outline';
 import { ChangeEvent, Suspense, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NftItemsCard from '@/app/components/nft-items-cards/nft-cards';
+import { TokenDetails, TokenSkelton } from '@/components/skelonton';
 
 export default function Collection({ params: { id } }: { params: { id: string } }) {
-  const { data: [collection] = [], error, isLoading } = useGetCollectionQuery(id);
+  const { data: [collection] = [], error, isLoading, isFetching } = useGetCollectionQuery(id);
   const { inputValue } = useSelector(selectSearchItem);
   const {
     data: isItemData,
-    isSuccess,
-    isFetching,
-    isError
+    isLoading: searchLoading,
+    isFetching: serchFetching
   } = useGetCollectionItemQuery({ collectionId: id, tokenId: inputValue }, { skip: inputValue === '' });
   const dispatch = useDispatch();
 
@@ -40,6 +40,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
     };
   }, [debouncedChangeHandler]);
 
+  // console.log({collection})
   return (
     <>
       <div className="mb-[50px] flex w-full justify-start">
@@ -47,7 +48,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
           <ArrowLongLeftIcon className="h-4 w-4" /> Back
         </Button>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>{collection && <ProjectDetail {...collection} />}</Suspense>
+      {isLoading || isFetching ? <TokenDetails /> : collection && <ProjectDetail {...collection} />}
 
       <section>
         <div className="my-[30px] mb-8 flex w-full flex-col items-center justify-between px-2 md:flex-row">
@@ -64,7 +65,9 @@ export default function Collection({ params: { id } }: { params: { id: string } 
         </div>
 
         <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-4">
-          <Suspense fallback={<div>Loading...</div>}>
+          {isLoading || isFetching || searchLoading || serchFetching ? (
+            <TokenSkelton />
+          ) : (
             <NftItemsCard
               NftItems={
                 typeof Number(inputValue) === 'number' && inputValue.length > 0
@@ -73,7 +76,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
               }
               collection={collection}
             />
-          </Suspense>
+          )}
         </div>
       </section>
     </>

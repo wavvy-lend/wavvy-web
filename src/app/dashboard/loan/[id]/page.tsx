@@ -1,12 +1,15 @@
 'use client';
-import BorrowLoan from '@/app/components/modal/borrowLoanModal';
+
 import { Button } from '@/ui/Button';
 import { useState } from 'react';
-import Modal from '@/app/components/modal';
-import RepayLoan from '@/app/components/modal/repayLoanModal';
+import ModalContainer from '@/ui/Modal/Modal';
+import RepayLoanModal from '@/app/components/modal/repayLoanModal';
+import { useGetLoanTimeLineQuery } from '@/redux/services/purchaseAPI';
 
-const Loan = () => {
+const Loan = ({ params: { id } }: { params: { id: string } }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: timeline, error, isLoading, isFetching } = useGetLoanTimeLineQuery(id);
 
   const openModal = () => {
     setIsOpen(true);
@@ -58,9 +61,9 @@ const Loan = () => {
         <Button variant="filled" color="alt" fullwidth onClick={openModal}>
           Pay back now
         </Button>
-        <Modal isOpen={isOpen} closeModal={closeModal} title="Buy With Qredos">
+        {/* <Modal isOpen={isOpen} closeModal={closeModal} title="Buy With Qredos">
           <BorrowLoan />
-        </Modal>
+        </Modal> */}
         {/* <Modal isOpen={isOpen} closeModal={closeModal} title="Repay part or all your loan">
           <RepayLoan />
         </Modal> */}
@@ -70,13 +73,19 @@ const Loan = () => {
         </div>
 
         <ol className="relative border-l-2 border-white border-opacity-[0.48]">
-          <LoanScheduleItem label="Initial payment" duration="24th Jan 2022" />
-          <LoanScheduleItem label="1st tranche payment" duration="Due 20th Jun 2022" />
+          {timeline?.map((text, i: any) => (
+            <LoanScheduleItem key={i} label="1st tranche payment" duration={`Due ${text}`} />
+          ))}
+          {/* <LoanScheduleItem label="Initial payment" duration="24th Jan 2022" />
           <LoanScheduleItem label="2nd tranche payment" duration="Due 20th Jul 2022" />
           <LoanScheduleItem label="3rd tranche payment" duration="3rd tranche payment" />
-          <LoanScheduleItem label="Project Release" duration="Due 20th Oct 2022" />
+          <LoanScheduleItem label="Project Release" duration="Due 20th Oct 2022" /> */}
         </ol>
       </div>
+
+      <ModalContainer open={isOpen} close={closeModal} label="Buy With Wavvy">
+        <RepayLoanModal />
+      </ModalContainer>
     </section>
   );
 };

@@ -3,10 +3,12 @@ import { GlobeAltIcon, HeartIcon, LinkIcon, PresentationChartBarIcon } from '@he
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const ProjectHeader = ({ collectionImage }: { collectionImage: string }) => (
+export const ProjectHeader = ({ collectionImage }: { collectionImage: string }) => {
+  // console.log({collectionImage})
+  return(
   <div className="flex w-full items-start justify-between px-[27px]">
     <Image
-      src={`${collectionImage}`}
+      src={collectionImage}
       alt=""
       width={130}
       height={130}
@@ -32,12 +34,13 @@ export const ProjectHeader = ({ collectionImage }: { collectionImage: string }) 
       </li>
     </ul>
   </div>
-);
+)
+  };
 
 export const ProjectTitle = ({ name, creator, website }: { name: string; creator: string; website: string }) => (
   <div className="flex w-full items-center justify-between py-[40px] text-white">
     <hgroup className=" flex flex-col items-start gap-5 font-rob font-bold">
-      <h1 className=" text-[30px]/[30px] capitalize">{`${name} -- NFT Project`}</h1>
+      <h1 className=" text-[30px]/[30px] capitalize">{`${name}`}</h1>
       <p className="text-[18px]/[18px]">{`By ${creator}`}</p>
     </hgroup>
 

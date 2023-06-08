@@ -58,22 +58,39 @@ export interface Collections {
   floor_price: string;
   website: string;
   status: string;
-  banner_image_url: string;
+  banner_image_url: string ;
   collections: ICollectionItems[];
   created_at?: string;
   updated_at?: string;
 }
 
 export interface ICollectionItems {
+  collectionId: string;
   tokenId: string;
   tokenAvatar: string;
   floorPrice: string | null;
+  loanPrice: string | null;
   floorPriceCurrency: string | null;
   saleStatus: string;
   orderId: string | null;
 }
 
 export interface INFTCard extends ICollectionItems {
-  itemsNumber: string;
   network: string;
+}
+
+export interface iLoanTerm {
+  downPaymentAmount: number;
+  interestFee: number;
+  monthlyPayments: number;
+  originalPurchasePrice: number | string;
+  totalPurchaseAmount: number;
+}
+export interface iTokenDetails {
+  floorPrice: string;
+  floorPriceCurrency: string;
+  loanPrice: number;
+  saleStatus: string;
+  tokenAvatar: string;
+  tokenId: string;
 }
