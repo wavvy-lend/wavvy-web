@@ -1,11 +1,17 @@
+'use client'
 import { forwardRef } from 'react';
 import { SearchProps } from './interface';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function SearchField(
-  { type = 'text', ...props },
+  { type = 'text',handleSubmit, ...props },
   ref
 ) {
+  const handleFormSubmit = () => {
+    if (handleSubmit) {
+      handleSubmit();
+    }
+  };
   return (
     <>
       <label htmlFor="wavvy-search" className="sr-only">
@@ -20,8 +26,8 @@ export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function Se
           {...props}
         />
 
-        <div className="pointer-events-none absolute inset-y-[14px] right-[22px] pl-[20px]">
-          <MagnifyingGlassIcon className=" h-6 w-6  text-[#666666]" />
+        <div className=" absolute inset-y-[14px] right-[22px] pl-[20px] cursor-pointer text-[#666666] border-l-2 border-[#666666]">
+          <MagnifyingGlassIcon className=" h-6 w-6   hover:text-[#fff]" onClick={()=>handleFormSubmit()} />
         </div>
       </div>
     </>
