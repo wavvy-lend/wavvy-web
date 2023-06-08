@@ -11,11 +11,12 @@ interface ILoanCard {
   name: string;
   amount: Number;
   dueDate: string | Date;
-  avatar:string;
-  tokenId:string;
+  avatar: string;
+  tokenId: string;
+  loanId: string;
 }
 
-const LoanCard = ({ name, amount, dueDate,avatar,tokenId }: ILoanCard) => {
+const LoanCard = ({ name, amount, dueDate, avatar, tokenId, loanId }: ILoanCard) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -53,12 +54,9 @@ const LoanCard = ({ name, amount, dueDate,avatar,tokenId }: ILoanCard) => {
         <p className="text-white text-opacity-50">Next Due Date</p>
       </div>
 
-      <Button variant="filled" color="secondary" onClick={openModal}>
+      <Button href={`/dashboard/loan/${loanId}`} variant="filled" color="secondary">
         Repay Loan
       </Button>
-      <ModalContainer open={isOpen} close={closeModal} label="Buy With Wavvy">
-          <RepayLoanModal />
-        </ModalContainer>
     </div>
   );
 };

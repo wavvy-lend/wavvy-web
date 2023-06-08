@@ -10,7 +10,7 @@ import NoContent from '@/components/no-content';
 import { IPurchaseItems } from '@/features/Pool/PoolItem';
 
 const Card = () => {
-  let userId = window.localStorage.getItem('user_id')
+  let userId = window.localStorage.getItem('user_id');
   const { data: purchases } = useSWR('purchase/user/projects/' + userId, fetcher, { suspense: true });
 
   const {
@@ -28,7 +28,6 @@ const Card = () => {
   return (
     <section className="grid w-full grid-cols-1 gap-4">
       {purchases.data.length > 0 ? (
-
         <>
           {purchases.data.map((purchase: IPurchaseItems, key: any) => (
             <LoanCard
@@ -37,7 +36,9 @@ const Card = () => {
               amount={purchase.debt}
               dueDate={purchase.nextDueDate}
               avatar={purchase.tokenAvatar}
-              tokenId={purchase.tokenId} />
+              tokenId={purchase.tokenId}
+              loanId={purchase.unique_id}
+            />
           ))}
         </>
       ) : (

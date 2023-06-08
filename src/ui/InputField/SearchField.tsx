@@ -3,7 +3,7 @@ import { SearchProps } from './interface';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function SearchField(
-  {  type = 'text', ...props },
+  { type = 'text', ...props },
   ref
 ) {
   return (
@@ -19,7 +19,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function Se
           autoComplete="off"
           {...props}
         />
-        <span className="input-error-message">Please enter a valid number.</span>
+
         <div className="pointer-events-none absolute inset-y-[14px] right-[22px] pl-[20px]">
           <MagnifyingGlassIcon className=" h-6 w-6  text-[#666666]" />
         </div>

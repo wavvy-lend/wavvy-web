@@ -26,14 +26,15 @@ export const NftItemCard: React.FC<INFTCard> = ({
 }) => {
   // console.log({ floorPrice, loanPrice })
   return (
-    <div className="relative block h-full w-full max-w-[319px] rounded-[19px] bg-prime-200 p-2 font-rob">
+    <div className="relative block h-full max-h-[411px] w-full max-w-[319px] rounded-[19px] bg-prime-200 p-2 font-rob">
       <NftStatus label={saleStatus} />
       <Image
         src={`${tokenAvatar}`}
         alt="project"
         width={301}
         height={441}
-        className="mb-[21px] h-[441px] w-[301px] rounded-[16px]"
+        className="mb-[21px] rounded-[16px]"
+        priority
       />
 
       <div className="-mt-[100px] flex h-[100px] w-full flex-col items-start  rounded-b-[16px] bg-grey-200 bg-opacity-[0.48] px-2 py-4 backdrop-blur-[14.5px]">
@@ -42,19 +43,18 @@ export const NftItemCard: React.FC<INFTCard> = ({
         <div className="flex w-full items-center justify-between">
           <CardPrice item="Floor price" value={`${floorPrice} ${floorPriceCurrency}`} />
           <ScaleIcon className="h-10 w-10 text-white" />
-          <CardPrice
-            item="Loan Price"
-            value={`~ ${loanPrice} ${floorPriceCurrency}`}
-          />
+          <CardPrice item="Loan Price" value={`~ ${loanPrice} ${floorPriceCurrency}`} />
         </div>
       </div>
       <div className="mb-2 mt-4 w-full px-2">
-        {saleStatus == 'AVAILABLE' && <Button href={'/pools/' + collectionId + '/' + tokenId} variant="filled" color="plain">
-          Buy Now
-        </Button>}
+        {saleStatus == 'AVAILABLE' && (
+          <Button href={'/pools/' + collectionId + '/' + tokenId} variant="filled" color="plain">
+            Buy Now
+          </Button>
+        )}
       </div>
     </div>
-  )
+  );
 };
 
 const NftStatus = ({ label }: INftStatus) => {

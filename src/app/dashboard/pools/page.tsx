@@ -7,6 +7,25 @@ import { PoolItem } from '@/features/Pool/PoolItem';
 import { PoolsStats } from '@/features/Pool/PoolStats';
 import { useGetUserPoolsQuery } from '@/redux/services/userApi';
 import { toast } from 'react-hot-toast';
+import { redirect } from 'next/navigation';
+import { shortenAddress } from '@/util/util';
+
+export interface IPoolItems extends React.PropsWithChildren {
+  id?: number;
+  unique_id: string;
+  contract_pool_id: string;
+  network: string;
+  creator_id: string;
+  payment_cycle: string;
+  apr: number;
+  duration_in_secs: number;
+  duration_in_months: number;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  volume: number;
+  noOfLoans: number;
+}
 
 const Pools = () => {
   const {
@@ -17,13 +36,12 @@ const Pools = () => {
 
   const { data: pools, error, isLoading } = useGetUserPoolsQuery(user);
 
-  // if (!isAuthenticated) return <AuthUser label="Connect your wallet to View your pools." onClick={connectWallet} />;
-
   if (!isAuthenticated) {
-    if (typeof window !== 'undefined') {
-      document.location.href = '/';
-    }
-    toast.error('Please connect your wallet to view your pools');
+    // if (typeof window !== 'undefined') {
+    //   document.location.href = '/';
+    // }
+    // toast.error('Please connect your wallet to view your pools');
+    redirect('/');
   }
 
   return (
@@ -43,7 +61,24 @@ const Pools = () => {
         ) : (
           <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
             {pools?.map(pool => (
-              <PoolItem key={pool.unique_id} pool={pool} />
+              <div
+                key={pool.unique_id}
+                className="group flex w-full items-center justify-between gap-4 rounded-[10px] bg-grey-200 p-4 hover:bg-prime-200"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-[14px]/[16px] text-grey-100">{pool.contract_pool_id}</span>
+                  <button
+                    data-poolid={pool.unique_id}
+                    className="font-rube text-[20px]/[24px] text-[#999999] group-hover:underline"
+                  >
+                    {shortenAddress(pool.creator_id)}
+                  </button>
+                </div>
+
+                <PoolDetails name="Loans" value={pool.noOfLoans} />
+                <PoolDetails name="Avg APY" value={`${pool.apr}%`} />
+                <PoolDetails name="Volume" value={`$ ${pool.volume}`} />
+              </div>
             ))}
           </div>
         )}
@@ -53,3 +88,12 @@ const Pools = () => {
 };
 
 export default Pools;
+
+const PoolDetails = ({ name, value }: { name: string; value: string | number }) => {
+  return (
+    <div className="flex flex-col items-start gap-2">
+      <dt className="text-[12px]/[14px] font-semibold text-alt-200 group-hover:text-grey-100">{name}</dt>
+      <dd className="font-rube text-[14px]/[16px] font-bold text-white">{value}</dd>
+    </div>
+  );
+};

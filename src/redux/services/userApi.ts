@@ -22,13 +22,34 @@ export interface IPool {
   volume: number;
 }
 
+export interface IRecentPurchaseItems {
+  borrower: string;
+  collectionName: string;
+  contract_loan_id: string;
+  contract_pool_id: string;
+  contract_purchase_id: string;
+  created_at: string;
+  down_payment: string;
+  escrow_address: string;
+  id: number;
+  network: string;
+  principal: string;
+  status: string;
+  tokenAvatar: string;
+  token_address: string;
+  token_id: string;
+  unique_id: string;
+  updated_at: string;
+  user_address: string;
+}
+
 export interface IUserState {
   user: IUser;
   pools: IPool[];
 }
 
 const header = (chainNetwork: SupportedNetWork, headers: Headers) => {
-  return headers.set('CLIENT-NETWORK', `${chainNetwork ? chainNetwork : SupportedNetWork.POLYGONTESTNET}`);
+  return headers.set('CLIENT-NETWORK', `${chainNetwork ? chainNetwork : SupportedNetWork.POLYGONMAINNET}`);
 };
 
 // Define a service using a base URL and expected endpoints
@@ -53,8 +74,12 @@ export const userAPi = createApi({
       query: data => `/pools/user/${data}`,
       transformResponse: (response: { data: IPool[] }) => response.data,
       providesTags: ['Pools']
+    }),
+    getRecentPurchase: builder.query<IRecentPurchaseItems[], void>({
+      query: () => '/purchase/recent',
+      transformResponse: (response: { data: IRecentPurchaseItems[] }) => response.data
     })
   })
 });
 
-export const { useCreateUserMutation, useGetUserPoolsQuery } = userAPi;
+export const { useCreateUserMutation, useGetUserPoolsQuery, useGetRecentPurchaseQuery } = userAPi;
