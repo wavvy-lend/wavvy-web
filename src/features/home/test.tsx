@@ -1,6 +1,4 @@
-'use client';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import useSWR from 'swr';
+'use client';;
 import Image from 'next/image';
 import { Banner, LenderBanner } from './banners';
 import { SearchField } from '@/ui/InputField';

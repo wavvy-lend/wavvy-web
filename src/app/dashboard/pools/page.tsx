@@ -37,10 +37,6 @@ const Pools = () => {
   const { data: pools, error, isLoading } = useGetUserPoolsQuery(user);
 
   if (!isAuthenticated) {
-    // if (typeof window !== 'undefined') {
-    //   document.location.href = '/';
-    // }
-    // toast.error('Please connect your wallet to view your pools');
     redirect('/');
   }
 

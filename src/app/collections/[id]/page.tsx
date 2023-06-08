@@ -1,7 +1,7 @@
 'use client';
 import ProjectDetail from '@/features/project/ProjectDetail';
 import { selectSearchItem, setInputValue } from '@/redux/features/slices/searchSlice';
-import { collectionsApi, useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
+import {  useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
 import { SearchField } from '@/ui/InputField';
 import { debounce } from 'lodash';
