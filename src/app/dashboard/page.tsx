@@ -1,36 +1,41 @@
 'use client';
-
-import AuthUser from '@/components/auth-user';
-import useSWR from 'swr';
 import { useContractContext } from '@/context/contract-context';
 import LoanCard from '@/features/dashboard/components/LoanCard';
 import { toast } from 'react-hot-toast';
-import { fetcher } from '@/util/util';
 import NoContent from '@/components/no-content';
 import { IPurchaseItems } from '@/features/Pool/PoolItem';
+import { useGetUserPurchaseQuery } from '@/redux/services/userApi';
+import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const Card = () => {
-  let userId = window.localStorage.getItem('user_id');
-  const { data: purchases } = useSWR('purchase/user/projects/' + userId, fetcher, { suspense: true });
+  const [userId, setUserId] = useState('');
+  const { data: purchases } = useGetUserPurchaseQuery(userId, { skip: userId === '' });
 
   const {
     account: { isAuthenticated }
   } = useContractContext();
 
   if (!isAuthenticated) {
-    if (typeof window !== 'undefined') {
-      document.location.href = '/';
-    }
-
     toast.error('Please connect your wallet to view your pools');
+    redirect('/');
   }
   console.log({purchases})
 
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const id = localStorage.getItem('user_id');
+      if (id) {
+        setUserId(id);
+      }
+    }
+  }, []);
+
   return (
     <section className="grid w-full grid-cols-1 gap-4">
-      {purchases.data.length > 0 ? (
+      {purchases?.length > 0 ? (
         <>
-          {purchases.data.map((purchase: IPurchaseItems, key: any) => (
+          {purchases?.map((purchase: IPurchaseItems, key: any) => (
             <LoanCard
               key={key}
               name={purchase.collectionName}

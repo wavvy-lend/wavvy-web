@@ -1,12 +1,11 @@
 'use client';
 import ProjectDetail from '@/features/project/ProjectDetail';
 import { selectSearchItem, setInputValue } from '@/redux/features/slices/searchSlice';
-import { collectionsApi, useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
+import {  useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
 import { SearchField } from '@/ui/InputField';
-import { debounce } from 'lodash';
 import { ArrowLongLeftIcon } from '@heroicons/react/24/outline';
-import { ChangeEvent, Suspense, useCallback, useEffect, useMemo } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NftItemsCard from '@/app/components/nft-items-cards/nft-cards';
 import { TokenDetails, TokenSkelton } from '@/components/skelonton';
@@ -14,6 +13,7 @@ import { TokenDetails, TokenSkelton } from '@/components/skelonton';
 export default function Collection({ params: { id } }: { params: { id: string } }) {
   const { data: [collection] = [], error, isLoading, isFetching } = useGetCollectionQuery(id);
   const { inputValue } = useSelector(selectSearchItem);
+  const [search,setSearch] = useState("")
   const {
     data: isItemData,
     isLoading: searchLoading,
@@ -21,26 +21,11 @@ export default function Collection({ params: { id } }: { params: { id: string } 
   } = useGetCollectionItemQuery({ collectionId: id, tokenId: inputValue }, { skip: inputValue === '' });
   const dispatch = useDispatch();
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    debouncedChangeHandler(value);
-  };
+  const handleSubmit= () =>{
+    const isValidNumber = !isNaN(Number(search));
+    if (isValidNumber) dispatch(setInputValue(search));
+  }
 
-  const debouncedChangeHandler = useCallback(
-    debounce((value: string) => {
-      const isValidNumber = !isNaN(Number(value));
-      if (isValidNumber) dispatch(setInputValue(value));
-    }, 500),
-    []
-  );
-
-  useEffect(() => {
-    return () => {
-      debouncedChangeHandler.cancel();
-    };
-  }, [debouncedChangeHandler]);
-
-  // console.log({collection})
   return (
     <>
       <div className="mb-[50px] flex w-full justify-start">
@@ -56,10 +41,11 @@ export default function Collection({ params: { id } }: { params: { id: string } 
           <form className="w-full md:max-w-[500px]">
             <SearchField
               id="item-search"
-              onChange={handleInputChange}
+              onChange={(e:ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
               pattern="[0-9]*"
-              value={inputValue}
+              value={search}
               placeholder="Search by Token ID"
+              handleSubmit={handleSubmit}
             />
           </form>
         </div>
@@ -70,7 +56,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
           ) : (
             <NftItemsCard
               NftItems={
-                typeof Number(inputValue) === 'number' && inputValue.length > 0
+                isItemData && search.length > 0
                   ? isItemData ?? []
                   : collection?.collections
               }
