@@ -37,14 +37,14 @@ const LoanCard = ({ name, amount, dueDate, avatar, tokenId, loanId, purchaseStat
   async function completePurchase() {
     setPurchaseLoading(true)
 
-    // let url = `${process.env.NEXT_PUBLIC_WAVVY_BASE_URL}purchase/opensea/buy/${collectionAddress}/${tokenId}`;
-    // let result = await Request.get(url)
-    // let duration = 10000;
-    // if (!result.ok) {
-    //   toast.error('Purchase on OpenSea Failed!', { duration })
-    //   setPurchaseLoading(false)
-    //   return
-    // }
+    let url = `${process.env.NEXT_PUBLIC_WAVVY_BASE_URL}purchase/opensea/buy/${collectionAddress}/${tokenId}`;
+    let result = await Request.get(url)
+    let duration = 10000;
+    if (!result.ok) {
+      toast.error('Purchase on OpenSea Failed!', { duration })
+      setPurchaseLoading(false)
+      return
+    }
 
     let provider = await loadProvider()
     let userAddress = await getConnectedAddress()

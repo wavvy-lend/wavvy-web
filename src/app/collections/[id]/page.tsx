@@ -44,7 +44,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
               onChange={(e:ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
               pattern="[0-9]*"
               value={search}
-              placeholder="Search by Token ID"
+              placeholder="Enter Token ID, then click the search icon..."
               handleSubmit={handleSubmit}
             />
           </form>

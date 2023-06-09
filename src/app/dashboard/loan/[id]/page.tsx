@@ -28,6 +28,7 @@ interface iPurchase {
 
 const Loan = ({ params: { id } }: { params: { id: string } }) => {
   const [isOpen, setIsOpen] = useState(false);
+  // @ts-ignore
   let [purchase, setPurchase] = useState<iPurchase>({});
 
   const [partPayment, setPartPayment] = useState('');
