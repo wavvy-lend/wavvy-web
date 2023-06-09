@@ -79,11 +79,12 @@ export const userAPi = createApi({
       query: () => '/purchase/recent',
       transformResponse: (response: { data: IRecentPurchaseItems[] }) => response.data
     }),
-    getUserPurchase: builder.query<any,any>({
-      query: (userId:string) => `/purchase/user/projects/${userId}`,
+    getUserPurchase: builder.query<any, any>({
+      query: (userId: string) => `/purchase/user/projects/${userId}`,
       transformResponse: (response: { data: any }) => response.data
     })
   })
 });
 
-export const { useCreateUserMutation, useGetUserPoolsQuery, useGetRecentPurchaseQuery, useGetUserPurchaseQuery } = userAPi;
+export const { useCreateUserMutation, useGetUserPoolsQuery, useGetRecentPurchaseQuery, useGetUserPurchaseQuery } =
+  userAPi;

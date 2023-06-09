@@ -11,7 +11,6 @@ export default function LendableProjects() {
 
   // if (isLoading) return <FectchLimitPoolSkelonton />;
 
-
   if (error) {
     toast.error('Error while loading data, Prefecting');
     return <div />;

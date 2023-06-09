@@ -1,4 +1,4 @@
-'use client';;
+'use client';
 import Image from 'next/image';
 import { Banner, LenderBanner } from './banners';
 import { SearchField } from '@/ui/InputField';

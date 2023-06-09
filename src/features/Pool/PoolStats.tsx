@@ -9,19 +9,37 @@ import {
   useGetLiquidityBorrowedQuery,
   useGetVolumeQuery
 } from '@/redux/services/poolApi';
+import Skeleton from '@/ui/Skeleton';
 
 export const PoolsStats = () => {
-
-  const { data: totalVolume } = useGetVolumeQuery('');
-  const { data: liquidityBorrowed } = useGetLiquidityBorrowedQuery('');
-  const { data: liquidityAvailable } = useGetLiquidityAvailableQuery('');
+  const { data: totalVolume, isLoading: isVolumeLoading, isFetching: isVolumeFetching } = useGetVolumeQuery('');
+  const { data: liquidityBorrowed, isLoading, isFetching } = useGetLiquidityBorrowedQuery('');
+  const {
+    data: liquidityAvailable,
+    isLoading: isLiquidityLoading,
+    isFetching: isLiquidtyFetching
+  } = useGetLiquidityAvailableQuery('');
 
   return (
     <>
       <Suspense fallback={<PoolStatsLoader />}>
-        {totalVolume ? <PoolStatsCard name="Total volume" value={totalVolume} /> : null}
-        {liquidityAvailable ? <PoolStatsCard name="Liquidity available" value={liquidityAvailable} /> : ''}
-        {liquidityBorrowed ? <PoolStatsCard name="Liquidity borrowed" value={liquidityBorrowed} /> : null}
+        {isVolumeLoading || isVolumeFetching ? (
+          <Skeleton className="aspect-square h-[14px] w-[100px] animate-pulse" />
+        ) : totalVolume ? (
+          <PoolStatsCard name="Total volume" value={totalVolume} />
+        ) : null}
+        {isLoading || isFetching ? (
+          <Skeleton className="aspect-square h-[14px] w-[100px] animate-pulse" />
+        ) : liquidityAvailable ? (
+          <PoolStatsCard name="Liquidity available" value={liquidityAvailable} />
+        ) : (
+          ''
+        )}
+        {isLiquidityLoading || isLiquidtyFetching ? (
+          <Skeleton className="aspect-square h-[14px] w-[100px] animate-pulse" />
+        ) : liquidityBorrowed ? (
+          <PoolStatsCard name="Liquidity borrowed" value={liquidityBorrowed} />
+        ) : null}
       </Suspense>
     </>
   );

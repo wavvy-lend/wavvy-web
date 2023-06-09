@@ -3,10 +3,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface SearchState {
   inputValue: string;
-};
+}
 
 const initialState: SearchState = {
-  inputValue: "",
+  inputValue: ''
 };
 
 const searchSlice = createSlice({
@@ -15,8 +15,8 @@ const searchSlice = createSlice({
   reducers: {
     setInputValue: (state, action: PayloadAction<string>) => {
       state.inputValue = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const { setInputValue } = searchSlice.actions;
