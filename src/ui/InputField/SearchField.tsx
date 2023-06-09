@@ -27,7 +27,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function Se
         />
 
         <div className=" absolute inset-y-[14px] right-[22px] pl-[20px] cursor-pointer text-[#666666] border-l-2 border-[#666666]">
-          <MagnifyingGlassIcon className=" h-6 w-6   hover:text-[#fff]" onClick={()=>handleFormSubmit()} />
+          <MagnifyingGlassIcon className=" h-6 w-6  text-white  hover:text-[#fff]" onClick={()=>handleFormSubmit()} />
         </div>
       </div>
     </>

@@ -12,8 +12,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className="mb-[20px] flex w-full justify-start">
-        <Button href="/" variant="plain">
-          <ArrowLongLeftIcon className="h-4 w-4" /> Back to Homepage
+        <Button href="/dashboard" variant="plain">
+          <ArrowLongLeftIcon className="h-4 w-4" /> Back to My Projects
         </Button>
       </div>
       <div className="flex w-full items-start gap-[47px]">

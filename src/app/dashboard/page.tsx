@@ -20,6 +20,7 @@ const Card = () => {
     toast.error('Please connect your wallet to view your pools');
     redirect('/');
   }
+  console.log({purchases})
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -43,6 +44,9 @@ const Card = () => {
               avatar={purchase.tokenAvatar}
               tokenId={purchase.tokenId}
               loanId={purchase.unique_id}
+              purchaseStatus={purchase.purchaseStatus}
+              collectionAddress={purchase.collectionAddress}
+              contractPurchaseId={purchase.contractPurchaseId}
             />
           ))}
         </>

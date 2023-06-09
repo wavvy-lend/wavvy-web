@@ -31,7 +31,7 @@ export const purchaseApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_WAVVY_BASE_URL}`,
     prepareHeaders(headers, api) {
       const chainNetwork: SupportedNetWork | null = localStorage.getItem('chain_network') as SupportedNetWork;
-      header(chainNetwork ? chainNetwork : SupportedNetWork.POLYGONTESTNET, headers);
+      header(chainNetwork ? chainNetwork : SupportedNetWork.POLYGONMAINNET, headers);
     }
   }),
 

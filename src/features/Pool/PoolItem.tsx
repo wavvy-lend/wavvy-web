@@ -47,6 +47,9 @@ export interface IPurchaseItems {
   tokenId: string
   unique_id: string
   updated_at: string
+  purchaseStatus:string
+  collectionAddress:string;
+  contractPurchaseId:string;
 }
 
 
