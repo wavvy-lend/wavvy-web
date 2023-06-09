@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="flex flex-col items-center justify-between pb-10 pt-5 sm:flex-row">
         <div className="m:mt-0 mt-4 flex items-center gap-4">
           <a
-            href="https://github.com/wavvy-len"
+            href="https://github.com/wavvy-lend"
             target="blank"
             className="text-grey-100 transition-colors duration-300 hover:text-alt-300"
           >
