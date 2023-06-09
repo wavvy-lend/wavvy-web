@@ -1,10 +1,10 @@
-'use client'
+'use client';
 import { forwardRef } from 'react';
 import { SearchProps } from './interface';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function SearchField(
-  { type = 'text',handleSubmit, ...props },
+  { type = 'text', handleSubmit, ...props },
   ref
 ) {
   const handleFormSubmit = () => {
@@ -26,8 +26,8 @@ export const SearchField = forwardRef<HTMLInputElement, SearchProps>(function Se
           {...props}
         />
 
-        <div className=" absolute inset-y-[14px] right-[22px] pl-[20px] cursor-pointer text-[#666666] border-l-2 border-[#666666]">
-          <MagnifyingGlassIcon className=" h-6 w-6  text-white  hover:text-[#fff]" onClick={()=>handleFormSubmit()} />
+        <div className=" absolute inset-y-[14px] right-[22px] cursor-pointer border-l-2 border-[#666666] pl-[20px] text-[#666666]">
+          <MagnifyingGlassIcon className=" h-6 w-6  text-white  hover:text-[#fff]" onClick={() => handleFormSubmit()} />
         </div>
       </div>
     </>

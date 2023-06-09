@@ -14,8 +14,6 @@ interface ILoanPaymentDropdown {
 // }
 
 const LoanPaymentDropdown = ({ setAmount, setIsOpen, partPayment, fullPayment }: ILoanPaymentDropdown) => {
-
-
   const partPaymentRef = useRef<HTMLParagraphElement>(null);
   const fullPaymentRef = useRef<HTMLParagraphElement>(null);
   const handlePartPaymentClick = () => {
@@ -32,12 +30,11 @@ const LoanPaymentDropdown = ({ setAmount, setIsOpen, partPayment, fullPayment }:
       setIsOpen(false);
     }
     // /repayment/amount/:loanUniqueId
-
-  }
+  };
   // console.log('daaaaa')
 
   return (
-    // { partPayment && 
+    // { partPayment &&
     <div className="absolute bottom-0 left-[50%] top-[4rem] z-50 flex h-fit w-full translate-x-[-50%]  flex-col rounded-lg bg-white pb-3 pl-3 pt-3 text-[#666]">
       <p
         className="w-full cursor-pointer border-b border-b-[#666] p-3 hover:rounded-md hover:bg-prime-200 hover:bg-opacity-80 hover:text-white"

@@ -14,7 +14,17 @@ const DetailedList: FC<IDetailedList> = ({ info, price }) => (
   </div>
 );
 
-export default function RepayLoanModal({ tokenAvatar, principal, partPayment, fullPayment }: { tokenAvatar: string, principal: number, partPayment: string, fullPayment: string }) {
+export default function RepayLoanModal({
+  tokenAvatar,
+  principal,
+  partPayment,
+  fullPayment
+}: {
+  tokenAvatar: string;
+  principal: number;
+  partPayment: string;
+  fullPayment: string;
+}) {
   const [value, setValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -60,12 +70,14 @@ export default function RepayLoanModal({ tokenAvatar, principal, partPayment, fu
                 )}
               </span>
             </div>
-            {isOpen &&
+            {isOpen && (
               <LoanPaymentDropdown
                 setAmount={amount => setValue(amount)}
                 setIsOpen={setIsOpen}
                 partPayment={partPayment}
-                fullPayment={fullPayment} />}
+                fullPayment={fullPayment}
+              />
+            )}
           </div>
           <button className="border-[ #C0C0C0] mt-[19px] flex w-full flex-row items-start justify-center gap-[10px] rounded-lg border bg-white px-[155px] py-[15px]">
             <span className="text-lg font-semibold text-[#333333]">Confirm transaction</span>
@@ -74,7 +86,6 @@ export default function RepayLoanModal({ tokenAvatar, principal, partPayment, fu
         <div className="flex max-h-[15.4rem] flex-col gap-y-[1.5rem] overflow-auto rounded-lg bg-[#bfbfbf0c] p-5 font-normal ">
           <h1 className="self-start text-[14px]/[14px] font-medium text-white">Past payment</h1>
           <ol className="relative flex flex-col gap-[20px] border-l border-gray-200">
-
             <li className="ml-4">
               <div className="absolute -left-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
               <div className="flex flex-col items-start justify-center gap-y-[10px]">
@@ -87,7 +98,6 @@ export default function RepayLoanModal({ tokenAvatar, principal, partPayment, fu
                 </div>
               </div>
             </li>
-            
           </ol>
         </div>
         {/* <div>

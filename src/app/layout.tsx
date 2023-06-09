@@ -4,6 +4,7 @@ import ContractProvider from '@/context/contract-context';
 import Navigation from '@/components/Navigation/navigation';
 import './globals.css';
 import NetWorkBanner from '@/components/NetworkBanner';
+import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Create Next App',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <hr className="mb-4 ml-[94px] border-prime-200 border-opacity-50 md:mx-[93px] md:my-6" />
 
             <main className="h-full w-full pb-[100px] lg:px-[72px]">{children}</main>
+            <Footer />
             <Toaster position="bottom-center" reverseOrder={false} />
           </body>
         </ContractProvider>

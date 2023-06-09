@@ -46,48 +46,44 @@ const Loan = ({ params: { id } }: { params: { id: string } }) => {
   };
 
   function getOrdinalSuffix(number: number) {
-    const suffixes = ["th", "st", "nd", "rd"];
+    const suffixes = ['th', 'st', 'nd', 'rd'];
     const lastDigit = number % 10;
-    const suffix = suffixes[lastDigit] || "th";
+    const suffix = suffixes[lastDigit] || 'th';
     return suffix;
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await fetcher('purchase/' + id)
-      setPurchase(data.data[0])
+      let data = await fetcher('purchase/' + id);
+      setPurchase(data.data[0]);
     };
 
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await fetcher('/repayment/amount/' + id)
+      let data = await fetcher('/repayment/amount/' + id);
       // console.log({ data })
-      setPartPayment(data.data.partPayment)
-      setFullPayment(data.data.fullPayment)
+      setPartPayment(data.data.partPayment);
+      setFullPayment(data.data.fullPayment);
     };
 
     fetchData();
   }, []);
-
 
   return (
     <section className="flex w-full items-start gap-5">
       <div className="flex h-full w-full max-w-[614px] flex-col gap-[50px]">
         {/* <div className="h-[205px] w-full rounded-t-[19px] bg-prime-100" /> */}
-        <img src={purchase.tokenAvatar} className='h-[205px] w-full rounded-t-[19px] bg-prime-100'></img>
+        <img src={purchase.tokenAvatar} className="h-[205px] w-full rounded-t-[19px] bg-prime-100"></img>
 
         <hgroup className="flex flex-col items-start gap-5 font-rob font-bold text-white">
           <h1 className=" text-[30px]/[30px]">{purchase.collectionName}</h1>
           <p className="text-[18px]/[18px]">By RTFKT</p>
         </hgroup>
         <div className="font-rob text-[14px]/[22px] font-medium text-white">
-          <p>
-            {purchase.description}
-          </p>
+          <p>{purchase.description}</p>
 
           {/* <ul>
             <li>⚒️Deadline to Forge physical: 14th September www.rtfkt.com</li>
@@ -138,11 +134,12 @@ const Loan = ({ params: { id } }: { params: { id: string } }) => {
       </div>
 
       <ModalContainer open={isOpen} close={closeModal} label="Settle Your Loan">
-        <RepayLoanModal 
-        tokenAvatar={purchase.tokenAvatar} 
-        principal={Number(purchase.principal) * 2}
-        partPayment={partPayment}  
-        fullPayment={fullPayment} />
+        <RepayLoanModal
+          tokenAvatar={purchase.tokenAvatar}
+          principal={Number(purchase.principal) * 2}
+          partPayment={partPayment}
+          fullPayment={fullPayment}
+        />
       </ModalContainer>
     </section>
   );
