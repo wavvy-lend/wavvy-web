@@ -24,6 +24,7 @@ const Card = () => {
 
     toast.error('Please connect your wallet to view your pools');
   }
+  console.log({purchases})
 
   return (
     <section className="grid w-full grid-cols-1 gap-4">
@@ -38,6 +39,9 @@ const Card = () => {
               avatar={purchase.tokenAvatar}
               tokenId={purchase.tokenId}
               loanId={purchase.unique_id}
+              purchaseStatus={purchase.purchaseStatus}
+              collectionAddress={purchase.collectionAddress}
+              contractPurchaseId={purchase.contractPurchaseId}
             />
           ))}
         </>

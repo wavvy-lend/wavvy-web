@@ -57,7 +57,7 @@ const Pools = () => {
         </div>
 
         {pools && pools.length < 1 ? (
-          <NoContent label="Yo do not have any pool yet. To create a pool make use of the button above" />
+          <NoContent label="You've not created a pool yet. To start lending to buyers, use the button above." />
         ) : (
           <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
             {pools?.map(pool => (

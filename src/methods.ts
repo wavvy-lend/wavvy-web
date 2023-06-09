@@ -6,7 +6,7 @@ const { BigNumber } = require("@ethersproject/bignumber");
 const { abi: wavvyAbi } = require('./app/abi/Wavvy.json');
 
 
-const WAVVY_MATIC_CONTRACT_ADDRESS = '0x965e4791b1aaF4C0AF66b80367c8744CFbB08C29';
+const WAVVY_MATIC_CONTRACT_ADDRESS = '0xA18Dd17D2f1f39EFA8CBDC8B005cf556914f9db5';
 declare global {
     interface Window {
         ethereum?: any;
@@ -97,26 +97,59 @@ export const getConnectedAddress = async () => {
 
 export const purchaseNFT =
     async (client: any, fromAddress: string, tokenAddress: string, tokenId: number, downPaymentAmount: number, principal: number, poolId: number) => {
-        let amount = Web3.utils.toWei(String(downPaymentAmount), "ether");
+        try {
+            let amount = Web3.utils.toWei(String(downPaymentAmount), "ether");
+            const contract = new client.eth.Contract(wavvyAbi, WAVVY_MATIC_CONTRACT_ADDRESS.trim())
+            let action = await contract.methods.purchaseNFT(tokenAddress, tokenId, amount, amount, poolId)
+
+            let gas = Math.floor(await action.estimateGas(
+                {
+                    from: fromAddress,
+                    value: Web3.utils.toWei(String(downPaymentAmount), "ether")
+                }
+            ) * 1.40);
+
+            let txn = await client.eth.sendTransaction({
+                from: fromAddress,
+                to: WAVVY_MATIC_CONTRACT_ADDRESS,
+                data: action.encodeABI(),
+                value: amount,
+                gas,   //   300000 GAS
+                gasPrice: 500000000000  //  wei
+            })
+
+            console.log({ txn })
+            return { ok: true, data: txn }
+        } catch (error) {
+            return { ok: false, data: error }
+
+        }
+    }
+/* 
+ 
+function completeNFTPurchase(uint256 purchaseId) external whenNotPaused {
+ */
+export const completeNFTPurchase = async (client: any, fromAddress: string, purchaseId: string) => {
+    try {
 
         const contract = new client.eth.Contract(wavvyAbi, WAVVY_MATIC_CONTRACT_ADDRESS.trim())
-        let action = await contract.methods.purchaseNFT(tokenAddress, tokenId, amount, amount, poolId)
+        let action = await contract.methods.completeNFTPurchase(purchaseId)
 
-        let gas = Math.floor(await action.estimateGas(
-            { from: fromAddress, value: Web3.utils.toWei(String(downPaymentAmount), "ether") }
-        ) * 1.40);
-
-        // let client = await loadProvider()
+        let gas = Math.floor(await action.estimateGas({ from: fromAddress }) * 1.40);
+        // console.log({purchaseId, fromAddress,trx:});return;
         let txn = await client.eth.sendTransaction({
             from: fromAddress,
             to: WAVVY_MATIC_CONTRACT_ADDRESS,
             data: action.encodeABI(),
-            value: amount,
             gas,   //   300000 GAS
             gasPrice: 500000000000  //  wei
         })
 
         console.log({ txn })
         return { ok: true, data: txn }
+    } catch (error) {
+        return { ok: false, data: error }
 
     }
+
+}

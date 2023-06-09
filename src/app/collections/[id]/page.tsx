@@ -30,7 +30,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
     debounce((value: string) => {
       const isValidNumber = !isNaN(Number(value));
       if (isValidNumber) dispatch(setInputValue(value));
-    }, 300),
+    }, 500),
     []
   );
 
