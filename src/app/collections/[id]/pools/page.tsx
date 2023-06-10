@@ -19,9 +19,9 @@ const Pools = () => {
         <div className="flex w-full items-center justify-between px-2 py-10">
           <h2 className="font-rob text-[45px]/[45px] font-bold text-white">Pools</h2>
         </div>
-        <Suspense fallback={<PoolStatsLoader />}>
-          <PoolItems />
-        </Suspense>
+        {/* <Suspense fallback={<PoolStatsLoader />}> */}
+        <PoolItems />
+        {/* </Suspense> */}
       </section>
     </>
   );
