@@ -121,3 +121,19 @@ export const LoanSkelton = ({ count = 4 }: { count?: number }) => (
     ))}
   </>
 );
+
+export const PoolSkelton = ({ count = 4 }: { count?: number }) => {
+  return (
+    <>
+      {Array.from({ length: count }, (_, i) => (
+        <div
+          key={i}
+          className="flex w-full animate-pulse items-center justify-between gap-4 rounded-[10px] bg-grey-300 p-4"
+        >
+          <Skeleton className="aspect-square h-[14px] w-[100px]" />
+          <Skeleton className="aspect-square h-[14px] w-[150px]" />
+        </div>
+      ))}
+    </>
+  );
+};

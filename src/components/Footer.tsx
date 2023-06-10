@@ -1,16 +1,26 @@
-import { HashtagIcon, HeartIcon } from '@heroicons/react/24/solid';
+// import { DocumentTextIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, DocumentTextIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="mx-10 rounded-t-3xl bg-prime-100 px-4 py-10 sm:max-w-xl md:max-w-full md:px-24 lg:px-[72px]">
+    <footer className="mx-10 rounded-t-3xl bg-grey-300 px-4 sm:max-w-xl md:max-w-full md:px-24 lg:px-[72px]">
       <div className="flex flex-col items-center justify-between pb-10 pt-5 sm:flex-row">
         <div className="m:mt-0 mt-4 flex items-center gap-4">
+          <p className="font-rob text-base font-bold leading-5 text-grey-100 md:order-2">
+            &copy; {new Date().getFullYear()} <span className="font-ava">WAVVY</span>
+          </p>
+        </div>
+
+        <div className="mt-4 flex items-center space-x-4">
+          <span className="flex items-center font-rob text-[16px]/[16px] font-semibold text-grey-100">
+            for the <HeartIcon className="mx-[2px] h-4 w-4 text-prime-100" /> of NFT&apos;s
+          </span>
           <a
             href="https://github.com/wavvy-lend"
             target="blank"
-            className="text-grey-100 transition-colors duration-300 hover:text-alt-300"
+            className="text-grey-100 transition-colors duration-300 hover:text-prime-100"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -24,23 +34,13 @@ export default function Footer() {
           <a
             href="https://wavvy.notion.site/Wavvy-Deck-d37647909c6e49b6a9ecf2bb100a74ba?pvs=4"
             target="blank"
-            className="inline-flex items-center  text-grey-100 transition-colors duration-300 hover:underline"
+            className="text-grey-100 transition-colors duration-300 hover:text-prime-100"
           >
-            <HashtagIcon className="h-4 w-4 lg:h-6 lg:w-6" />
-            <span className="font-dm-sans text-base font-bold lg:text-2xl">Docs</span>
+            <DocumentTextIcon className="h-4 w-4 lg:h-6 lg:w-6" />
           </a>
-          <p className="font-rob text-base font-bold leading-5 text-grey-100 md:order-2">
-            &copy; {new Date().getFullYear()} <span className="font-ava">WAVVY</span>
-          </p>
-        </div>
-
-        <div className="mt-4 flex items-center space-x-4">
-          <span className="flex items-center font-rob text-[16px]/[16px] font-semibold text-grey-100">
-            for the <HeartIcon className="mx-[2px] h-4 w-4 text-alt-300" /> of NFT&apos;s
-          </span>
-          <FooterLinks href="https://www.linkedin.com/in/ebube-okorie-274796189/" label="Ebube" />
+          {/* <FooterLinks href="https://www.linkedin.com/in/ebube-okorie-274796189/" label="Ebube" />
           <FooterLinks href="https://www.linkedin.com/in/nwobodoekene" label="Kaycee" />
-          <FooterLinks href="https://www.linkedin.com/in/izaakwalz" label="Izaak" />
+          <FooterLinks href="https://www.linkedin.com/in/izaakwalz" label="Izaak" /> */}
         </div>
       </div>
     </footer>
