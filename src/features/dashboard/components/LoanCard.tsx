@@ -92,14 +92,14 @@ const LoanCard = ({ name, amount, dueDate, avatar, tokenId, loanId, purchaseStat
         <p className="text-sm font-bold text-white">{`${dueDate}`}</p>
         <p className="text-white text-opacity-50">Next Due Date</p>
       </div>
-      {purchaseStatus === 'CLOSED' &&
-        <Button href={`/dashboard/loan/${loanId}`} variant="filled" color="plain">
-          View Loan
-        </Button>}
-      {purchaseStatus === 'OPEN' &&
-        <Button variant="filled" color="secondary">
-          {/* Complete Purchase */}
-          {
+      {/* {purchaseStatus === 'CLOSED' && */}
+      <Button href={`/dashboard/loan/${loanId}`} variant="filled" color="plain">
+        View Loan
+      </Button>
+      {/*}*/}
+      {/* {purchaseStatus === 'OPEN' && <Button variant="filled" color="secondary"> */}
+      {/* Complete Purchase */}
+      {/* {
             purchaseLoading ?
               (<div role="status">
                 <svg aria-hidden="true" className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,10 +109,11 @@ const LoanCard = ({ name, amount, dueDate, avatar, tokenId, loanId, purchaseStat
                 <span className="sr-only">Loading...</span>
               </div>) :
               <span onClick={completePurchase}>Complete Purchase</span>
-          }
+          } */}
 
 
-        </Button>}
+      {/* </Button> */}
+      {/* } */}
     </div>
   );
 };
