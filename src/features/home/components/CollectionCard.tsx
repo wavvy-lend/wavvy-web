@@ -42,10 +42,11 @@ export const CollectionCard = ({ ...collection }: ICollections) => (
 );
 
 const CollectionNetwork = ({ label }: ICollectionNetwork) => {
-  const bgColor = label === 'ethereum' ? 'bg-alt-300' : label === 'pologonMumbai' ? 'bg-alt-100' : 'bg-alt-500';
+  const bgColor = label === 'ethereum' ? 'bg-alt-300' : label === 'matic' ? 'bg-prime-100' : 'bg-alt-500';
+  const chain = label === 'ethereum' ? 'ethereum' : label === 'matic' ? 'polygon' : label;
   return (
     <div className={`absolute right-0 my-[13px] flex items-center  px-[18px] py-[10px] shadow-badge ${bgColor}`}>
-      <span className="font-rob text-[12px]/[18px] font-bold uppercase text-white">{label}</span>
+      <span className="font-rob text-[12px]/[18px] font-bold uppercase text-white">{chain}</span>
     </div>
   );
 };
