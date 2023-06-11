@@ -69,7 +69,8 @@ export const BorrowModal = ({
       setPurchaseLoading(false);
       return;
     }
-    toast.success('OpenSea Purchase Successfull! Now, click button to complete purchase.', { duration });
+    // toast.success('OpenSea Purchase Successfull! Now, click button to complete purchase.', { duration });
+    toast.success('OpenSea Purchase Successfull! Now, click dashboard to view purchase.', { duration });
     setPurchaseLoading(false);
 
     console.log({ result: result.data.data });
