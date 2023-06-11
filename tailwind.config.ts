@@ -47,6 +47,7 @@ export default {
         body: "url('/assets/bg-blur-circles.svg')",
         'banner-frame': "url('/assets/bg-illu.png')",
         // body: ' linear-gradient(315deg, rgba(30, 30, 30, 1) 81%, rgba(83, 24, 111, 1) 100%)',
+        footer: ' linear-gradient(180deg, rgba(94, 5, 133, 0.4) 10%, rgba(94, 5, 133, 0) 100%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       }

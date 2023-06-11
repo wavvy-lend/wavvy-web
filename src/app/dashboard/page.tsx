@@ -7,10 +7,11 @@ import { IPurchaseItems } from '@/features/Pool/PoolItem';
 import { useGetUserPurchaseQuery } from '@/redux/services/userApi';
 import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { LoanSkelton } from '@/components/skelonton';
 
 const Card = () => {
   const [userId, setUserId] = useState('');
-  const { data: purchases } = useGetUserPurchaseQuery(userId, { skip: userId === '' });
+  const { data: purchases, isLoading, isFetching } = useGetUserPurchaseQuery(userId, { skip: userId === '' });
 
   const {
     account: { isAuthenticated }
@@ -20,7 +21,7 @@ const Card = () => {
     toast.error('Please connect your wallet to view your pools');
     redirect('/');
   }
-  console.log({purchases})
+  console.log({ purchases });
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -35,20 +36,24 @@ const Card = () => {
     <section className="grid w-full grid-cols-1 gap-4">
       {purchases?.length > 0 ? (
         <>
-          {purchases?.map((purchase: IPurchaseItems, key: any) => (
-            <LoanCard
-              key={key}
-              name={purchase.collectionName}
-              amount={purchase.debt}
-              dueDate={purchase.nextDueDate}
-              avatar={purchase.tokenAvatar}
-              tokenId={purchase.tokenId}
-              loanId={purchase.unique_id}
-              purchaseStatus={purchase.purchaseStatus}
-              collectionAddress={purchase.collectionAddress}
-              contractPurchaseId={purchase.contractPurchaseId}
-            />
-          ))}
+          {isLoading || isFetching ? (
+            <LoanSkelton />
+          ) : (
+            purchases?.map((purchase: IPurchaseItems, key: any) => (
+              <LoanCard
+                key={key}
+                name={purchase.collectionName}
+                amount={purchase.debt}
+                dueDate={purchase.nextDueDate}
+                avatar={purchase.tokenAvatar}
+                tokenId={purchase.tokenId}
+                loanId={purchase.unique_id}
+                purchaseStatus={purchase.purchaseStatus}
+                collectionAddress={purchase.collectionAddress}
+                contractPurchaseId={purchase.contractPurchaseId}
+              />
+            ))
+          )}
         </>
       ) : (
         <NoContent label="You've not made a purchase yet." />

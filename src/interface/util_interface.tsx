@@ -58,7 +58,7 @@ export interface Collections {
   floor_price: string;
   website: string;
   status: string;
-  banner_image_url: string ;
+  banner_image_url: string;
   collections: ICollectionItems[];
   created_at?: string;
   updated_at?: string;

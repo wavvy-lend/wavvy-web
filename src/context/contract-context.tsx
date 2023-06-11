@@ -37,7 +37,7 @@ const initialState: ContractState = {
 
 const ContractContext = createContext<any | null>(initialState);
 
-export interface ContractProps extends React.PropsWithChildren { }
+export interface ContractProps extends React.PropsWithChildren {}
 
 export default function ContractProvider({ children }: ContractProps) {
   const router = useRouter();
@@ -84,12 +84,11 @@ export default function ContractProvider({ children }: ContractProps) {
       if (error) return console.log(error);
 
       let result = await createUser({ address: accounts[0] });
-      
+
       // @ts-ignore
       localStorage.setItem('user_id', result.error.data);
 
       if (!isLoading) return;
-
 
       if (data) {
         // console.log({ data })
@@ -144,7 +143,7 @@ export default function ContractProvider({ children }: ContractProps) {
           isNetwork: false
         });
       }
-    } catch (error) { }
+    } catch (error) {}
   }, []);
 
   useEffect(() => {
@@ -162,15 +161,13 @@ export default function ContractProvider({ children }: ContractProps) {
     window.ethereum.on('networkChanged', (network: string) => {
       const chainNetwork = CHAIN_INFO[Number(network)];
       if (chainNetwork !== undefined) {
-        console.log({ chainNetwork: chainNetwork.network })
+        console.log({ chainNetwork: chainNetwork.network });
         setAccount({ ...account, chainId: Number(network), chainNetwork: chainNetwork.network });
       }
       window.location.reload();
-
     });
 
     window.ethereum.on('disconnect', disconnect);
-
 
     return () => {
       window.ethereum.removeAllListeners();

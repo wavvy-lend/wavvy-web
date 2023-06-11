@@ -1,7 +1,7 @@
 'use client';
 import ProjectDetail from '@/features/project/ProjectDetail';
 import { selectSearchItem, setInputValue } from '@/redux/features/slices/searchSlice';
-import {  useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
+import { useGetCollectionItemQuery, useGetCollectionQuery } from '@/redux/services/CollectionsAPI';
 import { Button } from '@/ui/Button';
 import { SearchField } from '@/ui/InputField';
 import { ArrowLongLeftIcon } from '@heroicons/react/24/outline';
@@ -13,7 +13,7 @@ import { TokenDetails, TokenSkelton } from '@/components/skelonton';
 export default function Collection({ params: { id } }: { params: { id: string } }) {
   const { data: [collection] = [], error, isLoading, isFetching } = useGetCollectionQuery(id);
   const { inputValue } = useSelector(selectSearchItem);
-  const [search,setSearch] = useState("")
+  const [search, setSearch] = useState('');
   const {
     data: isItemData,
     isLoading: searchLoading,
@@ -21,10 +21,10 @@ export default function Collection({ params: { id } }: { params: { id: string } 
   } = useGetCollectionItemQuery({ collectionId: id, tokenId: inputValue }, { skip: inputValue === '' });
   const dispatch = useDispatch();
 
-  const handleSubmit= () =>{
+  const handleSubmit = () => {
     const isValidNumber = !isNaN(Number(search));
     if (isValidNumber) dispatch(setInputValue(search));
-  }
+  };
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
           <form className="w-full md:max-w-[500px]">
             <SearchField
               id="item-search"
-              onChange={(e:ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
               pattern="[0-9]*"
               value={search}
               placeholder="Enter Token ID, then click the search icon..."
@@ -55,11 +55,7 @@ export default function Collection({ params: { id } }: { params: { id: string } 
             <TokenSkelton />
           ) : (
             <NftItemsCard
-              NftItems={
-                isItemData && search.length > 0
-                  ? isItemData ?? []
-                  : collection?.collections
-              }
+              NftItems={isItemData && search.length > 0 ? isItemData ?? [] : collection?.collections}
               collection={collection}
             />
           )}

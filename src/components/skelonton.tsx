@@ -106,3 +106,34 @@ export const RecentPurchaseSkelton = ({ count = 8 }: { count?: number }) => {
     </>
   );
 };
+
+export const LoanSkelton = ({ count = 4 }: { count?: number }) => (
+  <>
+    {Array.from({ length: count }, (_, i) => (
+      <div key={i} className="flex w-full animate-pulse items-center gap-4 bg-grey-300 px-6 py-3">
+        <Skeleton className="aspect-square h-[80px] w-[80px]" />
+
+        <div className="flex w-full gap-3">
+          <Skeleton className="aspect-square h-[14px] w-[100px]" />
+          <Skeleton className="aspect-square h-[14px] w-[150px]" />
+        </div>
+      </div>
+    ))}
+  </>
+);
+
+export const PoolSkelton = ({ count = 4 }: { count?: number }) => {
+  return (
+    <>
+      {Array.from({ length: count }, (_, i) => (
+        <div
+          key={i}
+          className="flex w-full animate-pulse items-center justify-between gap-4 rounded-[10px] bg-grey-300 p-4"
+        >
+          <Skeleton className="aspect-square h-[14px] w-[100px]" />
+          <Skeleton className="aspect-square h-[14px] w-[150px]" />
+        </div>
+      ))}
+    </>
+  );
+};

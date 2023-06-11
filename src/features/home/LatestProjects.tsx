@@ -15,7 +15,7 @@ export default function LatestPRojects() {
         <h2 className="font-rob text-[45px]/[45px] font-bold text-white">Latest projects</h2>
       </div>
 
-      <div className="grid w-full grid-cols-2 justify-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid w-full grid-cols-2 justify-items-center gap-[27px] md:grid-cols-3 lg:grid-cols-4">
         {collections?.map(collection => (
           <CollectionCard
             key={collection.id}

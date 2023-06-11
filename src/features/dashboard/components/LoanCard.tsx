@@ -22,9 +22,19 @@ interface ILoanCard {
   contractPurchaseId: string;
 }
 
-const LoanCard = ({ name, amount, dueDate, avatar, tokenId, loanId, purchaseStatus, collectionAddress, contractPurchaseId }: ILoanCard) => {
+const LoanCard = ({
+  name,
+  amount,
+  dueDate,
+  avatar,
+  tokenId,
+  loanId,
+  purchaseStatus,
+  collectionAddress,
+  contractPurchaseId
+}: ILoanCard) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [purchaseLoading, setPurchaseLoading] = useState(false)
+  const [purchaseLoading, setPurchaseLoading] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
@@ -35,29 +45,29 @@ const LoanCard = ({ name, amount, dueDate, avatar, tokenId, loanId, purchaseStat
   };
 
   async function completePurchase() {
-    setPurchaseLoading(true)
+    setPurchaseLoading(true);
 
     let url = `${process.env.NEXT_PUBLIC_WAVVY_BASE_URL}purchase/opensea/buy/${collectionAddress}/${tokenId}`;
-    let result = await Request.get(url)
+    let result = await Request.get(url);
     let duration = 10000;
     if (!result.ok) {
-      toast.error('Purchase on OpenSea Failed!', { duration })
-      setPurchaseLoading(false)
-      return
+      toast.error('Purchase on OpenSea Failed!', { duration });
+      setPurchaseLoading(false);
+      return;
     }
 
-    let provider = await loadProvider()
-    let userAddress = await getConnectedAddress()
+    let provider = await loadProvider();
+    let userAddress = await getConnectedAddress();
 
-    let txn = await completeNFTPurchase(provider, userAddress, contractPurchaseId)
+    let txn = await completeNFTPurchase(provider, userAddress, contractPurchaseId);
     if (!txn.ok) {
-      toast.error('Completing your purchase, failed!', { duration })
-      setPurchaseLoading(false)
-      return
+      toast.error('Completing your purchase, failed!', { duration });
+      setPurchaseLoading(false);
+      return;
     }
 
-    toast.success('Your purchase is completed!', { duration })
-    setPurchaseLoading(false)
+    toast.success('Your purchase is completed!', { duration });
+    setPurchaseLoading(false);
 
     // console.log({ result: result.data.data })
   }

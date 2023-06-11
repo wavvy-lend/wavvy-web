@@ -5,37 +5,37 @@ import Link from 'next/link';
 
 export const ProjectHeader = ({ collectionImage }: { collectionImage: string }) => {
   // console.log({collectionImage})
-  return(
-  <div className="flex w-full items-start justify-between px-[27px]">
-    <Image
-      src={collectionImage}
-      alt=""
-      width={130}
-      height={130}
-      className="-mt-[100px] h-[130px] w-[130px] rounded-[10px] border-[4px] border-grey-300 object-cover"
-      priority
-    />
+  return (
+    <div className="flex w-full items-start justify-between px-[27px]">
+      <Image
+        src={collectionImage}
+        alt=""
+        width={130}
+        height={130}
+        className="-mt-[100px] h-[130px] w-[130px] rounded-[10px] border-[4px] border-grey-300 object-cover"
+        priority
+      />
 
-    <ul className="flex w-full items-center justify-end gap-10">
-      <li>
-        <Link href="/" className="text-grey-100 hover:text-opacity-80">
-          <PresentationChartBarIcon className="h-[25px] w-[25px]" />
-        </Link>
-      </li>
-      <li>
-        <Link href="/" className="text-grey-100 hover:text-opacity-80">
-          <HeartIcon className="h-[25px] w-[25px]" />
-        </Link>
-      </li>
-      <li>
-        <Link href="/" className="text-grey-100 hover:text-opacity-80">
-          <GlobeAltIcon className="h-[25px] w-[25px]" />
-        </Link>
-      </li>
-    </ul>
-  </div>
-)
-  };
+      <ul className="flex w-full items-center justify-end gap-10">
+        <li>
+          <Link href="/" className="text-grey-100 hover:text-opacity-80">
+            <PresentationChartBarIcon className="h-[25px] w-[25px]" />
+          </Link>
+        </li>
+        <li>
+          <Link href="/" className="text-grey-100 hover:text-opacity-80">
+            <HeartIcon className="h-[25px] w-[25px]" />
+          </Link>
+        </li>
+        <li>
+          <Link href="/" className="text-grey-100 hover:text-opacity-80">
+            <GlobeAltIcon className="h-[25px] w-[25px]" />
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
 export const ProjectTitle = ({ name, creator, website }: { name: string; creator: string; website: string }) => (
   <div className="flex w-full items-center justify-between py-[40px] text-white">
