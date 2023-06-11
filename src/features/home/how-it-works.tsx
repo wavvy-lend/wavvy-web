@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const HowItworks = () => {
   return (
-    <section className="h-full w-full rounded-3xl bg-grey-200 p-6 mt-6">
+    <section className="mt-6 h-full w-full rounded-3xl bg-grey-200 p-6">
       <h1 className="py-[60px] text-center text-[45px]/[45px] font-bold text-white">How it works</h1>
       <div className="flex w-full items-start gap-4 pb-6">
         <Image src={'/assets/nft-banner.png'} alt="How it works" width={450} height={422} className="" priority />
@@ -29,10 +29,10 @@ const HowItworks = () => {
             description="You will be provided with different flexible loan terms by lenders to fund your purchase."
           />
           <StepFeature
-          id="06"
-          label="Complete Purchase"
-          description="Once you've settled on a loan term, just click on buy and Wavvy will make the purchase. If purchase was successfull, visit your dashboard to view NFT"
-        />
+            id="05"
+            label="Complete Purchase"
+            description="Once you've settled on a loan term, just click on buy and Wavvy will make the purchase. If purchase was successfull, visit your dashboard to view NFT"
+          />
         </div>
       </div>
       {/* <div className="flex w-full items-center gap-3 px-4">
