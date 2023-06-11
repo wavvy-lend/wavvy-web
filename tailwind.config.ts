@@ -5,8 +5,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        rob: ['HK Grotesk, sans-serif'],
-        // rob: ['Roobert, sans-serif'],
+        // rob: ['HK Grotesk, sans-serif'],
+        // rob: ['Open Sans, sans-serif'],
+        rob: ['Roobert, sans-serif'],
         ava: [
           'CANAVAR, sans-serif',
           {
