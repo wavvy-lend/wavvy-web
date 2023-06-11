@@ -80,7 +80,7 @@ const Loan = ({ params: { id } }: { params: { id: string } }) => {
 
         <hgroup className="flex flex-col items-start gap-5 font-rob font-bold text-white">
           <h1 className=" text-[30px]/[30px]">{purchase.collectionName}</h1>
-          <p className="text-[18px]/[18px]">By RTFKT</p>
+          <p className="text-[18px]/[18px]">By 0x</p>
         </hgroup>
         <div className="font-rob text-[14px]/[22px] font-medium text-white">
           <p>{purchase.description}</p>
